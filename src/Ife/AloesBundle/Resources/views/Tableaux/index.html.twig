@@ -1,0 +1,444 @@
+{% extends  parent_template_var %} 
+
+{% block content -%}
+
+    <div class='title-two1a col-md-12 col-sm-12'> 
+    	Tableaux de bord
+    </div>
+
+	<br/>
+	<form id="aloes_tableaux" action="" method="post" {{ form_enctype(form) }}>	    
+
+		<div class='col-sm-12 block3'  > 	
+			<div class='col-sm-2' id= "block_left" style="padding:0px;">
+					<br/>	
+					<div id="ProgramPanel"  class="panel-group" id="accordion1" role="tablist1" aria-multiselectable="true">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="heading1">
+					      <h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+					          Programme
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+					      <div class="panel-body">
+							{{ form_widget(form.programs, {'attr': { 'id': 'programs',   'onChange':'populate_program();'}}) }} 	
+					      </div>
+					    </div>
+					  </div>
+					</div>  
+
+					<div id="ParcoursPanel" class="panel-group " id="accordion2" role="tablist2" aria-multiselectable="true">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="heading2">
+					      <h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+					          Filtre : Parcours
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
+					      <div class="panel-body">
+								<div id="aloes_tableaux_parcours"  onchange="populate_filtre();">						  	
+								</div>	
+					      </div>
+					    </div>
+					  </div>
+					</div> 
+
+
+					<div id="SemestresPanel" class="panel-group" id="accordion3" role="tablist3" aria-multiselectable="true">
+					  <div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="heading3">
+					      <h4 class="panel-title">
+					        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+					          Filtre : Semestres
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapse3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading3">
+					      <div class="panel-body">
+								<div id="aloes_tableaux_semestres" onchange="populate_filtre();">						  	
+								</div>	
+					      </div>
+					    </div>
+					  </div>
+					</div> 
+
+					<br/>
+					
+			</div>
+			<div class='col-sm-10' >		
+				<div class='col-sm-12 block3' >	
+					<br/>
+					<label>Type de rapports</label>	
+					<select id="aloes_tableaux_rapports" name="aloes_tableaux[rapports][]" onchange="populate_rapport();">
+						    <option value="0">Programme</option>
+						    <option value="1">Plan de cours</option>
+						    <option value="2">Référentiel de compétences</option>
+						    <option value="3">Evaluations</option> 
+					</select>	
+					<br/><br/>																  	
+			 	</div>			
+				<br/>  
+				<div class='col-sm-12 block3'  id="ChampsPanel">				
+						<label>Champs</label><br/> 	
+							<div id="aloes_tableaux_champs">		
+							
+								<div class='col-sm-3' >	
+																
+									<div class="checkbox" >
+										<label class="">
+											<input checked id="aloes_tableaux_champs_A" type="checkbox" name="aloes_tableaux[champs][]" value="A">
+											Description
+										</label>
+									</div>					
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_B" type="checkbox" name="aloes_tableaux[champs][]" value="B">
+											Méthodes pédagogiques
+										</label>
+									</div>										  	
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_C" type="checkbox" name="aloes_tableaux[champs][]" value="C">
+											Evaluation
+										</label>
+									</div>	
+
+								</div>
+								<div class='col-sm-3' >											
+									
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_D" type="checkbox" name="aloes_tableaux[champs][]" value="D">
+											Ressources
+										</label>
+									</div>	
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_E" type="checkbox" name="aloes_tableaux[champs][]" value="E">
+											Règlements
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_F" type="checkbox" name="aloes_tableaux[champs][]" value="F">
+											Autres informations utiles
+										</label>
+									</div>
+
+								</div>
+								<div class='col-sm-3' >		
+								
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_G" type="checkbox" name="aloes_tableaux[champs][]" value="G">
+											Objectifs généraux
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_H" type="checkbox" name="aloes_tableaux[champs][]" value="H">
+											Objectifs spécifiques
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_I" type="checkbox" name="aloes_tableaux[champs][]" value="I">
+											Compétences générales
+										</label>
+									</div>
+									
+
+								</div>
+								<div class='col-sm-3' >											
+									
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_J" type="checkbox" name="aloes_tableaux[champs][]" value="J">
+											Compétences spécifiques
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_K" type="checkbox" name="aloes_tableaux[champs][]" value="K">
+											Séquences
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input checked id="aloes_tableaux_champs_L" type="checkbox" name="aloes_tableaux[champs][]" value="L">
+											Travail à réaliser
+										</label>
+									</div>
+									<div class="checkbox">
+										<label class="">
+											<input  id="aloes_tableaux_champs_M" type="checkbox" name="aloes_tableaux[champs][]" value="M">
+											Evènements
+										</label>
+									</div>
+								</div>									
+							</div> 	  	  					
+				</div>							
+				
+
+
+				<div class='col-sm-12 block3'  id="ChampsUE" > 
+					<div class='col-sm-12' >
+							<label>UE</label>
+					</div>
+						
+					<div id="aloes_tableaux_ue">	
+
+
+						<div class='col-sm-12' >
+						
+							{% if niveau==3				%}
+								<input checked  id="aloes_tableaux_cue_{{course.id}}" type="checkbox" name="aloes_tableaux[ue][]" value="{{course.id}}">{{course.label}}
+							{% else %}							
+								Sélectionner un programme
+							{% endif %}
+							
+						</div>							  	
+					</div>		
+				</div>
+
+				<div class='col-sm-12' >
+					<button class="btn btn-color1" type="submit"><i class="icon icon-check icon-lg"></i>Valider</button>	
+					<br/><br/>
+				</div>
+				
+				
+			</div>
+		</div>
+
+		{{ form_errors(form) }}	
+    
+	</form>		    
+
+
+	<div id="aloes_tableaux_result" class="col-sm-12 block3"  >	
+		<br/><br/>
+	</div>
+
+<script type="text/javascript">
+
+      $("#ChampsPanel").hide();
+      $("#ChampsUE").hide();      	  
+
+	  {% if niveau is defined and (niveau==2 or niveau==3) 	%}
+	  
+		  populate_program({{ program.id}}); 
+		  
+      	  $("#aloes_tableaux_programs_{{ program.id}}").prop( "checked", true);		
+      	  $("#block_left").hide();
+		  $("#ProgramPanel").hide();
+		  $("#ParcoursPanel").hide();
+		  $("#SemestresPanel").hide();		  		  
+	  {% endif %}
+	  
+	  {% if niveau==3 	%}
+      	  $("#aloes_tableaux_ue_{{ course.id}}").prop( "checked", true);	
+      	  
+      	  $("#ChampsUE").hide();	  
+	  {% endif %}	 	  
+
+      function populate_program(id_select){
+      
+ 	      if (id_select==null)
+	 	      var id_select = $("#aloes_tableaux_programs input[type='radio']:checked").val();
+ 	       
+          $.ajax({
+            url: "{{ path('tableaux_bord_programs', {niv: niveau}) }}",
+            type: 'POST',
+            data: {'id': id_select},
+            dataType: 'json',
+            success: function(json){
+            
+            
+	          $('#aloes_tableaux_parcours').empty();
+              $.each(json.parcours, function(index, value) 
+              		{              		
+           			$('#aloes_tableaux_parcours').append("<div class='checkbox'><label class=''><input id='aloes_tableaux_parcours_"+index+"' type='checkbox' value='"+index+"' name='aloes_tableaux[parcours][]'>"+value+"</label></div>");
+              		});
+              
+
+            {% if niveau!=3				%}  			
+	
+	              $('#aloes_tableaux_ue').empty();	
+	              $('#aloes_tableaux_ue').append("<div class='col-sm-12'>");	
+	              $.each(json.ue, function(index, value) 
+	              		{          		
+	           			$('#aloes_tableaux_ue').append("<div  class='col-sm-3 col-md-3'><input id='aloes_tableaux_ue_"+value.id+"' type='checkbox' value='"+value.id+"' name='aloes_tableaux[ue][]'> "+value.label+"</div>");
+	               		}); 
+	              $('#aloes_tableaux_ue').append("</div>");	
+      
+            {% endif				%}        
+                              		
+              $('#aloes_tableaux_semestres').empty();		
+              $.each(json.semestres, function(index, value) 
+              		{              		
+           			$('#aloes_tableaux_semestres').append("<div class='checkbox'><label class=''><input id='aloes_tableaux_semestres_"+value.id+"' type='checkbox' value='"+value.id+"' name='aloes_tableaux[semestres][]'>"+value.label+"</label></div>");
+               		});                		
+            }
+          });  
+          
+      } 
+      
+
+      function populate_filtre(){
+
+		  var form=$("#aloes_tableaux");
+
+  	      data = form.serialize();		 
+  	        			 
+
+          $.ajax({ 
+            url: "{{ path('tableaux_bord_filtre') }}",
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function(json){
+             
+            $('#aloes_tableaux_ue').empty();	
+            $('#aloes_tableaux_ue').append("");
+             
+            $.each(json.ue, function(index, value) 
+              		{               		
+           			$('#aloes_tableaux_ue').append("<div class='col-sm-3 col-md-3' ><input "+value.checked+" id='aloes_tableaux_ue_"+value.id+"' type='checkbox' value='"+value.id+"' name='aloes_tableaux[ue][]'> "+value.label+"</div>");
+              		}); 
+              		
+              		
+            }
+
+          });   
+
+          
+      }
+
+
+		$("#aloes_tableaux").submit(function() {	
+
+ 			var form=$("#aloes_tableaux");
+
+  	      	data = form.serialize();	         
+	
+			$.ajax({
+					type: "POST",				
+					url: "{{ path("tableaux_bord_rapport") }}",										
+					data: data,
+					
+					dataType : 'html',	 												
+					cache: false,
+					success: function(data) 
+						{	
+						$('#aloes_tableaux_result').empty().append(data);															
+						}   
+			});	             			             	
+			return false;	
+  	        	      
+			
+		});	             			             	
+	
+      function populate_rapport(){
+
+ 			var form=$("#aloes_tableaux");
+
+  	      	data = form.serialize();	
+
+			if 			(   $("#aloes_tableaux_rapports").val()=="0"  )			
+      			{
+        		$("#ChampsPanel").hide();    			
+        		$("#ChampsUE").hide();  
+      			}  	      	
+			else if 			(   $("#aloes_tableaux_rapports").val()=="1"  )			
+      			{
+        		$("#ChampsPanel").show();
+        		$("#ChampsUE").show();
+        		        		  
+      			$("#aloes_tableaux_champs_A").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_B").prop( "checked", true);					   	
+      			$("#aloes_tableaux_champs_C").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_D").prop( "checked", true);	
+      			$("#aloes_tableaux_champs_E").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_F").prop( "checked", true);	
+      			$("#aloes_tableaux_champs_G").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_H").prop( "checked", true);					   	
+      			$("#aloes_tableaux_champs_I").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_J").prop( "checked", true);	
+      			$("#aloes_tableaux_champs_K").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_L").prop( "checked", true);	      			      			
+
+   				$("#aloes_tableaux_champs_A").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_B").prop( "disabled", false);					   	
+      			$("#aloes_tableaux_champs_C").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_D").prop( "disabled", false);	
+      			$("#aloes_tableaux_champs_E").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_F").prop( "disabled", false);	
+      			$("#aloes_tableaux_champs_G").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_H").prop( "disabled", false);					   	
+      			$("#aloes_tableaux_champs_I").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_J").prop( "disabled", false);	
+      			$("#aloes_tableaux_champs_K").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_L").prop( "disabled", false);	
+      			
+      			} 
+      		else if (   $("#aloes_tableaux_rapports").val()=="2"  )		
+      			{
+        		$("#ChampsPanel").hide();      			
+        		$("#ChampsUE").show();
+        		
+      			$("#aloes_tableaux_champs_A").prop( "checked", false);				   
+      			$("#aloes_tableaux_champs_B").prop( "checked", false);					   	
+      			$("#aloes_tableaux_champs_C").prop( "checked", false);				   
+      			$("#aloes_tableaux_champs_D").prop( "checked", false);	
+      			$("#aloes_tableaux_champs_E").prop( "checked", false);				   
+      			$("#aloes_tableaux_champs_F").prop( "checked", false);	
+      			$("#aloes_tableaux_champs_G").prop( "checked", false);				   
+      			$("#aloes_tableaux_champs_H").prop( "checked", false);					   	
+      			$("#aloes_tableaux_champs_I").prop( "checked", true);				   
+      			$("#aloes_tableaux_champs_J").prop( "checked", true);	
+      			$("#aloes_tableaux_champs_K").prop( "checked", false);				   
+      			$("#aloes_tableaux_champs_L").prop( "checked", false);	  	
+
+
+      			$("#aloes_tableaux_champs_A").prop( "disabled", true);				   
+      			$("#aloes_tableaux_champs_B").prop( "disabled", true);					   	
+      			$("#aloes_tableaux_champs_C").prop( "disabled", true);				   
+      			$("#aloes_tableaux_champs_D").prop( "disabled", true);	
+      			$("#aloes_tableaux_champs_E").prop( "disabled", true);				   
+      			$("#aloes_tableaux_champs_F").prop( "disabled", true);	
+      			$("#aloes_tableaux_champs_G").prop( "disabled", true);				   
+      			$("#aloes_tableaux_champs_H").prop( "disabled", true);					   	
+      			$("#aloes_tableaux_champs_I").prop( "disabled", false);				   
+      			$("#aloes_tableaux_champs_J").prop( "disabled", false);	
+      			$("#aloes_tableaux_champs_K").prop( "disabled", true);				   
+      			$("#aloes_tableaux_champs_L").prop( "disabled", true);	 
+
+      			 		
+      			}
+			else if 			(   $("#aloes_tableaux_rapports").val()=="3"  )			
+      			{
+        		$("#ChampsUE").show();      			     			
+      			}
+      			
+      }
+
+ 	  
+	  
+
+    </script>
+
+
+ 
+{% endblock %}
+    
+{% block sidebar_nav %}
+ {{ parent() }}
+{% endblock %}
+
+{% block header_nav %}	  
+ {{ parent() }}
+{% endblock %} 

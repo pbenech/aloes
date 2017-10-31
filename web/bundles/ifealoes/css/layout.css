@@ -1,0 +1,654 @@
+/** The Magic **/
+
+.progress-bar-success {
+    background-color: MediumSeaGreen;
+}
+
+.btn-success {
+    background-color: MediumSeaGreen;
+}
+
+.navbar-default {
+    background-color:  	#FAFAFA!important;
+}
+ 
+.btn-breadcrumb .btn:not(:last-child):after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: 100%;
+  z-index: 3;
+}
+.btn-breadcrumb .btn:not(:last-child):before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid rgb(173, 173, 173);
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  margin-left: 1px;
+  left: 100%;
+  z-index: 3;
+}
+
+/** The Spacing **/
+.btn-breadcrumb .btn {
+  padding:6px 12px 6px 24px;
+}
+.btn-breadcrumb .btn:first-child {
+  padding:6px 6px 6px 10px;
+}
+.btn-breadcrumb .btn:last-child {
+  padding:6px 18px 6px 24px;
+}
+
+/** Default button **/
+.btn-breadcrumb .btn.btn-default:not(:last-child):after {
+  border-left: 10px solid #fff;
+}
+.btn-breadcrumb .btn.btn-default:not(:last-child):before {
+  border-left: 10px solid #ccc;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+  border-left: 10px solid #ebebeb;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+  border-left: 10px solid #adadad;
+}
+
+/** Primary button **/
+.btn-breadcrumb .btn.btn-primary:not(:last-child):after {
+  border-left: 10px solid #428bca;
+}
+.btn-breadcrumb .btn.btn-primary:not(:last-child):before {
+  border-left: 10px solid #357ebd;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
+  border-left: 10px solid #3276b1;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
+  border-left: 10px solid #285e8e;
+}
+
+/** Success button **/
+.btn-breadcrumb .btn.btn-success:not(:last-child):after {
+  border-left: 10px solid #5cb85c;
+}
+.btn-breadcrumb .btn.btn-success:not(:last-child):before {
+  border-left: 10px solid #4cae4c;
+}
+.btn-breadcrumb .btn.btn-success:hover:not(:last-child):after {
+  border-left: 10px solid #47a447;
+}
+.btn-breadcrumb .btn.btn-success:hover:not(:last-child):before {
+  border-left: 10px solid #398439;
+}
+
+/** Danger button **/
+.btn-breadcrumb .btn.btn-danger:not(:last-child):after {
+  border-left: 10px solid #d9534f;
+}
+.btn-breadcrumb .btn.btn-danger:not(:last-child):before {
+  border-left: 10px solid #d43f3a;
+}
+.btn-breadcrumb .btn.btn-danger:hover:not(:last-child):after {
+  border-left: 10px solid #d2322d;
+}
+.btn-breadcrumb .btn.btn-danger:hover:not(:last-child):before {
+  border-left: 10px solid #ac2925;
+}
+
+/** Warning button **/
+.btn-breadcrumb .btn.btn-warning:not(:last-child):after {
+  border-left: 10px solid #f0ad4e;
+}
+.btn-breadcrumb .btn.btn-warning:not(:last-child):before {
+  border-left: 10px solid #eea236;
+}
+.btn-breadcrumb .btn.btn-warning:hover:not(:last-child):after {
+  border-left: 10px solid #ed9c28;
+}
+.btn-breadcrumb .btn.btn-warning:hover:not(:last-child):before {
+  border-left: 10px solid #d58512;
+}
+
+/** Info button **/
+.btn-breadcrumb .btn.btn-info:not(:last-child):after {
+  border-left: 10px solid #5bc0de;
+}
+.btn-breadcrumb .btn.btn-info:not(:last-child):before {
+  border-left: 10px solid #46b8da;
+}
+.btn-breadcrumb .btn.btn-info:hover:not(:last-child):after {
+  border-left: 10px solid #39b3d7;
+}
+.btn-breadcrumb .btn.btn-info:hover:not(:last-child):before {
+  border-left: 10px solid #269abc;
+} 
+
+/*
+ * General CSS 
+ */
+
+
+
+.panel-group {
+    margin-bottom: 5px;
+}
+
+.ui-sortable-handle{
+		   border-bottom: 1px solid LightGray ;
+}
+
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    background-color: grey;
+
+}
+
+
+thead {
+	  border-bottom: 2px solid grey;
+}
+
+.form-inline .radio  {
+	padding-right: 15px!important;
+} 
+
+.form-inline .checkbox  {
+	padding-left: 15px!important;
+	padding-right: 15px!important;
+} 
+
+.blockc {
+	border-left: 2px solid  MediumSeaGreen;  	
+	background-color: #fafafa; 
+	left:15px; 
+
+}
+
+.blockheader {
+	margin-bottom: 10px;
+	background-color:MediumSeaGreen!important; 
+	color: white;
+	border:1px solid  black;  
+}
+
+.block0 {
+	margin-bottom: 10px;	
+	background-color: #EDEDED; 
+	 
+	border:1px solid  green;  
+}
+ 
+.block1 {
+	margin-bottom: 10px;  
+	background-color: 	#F8F8FF; 	
+	border:1px solid  #f0ad4e;  		
+}
+
+.block2 {
+	margin-bottom: 10px;
+	background-color: 	#F8F8FF; 	
+	border:1px solid #5bc0de;  	
+}
+
+.block3 {
+	margin-bottom: 10px;
+	background-color: white; 	
+	border:1px solid grey;  
+	border-radius: 10px;			
+}
+
+.block3b {
+	margin-bottom: 10px;
+/*	background-color: #f9f9f9; 	*/ 
+	border:1px solid grey;  	
+}
+
+
+.entete0 { 
+    font-size: 85%;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+.entete1 { 
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;  
+}
+
+.entete2 { 
+    font-size: 75%;
+    font-weight: bold;
+    text-transform: uppercase;
+ /*   text-decoration: underline;   */
+    color: orange;
+}
+
+.label2 { 
+    font-size: 75%;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black;
+}
+   
+
+
+.entete3 { 
+    font-size: 75%;
+    font-weight: bold;
+    text-transform: uppercase;
+/*    text-decoration: underline;   */
+    color: #5bc0de;
+}
+ 
+.progress {
+    position: relative;
+}
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black; 
+ }
+
+.col-sm-12 {
+    padding-top: 5px ;
+
+}
+
+.modal-header {
+   background:#337ab7 ;
+   color:white ; 
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+} 
+
+.color1 {
+   background: MediumSeaGreen!important; 
+}
+
+.color2 {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.color3 {
+   background: #5bc0de!important; 
+}
+ 
+
+.color4 {
+   background: #99B4D1!important; 
+}
+  
+
+ 
+.btn-color1 {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+} 
+
+.btn-color2 {
+    background-color: #f0ad4e;
+    border-color: #eea236; 
+    color: #fff;
+} 
+
+.btn-color3 {
+    background-color: blue;
+    border-color: blue;
+    color: #fff;
+} 
+ 
+.btn-color4 {
+    background-color: #99B4D1;
+    border-color: #99B4D1;
+    color: #fff; 
+} 
+
+
+.glyphicon-collapse-down{
+	font-size:22px;
+	color:green;
+}
+ 
+.glyphicon-collapse-up{
+	font-size:22px;	
+	color:green; 
+}  
+
+
+.button1  .glyphicon-collapse-down {
+	font-size:22px;
+	color:MediumSeaGreen; 
+}
+
+
+
+.button1  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:MediumSeaGreen; 
+}  
+
+
+.button2  .glyphicon-collapse-down {
+	font-size:22px;
+	color:orange; 
+}
+
+.button2  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:orange; 
+}  
+
+
+.button2 .glyphicon-unchecked {
+	font-size:15px;	
+	color:orange; 	
+}
+
+.button3  .glyphicon-collapse-down {
+	font-size:22px;
+	color:#46b8da; 
+}
+
+.button3  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:#46b8da; 
+}
+
+
+.btn-color1 {
+    background-color: MediumSeaGreen;
+    border-color: #4cae4c;
+    color: #fff;
+} 
+
+.btn-color2 {
+    background-color: #f0ad4e;
+    border-color: #eea236; 
+    color: #fff;
+} 
+
+.btn-color3 {
+    background-color: #5bc0de;
+    border-color: #46b8da; 
+    color: #fff;
+} 
+
+
+.btn1 {
+    -moz-user-select: none;
+    background-image: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 4px 9px; 
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn2 {
+    -moz-user-select: none;
+    background-image: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 3px 7px; 
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}  
+body {
+    padding-top: 0px !important;
+} 
+
+fieldset
+{
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15),0 1px 4px rgba(0,0,0,.15);	
+
+}
+
+
+.item-nodeX {
+	padding: 0px;
+    border-top: 1px dotted #ddd; 	
+}
+
+/*
+.block
+{
+    margin: 10px;
+	background-color:#E6E6E6;	
+}
+*/
+
+.title-one {
+	background-color: #ececec; 
+    font-weight : bold; 
+  	font-size: 25px;  
+  	padding: 5px;  	
+}
+
+.title-two { 
+    font-weight : bold; 
+  	font-size: 18px;
+	margin-bottom: 5px;
+	border:1px solid  #f0ad4e;   	    	    	
+}
+
+
+.title-two1a { 
+    font-weight : bold; 
+  	font-size: 18px;
+	margin-bottom: 5px;
+	border:1px solid  grey;   
+	border-radius: 25px;	    	    	
+}
+
+.title-two1b { 
+    font-weight : bold; 
+  	font-size: 18px;
+	margin-bottom: 5px; 	    	    	
+}
+
+.row {
+
+    padding: 5px;
+}
+ 
+.attribut { 
+    font-weight : bold; 
+    float: left;
+
+    text-align: right;
+    padding-right: 10px;
+
+    color: #888;    
+    
+}
+
+.attribut2 {
+    font-weight : bold; 
+	color: #888; 	
+}
+
+input:not([class="form-control"])[type="text"]
+{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 0 none;
+    height: 40px;
+    width: 100%; 
+}
+
+ 
+input:not([class="form-control"])[type="password"]
+{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 0 none;
+    height: 40px;
+    width: 100%; 
+}
+
+
+
+/* Progress bars */
+
+.progress-bar-info {
+    background-color: #23527c;
+}
+
+/* Edition hints and controls */
+
+.remove  {
+    cursor:pointer
+}
+
+[class*=item] .remove, .aloes-session .remove {
+    visibility:hidden;
+    border:0;
+}
+
+.specific-item:hover .remove, 
+.parent-container:hover > div > .remove,
+.aloes-session:hover .remove {
+    visibility:visible;
+}
+
+
+.editable .editable-attribute{
+    border-bottom: 3px solid #fff;
+}
+
+.editable:hover .editable-attribute{
+    border-bottom: 3px dotted #ddd; 
+}
+
+.aloes-create-session, .aloes-description-save {
+    color: #fff;
+    background-color: #23527c;
+    border-color: #23527c;
+}
+
+
+.aloes-rich-editable {
+    border-left: 3px solid #fff;
+    padding-left: 10px;
+}
+
+.aloes-rich-editable:hover {
+    border-left: 3px dotted #ddd;
+    padding-left: 10px;
+}
+
+
+/* Editing state */
+
+.editable:hover .editable-attribute{
+    border-bottom: 3px dotted #ddd; 
+}
+
+.editable input {
+    display: none;
+}
+
+.editable.editing input {
+    display: inline;
+}
+
+.editable.editing .view {
+    display: none;
+}
+
+.rich-text-controls{
+    margin-top:20px;
+}
+
+
+/* List layout and styling */
+
+.aloes-panel {
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+
+.item-node , .aloes-session , .general-item-node {
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+.general-item-creator {
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+/* Table styling */
+
+td.linked, 
+td.deadline,
+td.weight, {
+    text-align:center
+}
+
+
+/* Navigation pills */
+
+.nav-pills > li.active > a {
+    color: #fff;
+    background-color: #23527c ;
+}
+
+.current {
+	color: white!important;
+    background-color: #23527c ; 	
+}
+
+.nav > li > .current:hover { 
+    color: white;
+    background-color: #23527c ; 
+}
+
+.nav > li > a:hover { 
+    color: white;
+    background-color: #ACBECD ; 
+}
+
+
+
+

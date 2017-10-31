@@ -1,0 +1,43 @@
+{% set pourcentage = 0 %}
+        
+{% for parent in entities %}
+	                    
+	{% set pourcentage = (parent.weight * 100) + pourcentage %}	 
+
+    <div class="item-nodeX" >
+
+        {{ block('parent_item') }}
+        
+
+	        <table class="table">
+	
+	            {{ block('children_header') }}
+	
+		   		 <tbody class="children">
+	                {% for child in attribute(parent,children) %}
+	                    {{ block('child_item') }}                                   
+	                {% endfor %}
+	                 
+
+	            </tbody>
+	
+				</div>
+	
+	        </table>
+        
+        	{{ block('new_child') }} 
+
+  
+        
+    </div>
+{% endfor %}
+
+<div class="row">
+	<div class=" col-md-6 col-sm-6">
+	</div>
+	<div class="general-item-weight cold-md-2 col-sm-2">	
+		<b>{{ pourcentage }}% Total</b>
+	</div>
+</div>	
+
+{{ block('new_parent') }}

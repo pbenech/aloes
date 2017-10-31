@@ -1,0 +1,26 @@
+{% extends 'IfeAloesBundle:Course:link-layout.html.twig' %}
+
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block link_content %}
+    {{ macros.link_selection_form(target_name, routes.update_selection, source, target_parents,menu) }}
+{% endblock %}
+
+{% block link_help_message %}
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign"> </span>
+        Sélectionnez les objectifs spécifiques liés à cette
+        évaluation. <br> Passez ensuite à l'onglet
+        <strong> Pondération </strong> pour
+        indiquer l'importance relative de chacun.
+    </div>
+{% endblock %}
+
+{% block link_title %}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Objectifs liés à l'évaluation: </div>  
+    
+    {% if msg is defined and msg==1 %}
+    	<br/><p><center><span  class="alert alert-success"> SELECTION ENREGITREE AVEC SUCCES </span></center></p>
+    {% endif%}    
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import  'IfeAloesBundle:Course:linking.html.twig' as macros%}
+
+
+{% block content -%}
+
+
+    <div class='title-two1a col-sm-12'> Séquences et Evaluations</div>    	
+
+	<script type="text/javascript">		
+		
+		$(document).on('focusin', function(e) {
+		    if ($(e.target).closest(".mce-window").length || $(e.target).closest(".moxman-window").length) {
+		        e.stopImmediatePropagation();
+		    }
+		});		
+		
+	</script>     
+
+    {% embed 'IfeAloesBundle:Aloes:list3.html.twig' with {'children': 'assessments','children2': 'events'} %}
+
+        {% block parent_item %}
+  			<div id="TO_{{parent.id}}_A" class="row" >      
+        		{% include 'IfeAloesBundle:Topic2:TO_XX_A.html.twig' %}
+			</div>			
+        {% endblock %}
+
+        {% block child_item %}
+			<div id="AS_{{child.id}}" class="row block1" > 
+        		{% include 'IfeAloesBundle:Assessment2:AS_XX.html.twig' %}	 		
+			</div>        
+        {% endblock %} 
+  
+
+        {% block child_item2 %} 
+			<div id="AS2_{{child.id}}" class="row block2"  > 
+        		{% include 'IfeAloesBundle:Event2:EV_XX.html.twig' %}			
+			</div>        
+        {% endblock %} 
+
+
+        {% block children_header %} 
+        	<div class="row col-sm-12">
+	            <div class="col-sm-3 entete2"> Travaux</div> 
+	            <div class="col-sm-3 entete2"> Evènement(s) Associé(s)</div> 
+	            <div class="col-sm-2 entete2"> Date de rendu</div>
+                <div class="col-sm-1 entete2"> Objectifs</div>	            
+	            <div class="col-sm-1 entete2"> Coefficient</div>
+	            <div class="col-sm-2 entete2"> </div>
+			</div>
+        {% endblock %} 
+
+        {% block children_header2 %} 
+        	<div class="row col-sm-12">
+	            <div class="col-sm-3 entete3"> Evènement(s)</div>
+	            <div class="col-sm-3 entete3"> Travaux Associé(s)</div>
+                <div class="col-sm-1 entete3"> Dates </div>	            
+	            <div class="col-sm-1 entete3">  </div>
+	            <div class="col-sm-2 entete3">  </div> 
+			</div>
+        {% endblock %} 
+
+
+        {% block new_parent %}        
+ 			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				  ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				  ( is_granted("ROLE_ADMIN") )
+			%}	
+			<!--	       
+            <div class="node-creator general-item-creatorX">
+             
+            	<a href="{{ path('course_topic21_create',{id:course.id, init:true}) }}">Créer une nouvelle séquence ou plusieurs séquences </a> 	
+
+            </div>  
+		 	-->
+		 
+			<div id="button_gen" class="col-sm-12" style="text-align:right">   	   
+			  <a class="btn1 btn-success" href="{{ path('course_topic21_create',{id:course.id, init:true}) }}">
+			  		<span class="glyphicon glyphicon-plus-sign"> Créer une nouvelle séquence ou plusieurs séquences
+			  </a> 						             
+			</div>    		 
+		 
+          {% endif %}             
+        {% endblock %}
+
+
+        {% block new_child %}
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+			%}			
+						
+			  <div id="button_gen" class="col-sm-12" style="text-align:right">  	  
+			  	<a title="Ajouter un travail"  data-toggle="modal" class="btn2 btn-warning" href="{{ path("topic_assessment_new_2", {id:parent.id}) }}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign">Ajouter
+			  	</a> 
+			  	<br/>&nbsp; 				
+	          </div> 			
+
+          {% endif %}
+        {% endblock %}
+
+
+        {% block new_child2 %}
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+			%}			
+						
+			  <div id="button_gen" class="col-sm-12" style="text-align:right">  		   
+			  	<a title="Ajouter un évènement" data-toggle="modal" class="btn2 btn-info" href="{{ path("topic_events_new_2", {id:parent.id}) }}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign">Ajouter
+			  	</a>  
+			  	<br/>&nbsp; 			 	
+	          </div> 			
+
+          {% endif %}
+        {% endblock %}
+
+
+    {% endembed %}
+    
+
+  	<script>            
+		$(document.body).on('hidden.bs.modal', function () {
+				$('#myModal').removeData('bs.modal');	    	
+				$("#modal-content").html('');								
+					
+		});								 		                     
+	</script>
+	  
+		<div class="modal fade in " data-backdrop="static" id="myModal" tabindex="-1" role="dialog"  data-target=".bs-example-modal-lg" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="z-index: 1050">  
+				<div id="modal-content" class="modal-content"> 					  	
+			    </div>
+			</div>   
+		</div>    
+    
+
+{% endblock %}
+
+

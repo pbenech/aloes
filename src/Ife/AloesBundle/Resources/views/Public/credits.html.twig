@@ -1,0 +1,17 @@
+{% extends 'IfeAloesBundle:Public:layout.html.twig' %}
+
+{% block content -%}
+
+    <div class='title-two1a col-md-12 col-sm-12'> 
+			 Crédits
+	</div>
+	
+   	<div class="col-sm-12 block3"  style="min-height:500px">
+    	{% if parameter is defined and parameter is not null %}
+   			{{ parameter.credits|raw }}
+   		{% endif %}
+   		<br/><br/>  	
+   	</div>
+   
+ 
+{% endblock %}

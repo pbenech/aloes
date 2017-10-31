@@ -1,0 +1,28 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+
+    {% embed 'IfeAloesBundle:Aloes:edit-general-item.html.twig' with {'children':edit_form.specificObjectives} %}
+
+	
+        {% block parent_title %}
+   		<div class='title-one'> {{ course.title }} </div>
+    	<div class='title-two'> Objectif général : Edition</div>    	
+        
+        {% endblock %}
+
+        {% block children_title %}
+            <h2> Objectifs spécifiques associés </h2>
+        {% endblock %}
+
+        {% block back_to_index %} 
+        
+            <a href="{{ path('course_objective', {id:course.id}) }}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Retour à la liste des objectifs
+            </a>
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

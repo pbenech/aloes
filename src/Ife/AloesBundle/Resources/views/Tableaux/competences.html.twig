@@ -1,0 +1,46 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+   	<div class='title-two1a col-md-12 col-sm-12'> 
+			Référentiel de compétences 
+	</div>
+
+    {% embed 'IfeAloesBundle:Aloes:list4.html.twig' with {'children':'specificCompetences'} %}
+
+
+        {% block parent_item %}
+  			<div id="CG_{{parent.id}}_A" class="row" >      
+        		{% include 'IfeAloesBundle:GeneralCompetence2:CG_XX_A.html.twig'  with {'action': 'consult'} %}
+			</div>   			
+			           
+        {% endblock %}
+
+        {% block child_item %}
+			<div id="CS_{{child.id}}" class="row block1">                 
+		  		{% include 'IfeAloesBundle:SpecificCompetence2:CS_XX.html.twig'  with {'action':  'consult'} %}				
+		  	</div>	         
+        {% endblock %}
+
+        {% block children_header %}
+        
+	            <div class="col-sm-8 entete2" style="text-align:center"> Compétences spécifiques</div> 
+	            <div class="col-sm-2 entete2" style="text-align:center"> % </div>
+	            <div class="col-sm-2 entete2" style="text-align:center"> </div>        
+        
+
+			    	{% for child in attribute(parent,children) %}
+				    	{{ block('child_item') }}                                 
+					{% endfor %}		    			
+  
+        {% endblock %}
+
+        {% block new_parent %}
+   
+        {% endblock %}  
+
+        {% block new_child %}
+                     
+        {% endblock %}
+
+    {% endembed %} 
+
+    

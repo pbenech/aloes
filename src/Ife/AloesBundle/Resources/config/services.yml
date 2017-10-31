@@ -1,0 +1,21 @@
+parameters:
+#    ife_aloes.example.class: Ife\AloesBundle\Example
+
+services:
+#    ife_aloes.example:
+#        class: %ife_aloes.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    ife.aloes.type.typo_selector:
+        class: Ife\AloesBundle\Form\TypoSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags: 
+            - { name: form.type, alias: typo_selector }
+    ife.aloes.type.cato_selector:
+        class: Ife\AloesBundle\Form\CatoSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: cato_selector }
+
+   
+
+         

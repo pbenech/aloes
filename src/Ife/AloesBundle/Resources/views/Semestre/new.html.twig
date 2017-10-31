@@ -1,0 +1,61 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default"href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Semestres</a>
+    </div> 
+{% endblock %}
+
+{% block content_10 -%}
+
+	
+    <div class='title-two1a col-md-12 col-sm-12'> 
+			Ajouter semestre
+	</div>
+
+
+	<form class="form-inline" id="roles" action="{{ path('semestres_create', { 'page' : page, 'sort' : sort, 'direction' : direction  }) }}" method="post">	
+
+
+		<div class='col-sm-12 block3'>
+				<div class='col-sm-2'> 	  	  
+			    	{{ form_label(form.title) }}
+				</div> 	  		    	
+				<div class='col-sm-10'> 	  	  
+			    	{{ form_widget(form.title) }}
+			 	    {{ form_errors(form.title) }}	
+				</div> 	
+
+
+
+				{{ form_rest(form) }}				
+
+				<div class='col-sm-12'>	
+					<hr/>
+				</div>
+  			
+				<div class='col-sm-12'>	
+						<div class='col-sm-3'> 
+						    <button type="submit"  class="btn btn-success btn" >Enregistrer</button>  
+						</div>
+						<div class='col-sm-9'>
+							    <a href="{{ path('semestres') }}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste </a>
+						</div>
+				</div>							
+
+				<div class='col-sm-12'>	
+				</div>
+		</div>
+								
+	</form>		
+
+	          
+	          
+    
+{% endblock %} 
+
+
+    
+

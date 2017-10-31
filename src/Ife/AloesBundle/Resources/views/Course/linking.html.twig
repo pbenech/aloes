@@ -1,0 +1,77 @@
+{% macro link_selection_form(target_name, form_action, source, targetParents,menu) %}
+    <form action="{{path(form_action, {id:source.id,menu:menu})}}" method="POST">
+        {% for parent in targetParents %}
+            <fieldset>
+                <legend> {{ parent.title }}</legend>
+                {% for target in parent.children %}
+                    <div class="checkbox">
+                        <label>  
+                            <input name="{{ "#{target_name}[#{target.id}]" }}"
+                                   type="checkbox"
+                                   {{ (target.isSelected)?'checked':'' }}>
+                            {{ target.title }}  
+                        </label>
+                    </div>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        <button class="btn btn-success" type="submit"> 
+            Enregistrer la sélection 
+        </button>
+    </form>
+{% endmacro %}
+
+
+{% macro link_rating_form(rating_form, relation_attribute, target_entity_name) %}
+
+    {{ form_start(rating_form) }}
+
+    <table class="table" >
+        <tbody>
+            {% for link in attribute(rating_form, relation_attribute) %}
+                {% set linked_entity = attribute(link.vars.data, target_entity_name) %}
+                <tr>
+                    <td>
+                        {{ linked_entity.title }}
+                    </td>
+                    <td>
+                        {{  form_widget(link.rating) }}                
+                    </td>
+                </tr>
+            {% endfor %}
+           {{ form_widget(rating_form._token)  }}      
+        </tbody>
+
+    </table>
+    {{ form_row(rating_form.submit) }}
+    {{ form_end(rating_form, {'render_rest':false}) }}
+
+{% endmacro %}
+
+
+{% macro link_weights(targets) %}
+    {% import _self as links %}
+
+    <table class="table">
+        <tbody>
+            {% for target in targets %}
+                <tr>
+                    <td>{{ target.title }}</td>
+                    <td>{{ links.progress_bar(target.weight) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endmacro %}
+   
+ 
+{% macro progress_bar(weight, type = 'info') %}
+  <div class="progress">  
+        <div class="{{ "progress-bar progress-bar-"~type }}"
+             role="progressbar" 
+             style="width:{{weight * 100 }}%;">
+        </div>
+        <span class="text-muted">{{ weight * 100 }} %</span>
+  </div>    
+{% endmacro %}

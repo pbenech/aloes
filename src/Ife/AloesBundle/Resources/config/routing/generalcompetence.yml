@@ -1,0 +1,42 @@
+generalcompetence:
+    path:     /
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:index" }
+ 
+generalcompetence_show:
+    path:     /{id}/show
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:show" }
+
+generalcompetence_new:
+    path:     /new
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:new" }
+         
+
+generalcompetence_new2:
+    path:     /{id}/new
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence2:new" }
+    requirements: { _method: post }
+
+generalcompetence_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:create" }
+    requirements: { _method: post }
+
+generalcompetence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:edit" }
+
+generalcompetence_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:GeneralCompetence:update" }
+    requirements: { _method: post|put }
+
+generalcompetence_delete:
+  path:     /{id}/delete
+  defaults: { _controller: "IfeAloesBundle:GeneralCompetence:delete" }
+  requirements: { _method: post|delete }
+
+# Specific competences
+generalcompetence_specifics_create:
+  path: /{id}/specifics/create
+  defaults: { _controller: "IfeAloesBundle:SpecificCompetence:create" }
+  requirements: { _method: post }

@@ -1,0 +1,98 @@
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/jquery.tinymce.min.js')}}"></script> 
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/tinymce.min.js')}}"></script>
+
+
+<div class="modal-header color2"> 
+	{% if type is defined and type=="new" %}
+		<b>Créer une compétence spécifique</b>
+	{% else %}
+		<b>Modifier une compétence spécifique</b>	
+	{% endif%}			
+	
+	<button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div id="modal-body" class="modal-body" > 
+
+
+	<form id="aloes_specific_competence" action="" method="post" name="aloes_general_objective"  {{ form_enctype(form) }}>
+	
+		{{ form_errors( form ) }}
+	
+	   	{{ form_row(form.title) }}
+	
+	   	{{ form_rest(form) }}	   		
+	    
+	   	<hr/>
+	     
+	    <button class="btn btn-color2" type="submit"><i class="icon icon-check icon-lg"></i>Enregistrer</button>
+    	<button class="btn btn-inverse" type="button" data-dismiss="modal"><i class="icon icon-times icon-lg"></i> Fermer</button>	 	   
+	    
+	</form>
+
+
+	<script type="text/javascript">
+	
+		$('input:text:visible:first').focus();    
+		
+
+		tinymce.init({
+					 selector: "textarea",	
+  					 cache_suffix: '?v=4.1.6',					 		 
+			 	   	 menubar: false,		
+			 	   	 "toolbar1":"code preview |bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink  ",
+//			 	   	 "plugins":"link image "						
+			 	   	 "plugins":"code preview link fullscreen "		
+					 });			
+			
+	
+		$("#aloes_specific_competence").submit(function() {			           
+				                				             
+			data = $(this).serialize();		         
+	
+			$.ajax({
+					type: "POST",
+					{% if type is defined and type=="new" %}					
+						url: "{{ path("specificcompetence_create_2", {id:parent.id}) }}",
+					{% elseif type is defined and type=="update" %}					
+						url: "{{ path("specificcompetence_update2", {id:entity.id}) }}",	
+					{% endif 																							%}											
+					data: data,
+	 				//dataType : 'html',	
+					dataType : 'json',	 												
+					cache: false,
+					success: function(data) 
+						{
+						{% if type is defined and type=="new" %}	
+						if (data.result==false)					  
+							$("#modal-content").empty().append(data.content);  
+						else
+							{			 			
+											
+							var content = $(data);
+							$("#sortable{{parent.id}}").append(data.content); 
+							$("#CG_{{parent.id}}_A_nb_specs").empty().append(data.nb_spec); 
+							$("#CG_{{parent.id}}_A_weight").empty().append(progress_bar(data.weight,'warning')); 								
+							$('#myModal').modal('hide');								
+							}
+						{% elseif type is defined and type=="update" %}		
+						if (data.result==false)					  
+							$("#modal-content").empty().append(data.content);  
+						else
+							{							 
+							$("#CS_{{entity.id}}_A_title2").empty().append(data.content); 							
+							$("#CS_{{entity.id}}_B_description").empty().append(data.description); 	
+							$('#myModal').modal('hide');	 
+							}
+						{% endif 																							%}																
+						}   
+			});	             			             	
+			return false;		           				 
+	
+		 
+		});
+		
+	</script>	 	
+     
+
+</div>

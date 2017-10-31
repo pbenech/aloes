@@ -1,0 +1,57 @@
+{% extends 'IfeAloesBundle:Aloes:layout.html.twig' %}
+
+{% block content_2 %}
+
+    <ul class="nav nav-sidebar" style='background-color:#DCDCDC'> 
+
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}				
+	        <li><a href="{{path('admin_utilisateurs')}}"
+	        	{% if menu is defined and menu=="adm-util"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Gestion des utilisateurs </a></li>
+        {% elseif  ( is_granted("ROLE_RESPONSABLE") ) %}				
+	        <li><a href="{{path('resp_utilisateurs')}}"
+	        	{% if menu is defined and menu=="adm-util"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Gestion des utilisateurs </a></li>
+        {% endif %}	
+
+        
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}	       
+                
+        <hr/>
+        {% endif %}	 
+                
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}				
+	        <li><a href="{{path('admin_parameters')}}"
+	        	{% if menu is defined and menu=="adm-param"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Paramètres </a></li>
+        {% endif %}	 
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}				
+	        <li><a href="{{path('levels')}}"
+	        	{% if menu is defined and menu=="adm-level"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Niveaux </a></li>
+        {% endif %}	
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}				
+	        <li><a href="{{path('langues')}}"
+	        	{% if menu is defined and menu=="adm-lang"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Langues </a></li>
+        {% endif %}	
+        {% if  ( is_granted("ROLE_ADMIN") )
+        %}				 
+	        <li><a href="{{path('semestres')}}"
+	        	{% if menu is defined and menu=="adm-sem"%}
+	        		class="current"
+	        	{% endif%}><span class="glyphicon glyphicon-play"></span> Semestres </a></li>
+        {% endif %}	        
+
+    </ul>
+{% endblock %} 

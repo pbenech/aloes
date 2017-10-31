@@ -1,0 +1,112 @@
+{% extends 'IfeAloesBundle:Aloes:layout.html.twig' %}
+
+{% import "::macro.html.twig" as macro %}
+
+{% block content -%}
+
+    
+ 	
+    	<div class='title-two1a col-md-9 col-sm-9'> 
+			Liste des programmes
+		</div>
+    	<div class='title-two1b col-md-3 col-sm-3' style='text-align:right'>
+			{% if is_granted("ROLE_RESPONSABLE") or is_granted("ROLE_ADMIN") %}	 
+
+					<div id="button_gen" class="col-sm-12" style="text-align:right">   	   
+					  <a class="btn1 btn-color4" href="{{path('programs_new')}}" >
+					  		<span class="glyphicon glyphicon-plus-sign"> Ajouter un programme
+					  </a> 						             
+					</div>  			
+
+			{% endif %}	 	
+    	</div> 		
+ 
+  	<div class="col-sm-12 block3">
+    <table class="table  table-striped  table-hover">
+        <thead> 
+            <th width='40%'> {{ knp_pagination_sortable(pagination, 'Titre', 'p.title') }}
+            	{{ macro.tri('p.title',sort,direction) }}       	            		
+            </th>
+            <th width='30%'> {{ knp_pagination_sortable(pagination, 'Sigle', 'p.label') }}
+            	{{ macro.tri('p.label',sort,direction) }} 
+            </th> 
+            <th width='10%' style="text-align:center"> Visualiser</th>
+            <th width='10%' style="text-align:center"> Modifier</th>
+            <th width='10%' style="text-align:center"> Supprimer </th>
+        </thead>
+        <tbody>
+        
+	{% for entity in pagination %}
+            <tr>
+                <td> 
+	            	{{ entity.title}}
+                </td>
+                <td> {{ entity.label }}  </td>
+
+
+                <td style="text-align:center"> 
+	            <a  class="btn1 btn-color4" href="{{path('programs_show', {'id':entity.id})}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                </td>
+
+                <td style="text-align:center">
+                {% if  ( is_granted("ROLE_RESPONSABLE") and entity.isResp(app.user.id)) or 
+                	   ( is_granted("ROLE_ADMIN") )
+                %}
+        			<a  class="btn1 btn-color4" href="{{ path('programs_edit', { 'id': entity.id, 'from': 'list' }) }}"><span class="glyphicon glyphicon-edit"></span></a>                
+                {% endif %}
+                </td>                
+                
+                <td style="text-align:center"> 
+	                {% if ( is_granted("ROLE_RESPONSABLE") and entity.isResp(app.user.id)) or
+                	   ( is_granted("ROLE_ADMIN") )	                 
+	               	%}
+	               	
+	               	
+					<a  data-cache="false"  data-toggle="modal" class="btn1 btn-danger" href="{{ path('programs_del2', {id:entity.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 						                    
+	               	
+	                {% endif %}
+                </td> 
+            </tr>
+	{% endfor %}
+        </tbody>
+    </table>
+    </div>
+	<center>
+	{{ knp_pagination_render(pagination) }}
+	</center>
+     
+	          
+	
+
+  	<script>            
+		$(document.body).on('hidden.bs.modal', function () {
+				$('#myModal').removeData('bs.modal');	    	
+				$("#modal-content").html('');								
+					
+		});								 		                     
+	</script>
+	  
+	<div class="modal fade in " data-backdrop="static" id="myModal" tabindex="-1" role="dialog"  data-target=".bs-example-modal-lg" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="z-index: 1050">  
+				<div id="modal-content" class="modal-content"> 					  	
+			    </div>
+			</div>   
+	</div>   	
+
+{% endblock %} 
+
+{% block scripts %}
+	{{ parent() }}
+
+	<script type="text/javascript">
+			
+		$('.btn_delete').click(function(e) {
+			e.preventDefault(); 
+			var path = $(this).attr('href');
+			$('#btn_comfirm_delete').attr('href', path);
+			$('#modal_confirm_delete').modal({'show':true});  
+		}); 
+	</script> 
+{% endblock %}
+    
+

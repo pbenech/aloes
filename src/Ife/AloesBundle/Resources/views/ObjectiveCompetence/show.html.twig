@@ -1,0 +1,32 @@
+{% extends 'IfeAloesBundle:Course:link-layout.html.twig' %}
+{% import  'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block link_title %}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Compétences liées à l'objectif:</div>
+
+{% endblock %}
+
+{% block link_help_message %}
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign"> </span>
+        L'importance de chaque compétence dans la poursuite de
+        l'objectif, calculée en fonction des pondérations, et telle
+        que présentée aux étudiants.
+    </div>
+{% endblock %}
+
+{% block link_content %}
+    {% if targets|length > 0 %}
+        {{ macros.link_weights(targets) }}
+    {% else %}
+        <p class="alert alert-warning"> 
+            Il n'y a pas encore de compétences liées à cet objectif. Vous pouvez
+            en ajouter depuis l'onglet 'Selection'.
+        </p>
+    {% endif %}
+{% endblock %}
+
+
+
+

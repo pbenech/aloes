@@ -1,0 +1,144 @@
+<?php
+
+namespace Ife\AloesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ObjectiveCompetence
+ * 
+ * @ORM\Entity(repositoryClass="Ife\AloesBundle\Entity\ObjectiveCompetenceRepository")
+ * @ORM\Table()
+ */
+class ObjectiveCompetence
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    private $id;
+   
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rating;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SpecificCompetence", inversedBy="objectiveLinks")
+     */
+    private $competence;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SpecificObjective", inversedBy="competenceLinks")
+     */
+    private $objective;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param integer $rating
+     * @return ObjectiveCompetence
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return integer 
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * Set competence
+     *
+     * @param \Ife\AloesBundle\Entity\SpecificCompetence $competence
+     * @return ObjectiveCompetence
+     */
+    public function setCompetence(\Ife\AloesBundle\Entity\SpecificCompetence $competence = null)
+    {
+        $this->competence = $competence;
+
+        return $this;
+    }
+
+    /**
+     * Get competence
+     *
+     * @return \Ife\AloesBundle\Entity\SpecificCompetence 
+     */
+    public function getCompetence()
+    {
+        return $this->competence;
+    }
+
+    /**
+     * Set objective
+     *
+     * @param \Ife\AloesBundle\Entity\SpecificObjective $objective
+     * @return ObjectiveCompetence
+     */
+    public function setObjective(\Ife\AloesBundle\Entity\SpecificObjective $objective = null)
+    {
+        $this->objective = $objective;
+
+        return $this;
+    }
+
+    /**
+     * Get objective
+     *
+     * @return \Ife\AloesBundle\Entity\SpecificObjective 
+     */
+    public function getObjective()
+    {
+        return $this->objective;
+    }
+
+    /* LinkSourceInterface methods */
+
+    public function getTarget()
+    {
+        return $this->competence;
+    }
+
+    public function setTarget(SpecificCompetence $target)
+    {
+        $this->competence = $target;
+    }
+
+    public function getSource()
+    {
+        return $this->objective;
+    }
+
+    public function setSource(SpecificObjective $source)
+    {
+        $this->objective = $source;
+    }
+    
+    
+    public function __toString()
+    { 
+        return $this->competence->getTitle(); 
+    }
+    
+}

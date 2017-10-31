@@ -1,0 +1,33 @@
+semestres:
+  path:     /list/{page}/{sort}/{direction}
+  defaults: { _controller: "IfeAloesBundle:Semestre:index", page: 1, sort: l.title, direction: asc  }
+
+semestres_show:
+    path:     /{id}/show/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:show", page: 1, sort: l.title, direction: asc }
+
+semestres_new:
+    path:     /new/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:new", page: 1, sort: l.title, direction: asc }
+
+semestres_create:
+    path:     /create/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:create", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post }
+
+semestres_edit:
+    path:     /{id}/edit/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:edit", page: 1, sort: l.title, direction: asc}
+
+semestres_update:
+    path:     /{id}/update/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:update", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post|put }
+
+semestres_delete:
+    path:     /{id}/delete/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Semestre:delete", page: 1, sort: l.title, direction: asc}
+
+  
+  
+               

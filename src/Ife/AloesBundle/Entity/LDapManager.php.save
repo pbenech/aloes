@@ -1,0 +1,21 @@
+<?php
+
+namespace Ife\AloesBundle\Entity;
+
+
+use FR3D\LdapBundle\Ldap\LdapManager as BaseLdapManager;
+use FR3D\LdapBundle\Model\LdapUserInterface;
+
+class LdapManager extends BaseLdapManager
+{
+    protected function hydrate(LdapUserInterface $user, array $entry)
+    {
+    	
+        parent::hydrate($user, $entry);
+
+        // Your custom code
+        //$user->setEmail($entry[id]);
+        //$user->setEmailCanonical($entry[email]);
+    } 
+} 
+?>

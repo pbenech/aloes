@@ -1,0 +1,9 @@
+{% macro tri(name, sort,direction) %}            	
+	{% if sort==name and direction=='asc' %}
+     	<span class="glyphicon glyphicon-sort-by-attributes" style="color:#23527c;font-size: 0.9em;"></span>
+    {% elseif sort==name and direction=='desc'%}           		
+    	<span class="glyphicon glyphicon-sort-by-attributes-alt" style="color:#23527c;font-size: 0.9em;"></span>             	
+    {% else %} 
+    	<span class="glyphicon glyphicon-sort" style="color:#23527c;font-size: 0.9em;"></span>
+    {% endif %}   
+{% endmacro %}	

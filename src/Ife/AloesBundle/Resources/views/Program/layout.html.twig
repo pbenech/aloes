@@ -1,0 +1,70 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}
+    <title> @loes </title>
+{% endblock %}
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">
+        <a class="btn btn-default" href="{{path('programs')}}"> Liste des programmes </a></li> 
+        <a class="btn btn-default active" href="#"> 
+	   		{% if program.level is defined and program.level !=null %}
+				{{ program.level }} - 
+			{% endif %}
+			{{ program.title }} 
+        </a>
+        
+    </div> 
+    <br/><br/>
+{% endblock %}
+
+{% block sidebar_nav %}
+  
+	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav "> 
+
+		        <li><a href="{{path('programs_show',{id:program.id})}}"
+		        	{% if menu is defined and menu=="programs_show"%}
+		        		class="current"
+		        	{% endif%}         
+		        	> Présentation </a></li>		        	
+		        	
+		        <li><a href="{{path('parcours_list',{id:program.id})}}"
+		        	{% if menu is defined and menu=="parcours_list"%}
+		        		class="current"
+		        	{% endif%}         
+		        	> Parcours </a></li>		        			        		        	
+		        	
+		        <li><a href="{{path('programs_courses', {id:program.id})}}"
+		            {% if menu is defined and menu=="programs_courses"%}
+		        		class="current"
+		        	{% endif%}  
+		        	> Cours (UE) </a></li>
+		        	
+		        	
+		        <li><a href="{{path('program_competences2', {id:program.id})}}"
+		            {% if menu is defined and menu=="program_competences2"%}
+		        		class="current"
+		        	{% endif%}                  
+		        > Référentiel de compétences </a></li>
+		        
+			    <li><a href="{{path('tableaux_bord', {niv:2, program:program.id})}}"
+			        	{% if menu is defined and menu=="tableaux"%}
+			        		class="current"
+			        	{% endif%}> Tableaux de bord </a></li>		
+
+		        
+			    <li><a href="{{ path('fos_user_security_logout') }}">
+			        	 Déconnexion </a></li>  
+		  
+		      </ul>
+		    </div><!-- /.navbar-collapse -->  
+  		</div><!-- /.container-fluid -->
+	</nav>
+ 
+	
+
+    
+{% endblock %}

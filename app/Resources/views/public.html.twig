@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+        
+
+        {% block title %}
+            <title> @loes </title>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/bootstrap/css/bootstrap.min.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/dashboard-layout.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/layout.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/sessions.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/sessions.css')}}" type="text/css"> 
+            <link rel="stylesheet" href="{{asset('bundles/scdatetimepicker/css/datetimepicker.css')}}" type="text/css"> 
+        {% endblock %}
+    </head>
+
+    <body> 
+ 
+        <!-- Header -->
+        <div class="container-fluid" id="header">
+            <div class="row  top-bar "> 
+                <div class="col-md-offset-2 col-sm-offset-3">
+                    {% block header_nav %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <!-- Main content -->
+                <div class="col-md-12" id="content" data-course="1" data-program="2">
+                    {% block content %}
+                        <h1> Main content </h1>
+                    {% endblock %}
+                </div>
+
+            </div>
+
+        </div>
+        
+        {% block scripts %}
+            <script src="{{asset('bundles/ifealoes/js/jquery.min.js')}}"></script>            
+            <script src="{{asset('bundles/ifealoes/bootstrap/js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('bundles/scdatetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
+        {% endblock %}
+
+
+    </body>
+
+</html>

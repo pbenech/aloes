@@ -1,0 +1,44 @@
+/* .aloes-session-date, .aloes-date-input { */
+/*     border-left: 3px solid #23527c; */
+/* } */
+
+.aloes-session {
+    margin-top: 10px
+}
+.aloes-session-description .view {
+    border-left:3px solid #fff;
+    padding-left:10px;
+}
+.aloes-session-description:hover .view {
+    border-left:3px dotted #ddd
+}
+
+.remove {
+    cursor:pointer
+}
+
+.aloes-session-title {
+    color: #23527c;
+}
+
+/* Editing state */
+
+.editable:hover .editable-attribute{
+    border-bottom: 3px dotted #ddd; 
+}
+
+.editable input {
+    display: none;
+}
+
+.editable.editing input {
+    display: inline;
+}
+
+.editable.editing .view {
+    display: none;
+}
+
+.session-description-controls {
+    margin-top: 10px;
+}

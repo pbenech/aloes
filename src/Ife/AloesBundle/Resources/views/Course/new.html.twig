@@ -1,0 +1,171 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+
+{% block content -%}
+
+
+ 	
+    	<div class='title-two1a col-md-12 col-sm-12'>     	
+    		Nouveau cours (UE)			
+		</div>
+
+ 
+
+  {{ form_start(form) }}
+
+  <div class='col-sm-12 container-fluid block3'>	 
+    <br/> 
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.label) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.label) }}
+	 	    {{ form_errors(form.label) }}	 
+		</div> 	  	
+	</div>   
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.title) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.title) }}
+	 	    {{ form_errors(form.title) }}	
+		</div> 	  	
+	</div>   
+
+
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.parcours) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.parcours) }}
+	 	    {{ form_errors(form.parcours) }}	
+		</div> 	  	
+	</div>   
+
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.credits) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.credits) }}
+	 	    {{ form_errors(form.credits) }}	
+		</div> 	  	
+	</div>  
+
+
+    <div class='row'>			
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.isOptional) }}
+			</div> 	  		    	 
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.isOptional) }}
+	 	    	{{ form_errors(form.isOptional) }}
+			</div> 		
+    </div>  
+    
+    <div class='row'>	    
+    		<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.semestres) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(form.semestres) }}
+		 	    {{ form_errors(form.semestres) }}	
+			</div> 	  
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.year) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(form.year) }}
+		 	    {{ form_errors(form.year) }}	
+			</div> 				
+	</div>
+	
+	
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.langues) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.langues) }}
+		 	    {{ form_errors(form.langues) }}	
+			</div> 	  	
+		</div>  	
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.publicationState) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.publicationState) }}
+	 	    {{ form_errors(form.publicationState) }}	
+		</div> 	  	
+	</div>   
+	
+	<div class="col-sm-12 block3b">    
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.url_ped) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.url_ped) }}
+	 	   	 	{{ form_errors(form.url_ped) }}
+			</div> 	  	
+		</div> 	            
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.url_web) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.url_web) }}
+	 	   	 	{{ form_errors(form.url_web) }}
+			</div> 	  	
+		</div> 	            
+	
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.url_twi) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.url_twi) }}
+	 	   	 	{{ form_errors(form.url_twi) }}
+			</div> 	  	
+		</div> 	      
+	
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.url_aut) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.url_aut) }}
+	 	   	 	{{ form_errors(form.url_aut) }}
+			</div> 	  	
+		</div> 	   
+	                          
+     
+	</div>		
+	
+	
+	
+
+	{{ form_widget(form._token) }}
+        
+	<div class='row'>	
+			<div class='col-md-3'> 
+				{{ form_widget(form.submit)}} 
+			</div>
+	    	<div class='col-md-3'>
+	    		<a href="{{ path('programs_courses',{id:program.id}) }}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste des cours (UE)</a>
+	    	</div>
+	</div>
+	
+  </div>         
+  
+   
+
+{% endblock %}

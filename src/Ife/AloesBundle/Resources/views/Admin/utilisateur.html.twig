@@ -1,0 +1,567 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Gestion utilisateurs</a>
+    </div> 
+{% endblock %}
+  
+
+{% block content_10 -%}
+
+    <div class='title-two1a col-md-12 col-sm-12'> 
+			Ajouter utilisateur LDAP
+	</div>
+
+
+	<div class='col-sm-12 block3'>
+
+			<form class="form-inline" action="{{ path('admin_utilisateurs_add_ldap', { 'page' : page, 'sort' : sort, 'direction' : direction  }) }}" method="post">	
+				<div  class="col-sm-4  col-xs-12">	
+					{{ form_widget(form.search) }}
+				</div>				   			
+				{{ form_rest(form) }}	
+				<div  class="col-sm-4  col-xs-12">	
+					<button type="submit" class="btn  btn-button-cancel ">Rechercher</button>
+				</div>
+			</form>
+						    
+	</div>							
+
+	
+	{% if findLdap > 0%}
+
+	<div class='col-sm-12 block3'>
+			<form id="roles" action="{{ path('admin_utilisateurs_create_ldap', { 'page' : page, 'sort' : sort, 'direction' : direction  }) }}" method="post">	
+
+			  <div class="col-sm-12">	
+					<div class='col-sm-2'> 	  	  
+				    	{{ form_label(formLdap.users) }}
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ form_widget(formLdap.users) }}
+				 	    {{ form_errors(formLdap.users) }}	
+				 	    <br/>
+					</div> 	
+			  </div>
+			  
+			  <div class="col-sm-12 block3">	
+					<div class='col-sm-2'> 	  	  
+				    	{{ form_label(formLdap.role1) }}
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ form_widget(formLdap.role1) }}
+				 	    {{ form_errors(formLdap.role1) }}	
+					</div> 	
+			  </div>
+
+			  <div id="role2"  class="col-sm-12 block3">	
+			  
+						{% if msg2 is defined  and msg2!="" %}
+						<div class="col-sm-12 alert alert-danger" role="alert">	{{ msg2|raw}}</div>
+						{% endif %}			  
+			  			  
+					  	<div id="R2">	
+							<div class='col-sm-2'> 	  	  
+						    	{{ form_label(formLdap.role2) }}
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+						    	{{ form_widget(formLdap.role2) }}
+						 	    {{ form_errors(formLdap.role2) }}	
+							</div> 	
+						</div>	
+					  	<div id="A2">			
+
+							<div class='col-sm-2'> 	  	  
+						    	{{ form_label(formLdap.courses2) }}
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+						    	{{ form_widget(formLdap.courses2) }}
+						 	    {{ form_errors(formLdap.courses2) }}	
+							</div> 	
+						</div>
+			</div>	  
+
+			<div id="role3"  class="col-sm-12 block3">		
+			
+				{% if msg3 is defined and msg3!=""%}
+						<div class="col-sm-12 alert alert-danger" role="alert">	{{ msg3|raw}}</div>
+				{% endif %}								  
+			  
+				<div id="R3">
+					<div class='col-sm-2'> 	  	  
+				    	{{ form_label(formLdap.role3) }}
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ form_widget(formLdap.role3) }}
+				 	    {{ form_errors(formLdap.role3) }}	
+					</div> 
+				</div>		
+
+				<div id="A3">
+							<div class='col-sm-2'> 	  	  
+						    	{{ form_label(formLdap.courses3) }}
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+						    	{{ form_widget(formLdap.courses3) }}
+						 	    {{ form_errors(formLdap.courses3) }}	
+							</div> 	
+
+
+				</div>
+
+			</div>	  	
+
+				{{ form_rest(formLdap) }}	
+
+				<div class='col-sm-12'>	
+					<hr/>
+				</div>				
+    
+				<div class='col-sm-12'>	
+						<div class='col-sm-3'> 
+							<button type="submit" class="btn btn-success btn">Ajouter</button>
+						</div>
+				    	<div class='col-sm-9'>
+				    		<a href="{{ path('admin_utilisateurs') }}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste des utilisateurs </a>
+				    	</div>
+				</div>				
+				
+				<div class='col-sm-12'>	
+				</div>
+
+			</form>		
+
+		</div>
+	{% endif %}
+         
+    
+{% endblock %} 
+
+
+{% block checkbox_hierarchy_widget %}
+  <ul class="listless spaced-listless" id="mainList">
+        {% for choiceOrOptionGroup,children in form.vars.choices %}
+            {% if children is iterable %}
+                <ul>
+                    {% for child,choiceView in children %}
+                        <li>
+                            <label class="checkbox">
+                                {{ form_widget(form.offsetGet(child)) }}
+                                {{ form.offsetGet(child).vars.label }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+
+                {# If not first loop, close previous <li> #}
+                {% if not loop.first %}
+                    </li>
+                {% endif %}
+
+                <li>
+                <label class="checkbox">
+                    {{ form_widget(form.offsetGet(choiceOrOptionGroup)) }}
+                    {{ form.offsetGet(choiceOrOptionGroup).vars.label }}
+                </label>
+            {% endif %}
+
+            {# Last of the loop, there will be an open <li>, close it. #}
+            {% if loop.last %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+
+
+    
+{% block scripts %}
+	
+  {{ parent() }}
+
+  <script type="text/javascript">
+  
+    $(document).ready(function(){
+
+		$('#form_courses2 :input').each(function () {
+			if ($(this).attr('type')=="checkbox")	
+				{
+				var res = $(this).attr('value').split('#');
+				if(res[0]=="COU" )
+						{					
+						$(this).closest("label").hide(); 
+						} 
+				}
+		});
+		
+		$('#form_courses3 :input').each(function () {
+			if ($(this).attr('type')=="checkbox")	
+				{
+				var res = $(this).attr('value').split('#');
+				if(res[0]=="COU" )
+						{					
+						$(this).closest("label").hide(); 
+						} 
+				}
+		});
+		
+ 
+ 
+		$("#form_courses2 input[type='checkbox']").change(function () {
+		
+		 	if ($(this).is(':checked'))
+		 		{ 
+		 		var res = $(this).val().split('#');
+		 		
+		 		if (res[0]=="COU")
+		 			{
+					$('#form_courses2 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							if	($(this).attr('value')=="PRO#"+res[1])		
+									{					
+									$(this).prop('checked',true); 
+									}
+							}
+					  });
+					} 
+					
+		 		if (res[0]=="PRO")
+		 			{
+			 		var res = $(this).val().split('#');		 			
+			 		
+					$('#form_courses2 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res3 = $(this).attr('value').split('#');
+							if(res3[0]=="COU" && res[1]==res3[1])
+									{					
+									$(this).closest("label").show(); 
+									} 
+							}
+					});	
+					
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res4 = $(this).attr('value').split('#');
+							
+							if(res4[0]=="PRO" && res[1]==res4[1])
+									{					
+									$(this).closest("label").hide(); 
+									$(this).prop('checked',false); 
+									} 	
+							if(res4[0]=="COU" && res[1]==res4[1])
+									{					
+									$(this).closest("label").hide(); 
+									$(this).prop('checked',false); 
+									} 	
+												 			
+							}			 		
+					});												 		
+			 				 			
+		 			}					
+					
+		 		}
+		 	else
+		 		{ 
+		 		var res = $(this).val().split('#');
+		 		
+
+		 		if (res[0]=="PRO")
+		 			{
+
+					$('#form_courses2 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res2 = $(this).attr('value').split('#');
+							if(res2[0]=="COU" && res2[1]==res[1] )
+								{					
+								$(this).prop('checked',false); 
+								}
+							}
+					  });
+					  
+					  
+					  
+		 			}	
+		 			
+					
+		 		if (res[0]=="PRO")
+		 			{
+			 		var res = $(this).val().split('#');		 			
+			 		
+					$('#form_courses2 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res3 = $(this).attr('value').split('#');
+							if(res3[0]=="COU" && res[1]==res3[1])
+									{					
+									$(this).closest("label").hide(); 
+									} 
+							}
+					});		
+					
+					
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res4 = $(this).attr('value').split('#');
+							
+							if(res4[0]=="PRO" && res[1]==res4[1])
+									{					
+									$(this).closest("label").show(); 
+									$(this).prop('checked',false); 									
+									} 	
+												  			
+							}			 		
+					});						
+						 			
+		 			
+		 			}		 			
+	
+	
+		 		} 
+
+		});
+
+
+
+ 
+		$("#form_courses3 input[type='checkbox']").change(function () {
+		
+		 	if ($(this).is(':checked'))
+		 		{ 
+		 		var res = $(this).val().split('#');
+		 		
+		 		if (res[0]=="COU")
+		 			{
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							if	($(this).attr('value')=="PRO#"+res[1])		
+									{					
+									$(this).prop('checked',true); 
+									}
+							}
+					  });
+					} 
+					
+		 		if (res[0]=="PRO")
+		 			{
+			 		var res = $(this).val().split('#');		 			
+			 		
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res3 = $(this).attr('value').split('#');
+							if(res3[0]=="COU" && res[1]==res3[1])
+									{					
+									$(this).closest("label").show(); 
+									} 
+							}
+					});			 		
+			 				 			
+		 			}					
+					
+		 		}
+		 	else
+		 		{ 
+		 		var res = $(this).val().split('#');
+		 		
+		 		if (res[0]=="PRO")
+		 			{
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res2 = $(this).attr('value').split('#');
+							if(res2[0]=="COU" && res2[1]==res[1] )
+								{					
+								$(this).prop('checked',false); 
+								}
+							}
+					  });
+		 			}	
+		 			
+					
+		 		if (res[0]=="PRO")
+		 			{
+			 		var res = $(this).val().split('#');		 			
+			 		
+					$('#form_courses3 :input').each(function () {
+						if ($(this).attr('type')=="checkbox")	
+							{
+							var res3 = $(this).attr('value').split('#');
+							if(res3[0]=="COU" && res[1]==res3[1])
+									{					
+									$(this).closest("label").hide(); 
+									} 
+							}
+					});						
+
+
+
+
+
+
+		 			}
+		 				  					
+							 					 			
+	
+	
+		 		} 
+
+		});
+
+
+
+    
+
+		if ($("#form_role1 input[type='radio']:checked").val()=="1")
+			{
+			$("#role2").hide();
+			$("#A2").hide();	
+			$("#R2").hide();
+			$("#role3").hide();				
+			$("#A3").hide();	
+			$("#R3").hide();
+			}
+
+	
+		$("#form_role1 input[type='radio']").change( function() {
+ 			if ($("#form_role1 input[type='radio']:checked").val()=="0")
+				{
+				$("#role2").show();	
+				/*$("#A2").show();*/ 
+				$("#R2").show();	
+				$("#role3").show();
+				/*$("#A3").show();*/  
+				$("#R3").show();
+				
+				}			
+				
+ 			if ($("#form_role1 input[type='radio']:checked").val()=="1")
+				{
+				$('#form_role2_1').prop( "checked", true );		
+				$('#form_courses2 :input').each(function () {
+					var res3 = $(this).attr('value').split('#');
+					if ($(this).attr('type')=="checkbox")	
+						{						
+						$(this).prop('checked',false); 
+						}
+					if(res3[0]=="COU")
+						{					
+						$(this).closest("label").hide(); 
+						} 						
+						
+				});		 				
+
+				$('#form_role3_1').prop( "checked", true );		
+				$('#form_courses3 :input').each(function () {
+					var res3 = $(this).attr('value').split('#');
+					if ($(this).attr('type')=="checkbox")	
+						{						
+						$(this).prop('checked',false); 
+						}
+					if(res3[0]=="COU")
+						{					
+						$(this).closest("label").hide(); 
+						} 							
+				});		
+				
+				/* Parcourir cours3 pour reactiver */	
+				$('#form_courses3 :input').each(function () {
+					var res4 = $(this).attr('value').split('#');				
+					if(res4[0]=="PRO")							
+						$(this).closest("label").show(); 									
+				});										
+				
+				$("#role2").hide();				
+				$("#A2").hide();	
+				$("#R2").hide();
+					
+				$("#role3").hide();		
+				$("#A3").hide();	
+				$("#R3").hide();
+				}					
+		});   
+		 
+		if ($("#form_role2 input[type='radio']:checked").val()=="0")
+			{
+			$("#A2").hide();	
+			}
+
+	
+		$("#form_role2 input[type='radio']").change( function() {	 
+ 			if ($("#form_role2 input[type='radio']:checked").val()=="0")
+				{
+				$("#A2").hide();
+				$('#form_courses2 :input').each(function () {
+					var res3 = $(this).attr('value').split('#');
+					if ($(this).attr('type')=="checkbox")	
+						{						
+						$(this).prop('checked',false); 
+						}
+					if(res3[0]=="COU")
+						{					
+						$(this).closest("label").hide(); 
+						} 						
+					});
+					
+				/* Parcourir cours3 pour reactiver */	
+				$('#form_courses3 :input').each(function () {
+					var res4 = $(this).attr('value').split('#');				
+					if(res4[0]=="PRO")							
+						$(this).closest("label").show(); 									
+				});								 								
+				}	
+ 			if ($("#form_role2 input[type='radio']:checked").val()=="1")
+				{
+				$("#A2").show();
+				$("#R2").show();
+				}
+		});   
+		 
+		if ($("#form_role3 input[type='radio']:checked").val()=="0")
+			{
+			$("#A3").hide();	
+
+			} 
+
+		$("#form_role3 input[type='radio']").change( function() {	 
+ 			if ($("#form_role3 input[type='radio']:checked").val()=="0")
+				{
+				$("#A3").hide();
+				$('#form_courses3 :input').each(function () {
+									var res3 = $(this).attr('value').split('#');
+									if ($(this).attr('type')=="checkbox")	
+										{						
+										$(this).prop('checked',false); 
+										}
+									if(res3[0]=="COU")
+										{					
+										$(this).closest("label").hide(); 
+										} 						
+										 
+								});					
+				}	
+ 			if ($("#form_role3 input[type='radio']:checked").val()=="1")
+				{
+				$("#A3").show();
+				$("#R3").show();
+				}
+		});   
+ 
+
+	});         
+  </script> 
+{% endblock %}
+
+
+

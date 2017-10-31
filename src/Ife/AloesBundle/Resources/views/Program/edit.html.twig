@@ -1,0 +1,93 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+
+{% block content -%}
+ 
+  	
+    <div class='title-two1a col-md-12 col-sm-12'> 
+    		Edition 
+	   		{% if program.level is defined and program.level !=null %}
+				{{ program.level }} -
+			{% endif %}
+			{{ program.title }} 			
+	</div>	
+
+	{{ tinymce_init() }} 
+
+  	{{ form_start(edit_form) }}
+
+	<div class='col-sm-12 container-fluid block3'>	
+	  	  
+	<br/>  	  
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(edit_form.level) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(edit_form.level) }}
+	    	{{ form_errors(edit_form.level) }}	 
+		</div> 	  	
+	</div>  	  	  
+	  	  
+	  	  
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(edit_form.title) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(edit_form.title) }}
+	    	{{ form_errors(edit_form.title) }}	    	
+		</div> 	  	
+	</div>   
+	
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(edit_form.label) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(edit_form.label) }}
+	    	{{ form_errors(edit_form.label) }}	 
+		</div> 	  	
+	</div>  	
+	 
+  
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(edit_form.url) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(edit_form.url) }}
+	    	{{ form_errors(edit_form.url) }}
+		</div> 	  	
+	</div>  	
+
+
+ 	
+	<div class='row'>	
+		<div class='col-md-12'> 	  	  
+	    	{{ form_label(edit_form.description) }}
+		</div> 	  		    	
+		<div class='col-md-12'> 	  	  
+	    	{{ form_widget(edit_form.description) }}
+	    	{{ form_errors(edit_form.description) }}	
+		</div> 	  	
+	</div>  
+ 
+    
+	<div class='row'>	
+			<div class='col-md-3'> 
+				{{ form_widget(edit_form.submit)}} 
+			</div>
+	    	<div class='col-md-6'>
+	    		{% if from is defined and from=='list' %}
+	    			<a href="{{path('programs')}}"><span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste des programmes</a>
+				{% else %}
+					<a href="{{ path('programs_show', {id:program.id}) }}"><span class="glyphicon glyphicon-arrow-left"></span> Retour présentation programme</a>
+				{% endif %}				
+	    	</div> 
+	</div>
+
+	</div>
+
+	{{ form_end(edit_form) }}
+
+{% endblock %}

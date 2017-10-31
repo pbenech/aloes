@@ -1,0 +1,90 @@
+<div class="modal-header color2"> 
+	<b>Suppression Objectif spécifique </b><button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div id="modal-body" class="modal-body" >
+
+
+    Etes-vous sûr de vouloir supprimer définitivement cet objectif spécifique suivant  ?
+ 
+    <br/>    
+    <br/>{{ entity.title }}
+
+	<br/>	
+	    
+    {{ form_start(delete_form) }}
+    
+	<hr/>     
+
+    {{ form_widget(delete_form.delete) }}
+      
+    {{ form_widget(delete_form.nodelete) }}
+      
+    {{ form_end(delete_form) }}
+    
+	<script type="text/javascript">
+
+			$("#form_delete").click(function() {
+			
+					data = $(this).serialize();		
+		
+					$.ajax({ 
+							type: "POST",						
+							url: "{{ path("general_objective_specific_objective_delete_2", {id:entity.id}) }}",					
+							data: data, 
+							dataType : 'json',				 								
+							cache: false, 
+							success: function(data) 
+								{ 
+								if (data.result==false)					  
+									$("#modal-content").empty().append(data.content);  
+								else
+									{
+									var x = data.content;
+									
+									var cpt=0;
+
+									$.each( x, function( key, value ) {
+										key 	= value['key'];
+										weight 	= value['weight'];
+										type 	= value['type'];
+										
+										if (type=="GEN")
+											{
+											if (weight==null)
+												weight=0;
+											$("#OG_"+key+"_A_weight").empty().append(progress_bar(weight,'success')); 
+											cpt = cpt +	weight;												
+											}
+										if (type=="SPE")
+											{
+											if (weight==null)
+												weight=0;
+											$("#OS_"+key+"_weight").empty().append(progress_bar(weight,'warning')); 																					
+											}																	
+									}); 
+   												 
+									$( "#OS_{{entity.id}}" ).remove();	 
+									 
+									$("#general-item-weight").empty().append(progress_bar(cpt,'info')); 
+									
+									
+									$("#OG_{{parent.id}}_A_nb_specs").empty().append("Spécifiques("+data.nb_spec+")"); 
+																							
+									$('#myModal').modal('hide');							
+									}   
+								}   	
+					});	      
+
+         				 
+					return false;		
+			});
+			
+			 
+			$("#form_nodelete").click(function() {
+				$('#myModal').modal('hide');	         				 
+				return false;							
+			});		
+
+	</script>
+</div> 

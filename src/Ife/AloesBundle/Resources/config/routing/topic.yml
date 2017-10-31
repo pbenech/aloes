@@ -1,0 +1,98 @@
+topic_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:Topic:create" }
+    requirements: { _method: post }
+
+topic_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:Topic:edit" }
+
+topic_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:Topic:update" }
+    requirements: { _method: post|put }
+
+topic_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:Topic:delete" }
+    requirements: { _method: post|delete }
+
+topic_del2:
+    path:     /{id}/del2
+    defaults: { _controller: "IfeAloesBundle:Topic2:del" }
+
+topic_delete2: 
+    path:     /{id}/delete2
+    defaults: { _controller: "IfeAloesBundle:Topic2:delete" }
+    requirements: { _method: post|delete }
+
+
+topic_edit2:
+    path:     /{id}/edit2
+    defaults: { _controller: "IfeAloesBundle:Topic2:edit" }
+
+topic_update2:
+    path:     /{id}/update2
+    defaults: { _controller: "IfeAloesBundle:Topic2:update" }
+    requirements: { _method: post|put }
+
+
+# Assessments
+
+topic_assessment_create:
+  path: /{id}/assessments/create
+  defaults: { _controller: "IfeAloesBundle:Assessment:create" }
+  
+topic_assessment_new_2:
+  path: /{id}/assessments_2/new
+  defaults: { _controller: "IfeAloesBundle:Assessment2:new" }
+
+topic_events_new_2:
+  path: /{id}/events_2/new  
+  defaults: { _controller: "IfeAloesBundle:Event2:new" }
+  
+topic_assessment_create_2:
+  path: /{id}/assessments_2/create
+  defaults: { _controller: "IfeAloesBundle:Assessment2:create" }
+  requirements: { _method: post }  
+
+topic_events_create_2:
+  path: /{id}/events_2/create
+  defaults: { _controller: "IfeAloesBundle:Event2:create" }
+  requirements: { _method: post } 
+
+topic_assessment_edit_2:
+  path: /{id}/assessments_2/edit
+  defaults: { _controller: "IfeAloesBundle:Assessment2:edit" }
+
+topic_events_edit_2:
+  path: /{id}/events_2/edit
+  defaults: { _controller: "IfeAloesBundle:Event2:edit" }
+
+topic_assessment_update_2:
+  path: /{id}/assessments_2/update
+  defaults: { _controller: "IfeAloesBundle:Assessment2:update" }
+  requirements: { _method: post }   
+
+topic_events_update_2:
+  path: /{id}/events_2/update
+  defaults: { _controller: "IfeAloesBundle:Event2:update" }
+  requirements: { _method: post }
+
+topic_assessment_del_2:
+  path: /{id}/assessments_2/del
+  defaults: { _controller: "IfeAloesBundle:Assessment2:del" }
+
+topic_assessment_delete_2:
+  path: /{id}/assessments_2/delete
+  defaults: { _controller: "IfeAloesBundle:Assessment2:delete" }
+  requirements: { _method: post } 
+
+topic_events_del_2:
+  path: /{id}/events_2/del
+  defaults: { _controller: "IfeAloesBundle:Event2:del" }
+  
+topic_events_delete_2:
+  path: /{id}/events_2/delete
+  defaults: { _controller: "IfeAloesBundle:Event2:delete" }
+  requirements: { _method: post }      

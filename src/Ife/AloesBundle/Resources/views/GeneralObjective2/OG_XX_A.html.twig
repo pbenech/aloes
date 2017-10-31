@@ -1,0 +1,41 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+ 
+				<div  id="OG_{{parent.id}}_A_title" class="col-sm-6"  > 	
+				
+					<span  id="OG_{{parent.id}}_A_bloc" class="button1"  > 	  
+						{% if type is defined and type=="new"%}
+							<span id="OBJG{{parent.id}}" onclick="HideShow2('#OG_{{parent.id}}_B','#OBJG{{parent.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>    	
+						{% else %}
+							<span id="OBJG{{parent.id}}" onclick="HideShow2('#OG_{{parent.id}}_B','#OBJG{{parent.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>    			
+						{% endif %}			
+					</span>  
+					<span  id="OG_{{parent.id}}_A_title2"   > 
+						{{ parent.title }}  
+					</span> 
+				</div> 
+
+				{% set nb_specs = parent.specificObjectives|length %}	 	               	              
+		        <div class="col-sm-2"  id="OG_{{parent.id}}_A_nb_specs" style="text-align:center" >      		
+	          		{{nb_specs}}
+	          	</div>	
+
+		        <div   id="OG_{{parent.id}}_A_weight" class="col-sm-2" >		            
+					{{ macros.progress_bar(parent.weight,'success') }} 		            
+		        </div> 
+	 
+
+	          	
+				<div class="col-sm-2"   id="CG_{{parent.id}}_A_button" style="text-align:right">  			          	
+					 {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+					       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+					       ( is_granted("ROLE_ADMIN") )
+					  %}		      
+					         
+							<a  data-cache="false"  data-toggle="modal" class="btn1 btn-success" href="{{ path('course_objective_edit2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 						                    
+
+							<a  data-cache="false"  data-toggle="modal" class="btn1 btn-danger" href="{{ path('course_objective_del2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 						                    
+
+		                    
+		             {% endif %}	          	
+	          	</div>
+	        

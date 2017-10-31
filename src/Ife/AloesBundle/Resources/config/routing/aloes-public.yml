@@ -1,0 +1,24 @@
+course_resum:
+    path:     /{id}/resum/{param}
+    defaults: { _controller: "IfeAloesBundle:Course:resum", param: "012345678" }
+
+course_url:
+    path:     /{id}/url
+    defaults: { _controller: "IfeAloesBundle:Course:url" }
+        
+aloes_about:
+    path:     /about
+    defaults: { _controller: "IfeAloesBundle:Public:about" }
+
+aloes_credits:
+    path:     /credits
+    defaults: { _controller: "IfeAloesBundle:Public:credits" }    
+    
+password_reset:
+    path:     /password_reset
+    defaults: { _controller: "IfeAloesBundle:Public:password_reset" } 
+
+password_re_init:
+    path:     /password_re_init
+    defaults: { _controller: "IfeAloesBundle:Public:password_re_init" } 
+  

@@ -1,0 +1,99 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block scripts %}
+  {{ parent() }} 
+{% endblock %} 
+ 
+{% block content -%}
+        
+    <div class='title-two1a col-sm-12'>  Objectifs "généraux" d'apprentissage</div>    	
+
+
+    	{% embed 'IfeAloesBundle:Aloes:list2.html.twig' with {'children': 'specificObjectives'} %}
+
+        {% block parent_item %} 
+  			<div id="OG_{{parent.id}}_A" class="row" >      
+        		{% include 'IfeAloesBundle:GeneralObjective2:OG_XX_A.html.twig' %}
+			</div>
+        {% endblock %}
+ 
+        {% block child_item %}   
+			<div id="OS_{{child.id}}" class="row block1">                 
+		  		{% include 'IfeAloesBundle:SpecificObjective2:OS_XX.html.twig' %}				
+		  	</div>	 
+        {% endblock %}  
+
+        {% block children_header %}
+        		<div class="col-sm-12">
+	            	<div class="col-sm-6 entete2" style="text-align:left"> Objectifs spécifiques</div> 
+	            	<div class="col-md-2 entete2" style="text-align:center"> Compétences spécifiques</div>
+	            	<div class="col-md-2 entete2" style="text-align:center"> % </div>
+	            	<div class="col-md-2 entete2" style="text-align:center"> </div>        
+        		</div>
+        		
+        		<div class="col-sm-12">
+					<ul id="sortable{{parent.id}}" class="connectedSortable">		   		 
+				    	<br/>      
+			    		{% for child in attribute(parent,children) %}
+				    		{{ block('child_item') }}                                 
+						{% endfor %}		    			
+			   		</ul>         
+			    </div>
+			   
+			   {% include 'IfeAloesBundle:GeneralObjective2:sortJavascript.html.twig' %}				     	         
+        {% endblock %} 
+
+        {% block new_parent %}		         
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				  ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				  ( is_granted("ROLE_ADMIN") )
+			%}	
+			<div id="button_gen" class="col-sm-12" style="text-align:right">   	   
+			  <a data-toggle="modal" class="btn1 btn-success" href="{{path('course_objective_new2', {id:course.id})}}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign"> Ajouter un objectif général
+			  </a> 						             
+			</div>  			
+		 
+            {% endif %} 
+        {% endblock %}   
+ 
+        {% block new_child %} 
+ 		         
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				  ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				  ( is_granted("ROLE_ADMIN") )
+			%}	       
+			
+			  <div id="button_gen" class="col-sm-12" style="text-align:right">  		  
+			  	<a data-toggle="modal" class="btn2 btn-warning" href="{{ path("general_objective_specific_objective_new_2", {id:parent.id}) }}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign"> Ajouter un objectif spécifique
+			  	</a> 
+			  	<br/>&nbsp; 				
+	          </div> 			
+
+          {% endif %}
+
+        {% endblock %}
+
+
+    {% endembed %}
+
+  	<script>            
+		$(document.body).on('hidden.bs.modal', function () {
+				$('#myModal').removeData('bs.modal');	    	
+				$("#modal-content").html('');								
+					
+		});								 		                     
+	</script>
+	  
+		<div class="modal fade in " data-backdrop="static" id="myModal" tabindex="-1" role="dialog"  data-target=".bs-example-modal-lg" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">  
+				<div id="modal-content" class="modal-content"> 					  	
+			    </div>
+			</div>   
+		</div>
+
+{% endblock %}
+
+

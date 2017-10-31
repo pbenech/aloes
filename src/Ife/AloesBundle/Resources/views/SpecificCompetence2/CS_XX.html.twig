@@ -1,0 +1,67 @@
+ {% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+ 
+ {% if entete is defined and entete==true%}
+ 			<div id="CS_{{child.id}}" class="row block1" >
+ {% endif %} 
+
+
+  			<div id="CS_{{child.id}}_title" class="col-sm-8 button2">
+						<span  id="CS_{{child.id}}_A_bloc"  class="button2"  > 	  
+							{% if type is defined and type=="new"%} 
+								<span id="OBJS{{child.id}}" onclick="HideShow2('#CS_{{child.id}}_B','#OBJS{{child.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>
+							{% else %}
+								<span id="OBJS{{child.id}}" onclick="HideShow2('#CS_{{child.id}}_B','#OBJS{{child.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>
+							{% endif %}			
+						</span>       			
+						<span  id="CS_{{child.id}}_A_title2"   > 
+							{{ child.title }}  
+						</span>   			
+  			
+  			
+  				<!--
+  				<span class="glyphicon glyphicon-unchecked"></span> {{ child.title }}  
+  				--> 
+		    </div>    
+         
+  			<div id="CS_{{child.id}}_weight" class="col-sm-2">
+  			 {{ macros.progress_bar(child.weight,'warning') }} 
+		    </div>     
+
+  			<div id="CS_{{child.id}}_but" class="col-sm-2" style="text-align:right">
+  			
+
+				  {% if   (action=="update") and 
+				  		(
+				  			( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+				  			( is_granted("ROLE_ADMIN"))
+				  		)
+				  %}	
+
+				  	<a data-toggle="modal" class="btn2 btn-warning" href="{{ path('specificcompetence_edit_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 				 				  	               
+ 				  	
+				  	<a data-toggle="modal" class="btn2 btn-danger" href="{{ path('specificcompetence_del_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 				 				  	               
+              
+                  {% endif %} 
+		    </div>   
+		    
+		    
+
+		   <div id="CS_{{child.id}}_B"  style="display: none;background-color:white"  class="col-sm-12 block1">  		        
+ 
+			            <div id="CS_{{child.id}}_B_label" class="col-sm-2">
+			            	Description :
+			            </div>			         
+			            <div class="col-sm-10">
+						    <div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">
+						    		<span id="CS_{{child.id}}_B_description" >{{ child.description|raw  }}</span>
+						    </div>	 			            
+			            </div>			        
+
+			</div>    		    
+		    
+		    
+ 
+  {% if entete is defined and entete==true%}			
+		  	</div>	 						
+ {% endif %} 
+            

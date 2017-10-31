@@ -1,0 +1,132 @@
+programs:
+  path:     /list/{page}/{sort}/{direction}
+  defaults: { _controller: "IfeAloesBundle:Program:index", page: 1, sort: p.title, direction: asc  }
+    
+program_pad:
+    path:     /{id}/pad
+    defaults: { _controller: "IfeAloesBundle:Program:programpad" }
+
+programs_pad:
+    path:     /pad
+    defaults: { _controller: "IfeAloesBundle:Program:pad" }
+
+cours_pad:
+    path:     /{id}/courspad
+    defaults: { _controller: "IfeAloesBundle:Course:courspad" }
+    
+programs_about:
+    path:     /about
+    defaults: { _controller: "IfeAloesBundle:Program:about" }
+
+programs_credits:
+    path:     /credits
+    defaults: { _controller: "IfeAloesBundle:Program:credits" }
+
+programs_show:
+    path:     /{id}/show
+    defaults: { _controller: "IfeAloesBundle:Program:show" }
+
+programs_new:
+    path:     /new
+    defaults: { _controller: "IfeAloesBundle:Program:new" }
+
+programs_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:Program:create" }
+    requirements: { _method: post }
+
+programs_edit:
+    path:     /{id}/edit/{from}
+    defaults: { _controller: "IfeAloesBundle:Program:edit" }
+
+programs_update:
+    path:     /{id}/update/{from}
+    defaults: { _controller: "IfeAloesBundle:Program:update" }
+    requirements: { _method: post|put }
+
+programs_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:Program:delete" }
+
+programs_del2:
+    path:     /{id}/del
+    defaults: { _controller: "IfeAloesBundle:Program:del" }
+
+
+programs_delete2:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:Program:delete" }
+ 
+# Courses
+
+programs_courses:
+  path: /{id}/courses/list/{page}/{sort}/{direction}
+  defaults: {_controller: "IfeAloesBundle:Course:index", page: 1, sort: c.label, direction: asc}
+
+programs_courses_new:
+  path: /{id}/courses/new
+  defaults: {_controller: "IfeAloesBundle:Course:new"}
+
+programs_courses_create:
+  path: /{id}/courses/create
+  defaults: {_controller: "IfeAloesBundle:Course:create"}
+  requirements: { _method: post }
+
+# Competences
+
+program_competences:
+  path: /{id}/competences/{sequence}
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence:index", sequence: 'ND'}
+
+program_competences_new2:
+  path: /{id}/competences2/new
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:new"}
+ 
+program_competences2:
+  path: /{id}/competences2
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:index"}
+ 
+program_competences_cours:
+  path: /{id}/competences_cours/{selection}
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:cours"}
+
+program_edit_competences:
+  path: /{id}/edit_competences
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:edit_competences"}
+
+program_update_competences:
+  path: /{id}/update_competences
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:update_competences"}  
+
+program_competences_edit2:
+  path: /{id}/competence2/edit
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:edit"}
+
+program_competences_del2:
+  path: /{id}/competence2/del
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:del"}
+
+
+program_competences_delete2:
+  path: /{id}/competence2/delete
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:delete"}
+
+
+program_competences_update2:
+  path: /{id}/competence2/update
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:update"}
+  requirements: { _method: post }
+ 
+program_competences_create2:
+  path: /{id}/competence2/create
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence2:create"}
+  requirements: { _method: post }
+
+program_competences_create:
+  path: /{id}/competence/create
+  defaults: {_controller: "IfeAloesBundle:GeneralCompetence:create"}
+  requirements: { _method: post }
+  
+program_competences_order:
+  path: /{id}/competences_order
+  defaults: { _controller: "IfeAloesBundle:GeneralCompetence2:order" }    

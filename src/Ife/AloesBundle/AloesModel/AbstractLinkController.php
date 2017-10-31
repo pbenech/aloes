@@ -1,0 +1,199 @@
+<?php
+namespace Ife\AloesBundle\AloesModel;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Ife\AloesBundle\Entity\SpecificObjective;
+use Ife\AloesBundle\Entity\Assessment;
+
+abstract class AbstractLinkController extends Controller
+{
+    
+    abstract protected function createSourceType();
+    
+    /**
+     * Displays a form to select targets.
+     * 
+     */
+    public function selectAction($id,$menu,$msg) 
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $source = $this->getSource($id);
+        $targetParents = $this->getTargetParents($source);
+
+        // Mark the targets that are already linked. 
+        $source->flagTargets();  
+
+        
+        return $this->render($this->getLinkClass().':select.html.twig', array(
+            'course' => $source->getCourse(),
+            'source' => $source,
+            'target_name' => $this->getTargetName(),
+            'target_parents' => $targetParents,
+            'routes' => $this->getLinkEditionRoutes(),
+        	'menu'	=> $menu,
+        	'msg'	=> $msg
+        )); 
+    }
+
+    /**
+     * Updates the targets according to selection.
+     * 
+     */
+    public function updateSelectionAction(Request $request, $id, $menu)
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $source = $this->getSource($id);
+
+        $selectedIdsMap = $request->request->get($this->getTargetName(), array());
+        
+        if (0 === $numSelected = count($selectedIdsMap)) {
+        	
+            $source->getLinks()->clear(); 
+            $this->em->flush();
+
+            $routes = $this->getLinkEditionRoutes();
+            return $this->redirectToRoute($routes['selection'], array('id'=>$source->getId(),'menu' => $menu,'msg' => '1'));
+        }
+
+        $targets = $this->getTargets(array_keys($selectedIdsMap));
+        
+        if (count($targets) != $numSelected) {
+            throw $this->createNotFoundException('Not all selected targets could be found.');
+        }
+
+        $source->setTargets($targets);
+        $this->em->flush();
+        
+        $routes = $this->getLinkEditionRoutes();
+        return $this->redirectToRoute($routes['selection'], array('id'=>$source->getId(),'menu' => $menu,'msg' => '1'));
+    }
+
+    /**
+     * Displays a form to rate links.
+     *  
+     */
+    public function rateAction($id,$menu,$msg)
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $this->routes = $this->getLinkEditionRoutes();
+        $source = $this->getSource($id);
+
+        $formView = null;
+        if ($source->hasLinks()) {
+            $formView = $this->createRatingForm($source,$menu)->createView();            
+        }
+
+        return $this->render($this->getLinkClass().':rate.html.twig', array(
+            'source' => $source,
+            'course' => $source->getCourse(),            
+            'routes' => $this->routes,
+            'rating_form' => $formView,
+        	'menu'	=> $menu,
+        	'msg'	=> $msg
+        ));
+    }
+
+    /**
+     * Updates the link ratings.
+     */
+    public function updateRatingAction(Request $request, $id,$menu)
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $this->routes = $this->getLinkEditionRoutes();
+        $source = $this->getSource($id);
+
+        $form = $this->createRatingForm($source,$menu);
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute($this->routes['rating'], array('id'=>$source->getId(),'menu' => $menu,'msg' => '1'));
+        }
+
+         return $this->render('IfeAloesBundle:Assessment:link-rating.html.twig', array(
+            'source' => $source,
+            'course' => $source->getCourse(),            
+            'routes' => $this->routes,
+            'rating_form' => $form->createView(),
+        	'menu'	=> $menu,
+            'msg' => '0'
+        ));
+    }
+
+    /**
+     * Displays a weighted view of the links.
+     */
+    public function showAction($id,$menu)
+    {
+        $this->em = $this->getDoctrine()->getManager();
+        $source = $this->getSource($id);
+        $targets = $source->getTargets();
+        return $this->render($this->getLinkClass().':show.html.twig', array(
+            'course' => $source->getCourse(),            
+            'source' => $source,
+            'routes' => $this->getLinkEditionRoutes(),
+            'targets' => $targets ,
+        	'menu'	=> $menu
+        ));
+    }
+
+    private function getSource($id)
+    {
+        return $this->em->getRepository($this->getSourceClass())->find($id);
+    }
+
+    private function getTargetParents($source)
+    {
+        $repository = $this->em->getRepository($this->getTargetParentClass());
+        if ($source instanceof SpecificObjective) {
+            return $repository->findByProgram($source->getCourse()->getProgram());
+        } else if ($source instanceof Assessment) {
+            return $repository->findByCourse($source->getCourse());
+        } else {
+            throw new \Exception('Unknown source type.');
+        }
+    }
+
+    private function getTargets($ids)
+    {
+        return $this->em
+            ->getRepository($this->getTargetClass())
+            ->findById($ids);
+    }
+
+    private function getLinkEditionRoutes()
+    {
+        $prefix = $this->getLinkName();
+        return array(
+            'selection' => $prefix.'_selection',
+            'update_selection' => $prefix.'_selection_update',            
+            'rating' => $prefix.'_rating',
+            'update_rating' => $prefix.'_rating_update',
+            'weights' => $prefix.'_weights',
+            'index' => 'course_'.$this->getSourceName()
+        );
+    }
+
+    private function createRatingForm($source,$menu)
+    {
+        $form = $this->createForm($this->createSourceType(), $source, array(
+            'action' => $this->generateUrl($this->routes['update_rating'], array(
+                'id' => $source->getId(),
+        		'menu'	=> $menu
+            )),
+            'method' => 'POST',
+            'rating' => true
+        ));
+        
+        $form->add('submit', 'submit', array(
+            'label' => 'Enregistrer',
+            'attr' => array('class'=>'btn btn-success')
+        ));
+
+        return $form;        
+    }
+}

@@ -1,0 +1,17 @@
+{% extends '::public.html.twig' %}
+
+
+{% set program = course.program %}
+
+{% block content -%} 
+	{% include "IfeAloesBundle:Tableaux:resum.html.twig"  %}
+		
+{% endblock %}
+
+{% block title %}
+    <title> {{ course.label }} </title>
+{% endblock %}
+
+
+{% block sidebar_nav %}	
+{% endblock %}

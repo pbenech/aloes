@@ -1,0 +1,8 @@
+
+<font color="{{color}}">
+	<br/><b>{{ course.label }} - {{ course.title }}			</b><br/><br/>
+
+	{% for assessment in assessments			%}
+		<span class="glyphicon glyphicon-triangle-right"></span>{{ assessment.deadline|date("d/m/Y")	}} - {{ assessment.title	}} 	 - [{{ assessment.weight*100	}}%] <br/>
+	{% endfor										%}
+</font>

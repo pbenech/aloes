@@ -1,0 +1,89 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+{% import "::macro.html.twig" as macro %}
+ 
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Niveaux</a>
+    </div>          
+{% endblock %}
+ 
+
+{% block content_10 -%}
+
+	
+	
+    	<div class='title-two1a col-md-9 col-sm-9'> 
+			Liste des niveaux
+		</div>
+    	<div class='title-two1b col-md-3 col-sm-3' style='text-align:right'>
+			<a class="btn1 btn-color4" href="{{ path('levels_new', { 'page' : page, 'sort' : sort, 'direction' : direction  } ) }}">
+		    	<span class="glyphicon glyphicon-pencil"></span> Ajouter un niveaux
+		    </a>	
+    	</div> 		
+
+	<div class="col-sm-12 block3">
+    <table class="table   table-striped  table-hover col-sm-12 ">
+        <thead>
+            <th width='20%'>{{ knp_pagination_sortable(pagination, 'Sigle', 'l.sigle') }}
+            	{{ macro.tri('l.sigle',sort,direction) }}  
+            </th>
+            <th width='50%'>{{ knp_pagination_sortable(pagination, 'Titre', 'l.title') }}
+            	{{ macro.tri('l.title',sort,direction) }}  
+            </th>
+  
+            <th width='10%' style="text-align:center"> Consulter</th>
+            <th width='10%' style="text-align:center"> Modifier</th> 
+            <th width='10%' style="text-align:center"> Supprimer</th>            
+    
+        </thead> 
+        <tbody>
+        
+		{% for entity in pagination %}
+            <tr>
+                <td> 
+	            	{{ entity.sigle}} 
+                </td>
+                <td> 
+	            	{{ entity.title}} 
+                </td>
+ 	
+            	<td style="text-align:center">  
+			    	<a  class="btn1 btn-color4" href="{{ path('levels_show', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	<span class="glyphicon glyphicon-eye-open"></span>
+			   		</a>     	 	                  
+                </td>                  
+
+                <td style="text-align:center">  
+			    	<a  class="btn1 btn-color4" href="{{ path('levels_edit', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	<span class="glyphicon glyphicon-edit"></span>
+			   		</a>     	 	                  
+                </td>  
+
+                <td style="text-align:center">  
+	                {% if entity.levelprograms|length == 0 %}
+				    	<a  class="btn1 btn-danger" href="{{ path('levels_delete', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+				        	<span class="glyphicon glyphicon-remove"></span> 
+				   		</a>     	 	                  
+				   	{% endif%}	
+                </td>                  
+    
+
+            </tr>		
+		{% endfor %}
+		
+        </tbody>
+    </table>
+  	</div>
+
+	<center>
+	{{ knp_pagination_render(pagination) }}
+	</center>
+	          
+    
+{% endblock %} 
+
+
+    
+

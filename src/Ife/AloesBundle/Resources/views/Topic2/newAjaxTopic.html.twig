@@ -1,0 +1,187 @@
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/jquery.tinymce.min.js')}}"></script> 
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/tinymce.min.js')}}"></script>
+
+<script src="{{asset('bundles/ifealoes/js/bootstrap3-typeahead.min.js')}}"></script>
+<script src="{{asset('bundles/ifealoes/js/typologie.js')}}"></script>
+
+
+                    
+<script type="text/javascript"> 
+
+
+		tinymce.init({
+					 selector: "textarea",	
+  					 cache_suffix: '?v=4.1.6',					 		 
+			 	   	 menubar: false,		
+			 	   	 "toolbar1":"code preview |bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink  ",
+//			 	   	 "plugins":"link image "						
+			 	   	 "plugins":"code preview link fullscreen "		
+					 });	
+
+  		$('input:text:visible:first').focus();	
+  
+ 
+  
+		$("#aloes_assessment2").submit(function() {
+			            
+		data = $(this).serialize();		         
+
+		$.ajax({ 
+				type: "POST",					
+				url: "{{ path("topic_update2", {id:entity.id}) }}",					
+
+				data: data, 
+				dataType : 'json',				 								
+				cache: false, 
+				success: function(data) 
+					{ 
+					if (data.result==false)					  
+						$("#modal-content").empty().append(data.content);  
+					else						
+						{																						 
+						$("#TO_{{entity.id}}_A").empty().append(data.content);  
+						$("#TO_{{entity.id}}_B0").empty().append(data.view);  
+						$('#myModal').modal('hide');							
+						}   
+					tinyMCE.remove();  	
+					}   	
+		});	             			             
+		return false;		            				 			           				 
+	});	 
+		  		  			 
+</script>
+
+ 
+<div class="modal-header color1"> 
+	<b>Séquence mise à jour</b><button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+ 
+<div id="modal-body" class="modal-body" >
+
+<form  id="aloes_assessment2" class="form-inline" action="" method="post"  {{ form_enctype(form) }}>
+	
+	{{ form_errors( form ) }}
+	
+
+	<div class="col-md-12 col-sm-12">
+		<div class="col-md-2 col-sm-2">
+			  {{ form_label(form.title) }}
+		</div>
+		<div class="col-md-10 col-sm-10">
+			  {{ form_widget(form.title) }}
+			  {{ form_errors(form.title) }}
+		</div>
+	</div>
+	
+		<div class='col-sm-12'> 
+			<div class='col-sm-2'> 	  	  
+			    <b>Date et Heure</b>
+			</div> 	  		    	
+			<div class='col-sm-2'> 	  	  
+			    Du
+			</div> 	
+			<div class='col-sm-3'> 	  	  
+			    {{ form_widget(form.startDate) }}
+		    	{{ form_errors(form.startDate) }}	
+			</div> 	
+
+
+			<script type="text/javascript">
+				$(function() {
+				    $('#aloes_assessment2_startDate').datetimepicker({
+			                minView: 0, pickTime: false, autoclose: true 
+				    });
+				}); 
+			</script>
+		
+			<div class='col-sm-2'> 	  	  
+			    Au
+			</div> 			  			
+			<div class='col-sm-3'> 	  	  
+				{{ form_widget(form.endDate) }}
+		    	{{ form_errors(form.endDate) }}	
+			</div> 	  
+		</div>
+		
+			 
+		<script type="text/javascript">
+			$(function() {
+			    $('#aloes_assessment2_endDate').datetimepicker({
+			            minView: 0, pickTime: false, autoclose: true 
+			    });
+			});
+		</script>		
+ 
+  		
+	<div class="col-md-12 col-sm-12">
+		<div class="col-md-2 col-sm-2">
+			  {{ form_label(form.place) }}
+		</div>
+		<div class="col-md-10 col-sm-10">
+			  {{ form_widget(form.place) }}
+			  {{ form_errors(form.place) }}
+		</div>
+	</div>
+	
+	
+	<div class="col-md-12 col-sm-12">
+		<div class="col-md-2 col-sm-2">
+			
+		</div>
+		<div class="col-md-10 col-sm-10">
+			  {{ form_widget(form.isFaceToFace) }}
+			  {{ form_errors(form.isFaceToFace) }}
+		</div>
+	</div>		
+	
+	<div class="col-md-12 col-sm-12">
+		<div class="col-md-2 col-sm-2">
+			  {{ form_label(form.description) }}
+		</div>
+		<div class="col-md-10 col-sm-10">
+			  {{ form_widget(form.description) }}
+			  {{ form_errors(form.description) }}
+		</div>
+	</div>	
+	
+
+
+		<div class="col-sm-12">
+			<div class='col-sm-2'> 	  	  
+				   <b>Thématique</b>
+			</div> 	  
+			<div class="col-sm-5">	 
+				<div id="typologie-control" class="control-group col-sm-12">
+					<div class="input-append">
+						<input   id="new-typologie" type="text">	
+									
+					</div>
+				</div> 				
+			</div>	
+			<div class="col-sm-1">
+				<button id="add-another-typologie" class="btn" type="button">+</button>	
+			</div>
+			<div class="col-sm-4">					
+				<ul id="typologies-list">
+				</ul>
+					
+				<div id="hiddens">
+					{{ form_widget(form.typologies) }}
+				</div> 					
+			</div>		  
+		</div>  		
+	
+	
+	{{ form_rest(form) }}	   		
+	
+	<div class="col-md-12 col-sm-12">
+	 	<hr/>	    
+	</div>
+
+
+	<button class="btn btn-color1" type="submit"><i class="icon icon-check icon-lg"></i> Enregistrer</button>
+	<button class="btn btn-inverse" type="button" data-dismiss="modal"><i class="icon icon-times icon-lg"></i> Fermer</button>
+	
+</form>
+ 
+</div>

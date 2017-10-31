@@ -1,0 +1,3 @@
+course_resum:
+    path:     /{id}/resum
+    defaults: { _controller: "IfeAloesBundle:Course:resum" }

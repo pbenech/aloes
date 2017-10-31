@@ -1,0 +1,279 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+
+
+    	<div class='title-two1a col-md-9 col-sm-9'> 
+			Pr&eacute;sentation
+		</div>
+    	<div class='title-two1b col-md-3 col-sm-3' style="text-align:right">
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+			      ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+			      ( is_granted("ROLE_ADMIN") )
+			 %}
+			        <a class="btn1 btn-color4" href="{{ path('courses_edit', { 'id': course.id, 'from': 'entity' }) }}">
+			            <span class="glyphicon glyphicon-edit"></span> Modifier présentation
+			        </a>
+			{% endif %}    	
+    	</div> 		
+
+
+
+ 
+	<div class='col-sm-12 container-fluid block3'>	
+ 			<br/>
+	   	   <div class="col-sm-12 block3b">	
+        
+	       {% if course.program !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Programme : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.program }}
+					</div> 	  	
+				</div>               
+	       {% endif %}	       
+
+
+
+	       {% if course.label !="" %}
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Sigle : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.label }}
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}
+	       
+	       
+	       {% if course.title !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Titre : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.title }}
+					</div> 	  	
+				</div>  	        	       
+	       {% endif %}		       
+
+	       
+	       {% if course.semestres|length >0 %}
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Semestre(s) : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+						{% for sem in course.semestres %}
+				        	{{ sem.title }}&nbsp
+				        {% endfor %} 
+					</div> 	  	
+				</div>  		       	       
+	       {% endif %}	
+	       
+	       {% if course.year !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Année : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.year }}
+					</div> 	  	
+				</div>   	       
+	       {% endif %}		        
+
+	        
+
+	       {% if course.langues|length >0  %}		   
+
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+						    	Langue(s) :  
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+						{% for lan in course.langues %}
+				        	{{ lan.title }}&nbsp
+				        {% endfor %} 
+					</div> 	  	
+				</div> 	   	       
+			{% endif %}		       
+	              
+
+	       {% if course.credits !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Nombre de crédits : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.credits }}
+					</div> 	  	
+				</div> 	 	  	       
+	       {% endif %}	
+
+
+	       {% if course.isOptional !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Optionnel : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+
+							    	{% if course.isOptional==1 %}
+							    		Oui
+							    	{% else %}
+							    		Non
+							    	{% endif %}					    	
+				    	
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}	
+	   	   </div>
+	   	   
+	   	   <div class="col-sm-12 block3b">		   	   
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Enseignant(s) associé(s) :
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+					 	{% for user in course.redacteurs %}
+				    		{{user.sn }}, {{ user.givenname }}</br>
+				    	{% endfor %}
+					</div> 	  	
+				</div> 	 	   	   
+	   	   </div>
+	   	   
+	       {% if course.prerequisites|length >0 or course.concurrentCourses|length >0 %}		   
+			   <div class="col-sm-12 block3b">	
+			       {% if course.prerequisites|length >0 %}	
+						<div class='row'>	
+							<div class='col-md-3 attribut'> 	  	  
+						    	Préalable(s) : 
+							</div> 	  		    	
+							<div class='col-md-9'> 	  	  
+						    	{% for pre in course.prerequisites %}
+				                    {{ pre.label }}&nbsp
+				                    <br>
+				                  {% endfor %} 
+							</div> 	  	
+						</div> 	   	       
+			       {% endif %}	
+	
+			       {% if course.concurrentCourses|length >0  %}
+						<div class='row'>	
+							<div class='col-md-3 attribut'> 	  	  
+						    	Concomitant(s) :  
+							</div> 	  		    	
+							<div class='col-md-9'> 	  	  
+			 	              {% for conc in course.concurrentCourses %}
+			                    {{ conc.label }}
+			                    <br>
+			                  {% endfor %}
+							</div> 	  	
+						</div> 	        	       
+			       {% endif %}	
+			   </div>
+		   {% endif %}	
+
+		   
+		   {% if course.isRemote>0  %} 	   
+		   	<div class="col-sm-12 block3b">	
+		   {% endif %}		
+		   		       		   
+			
+
+		   {% if    course.isFaceToFace!=""  or course.location!=null or course.timeSlot!=null or course.isRemote!=""   %} 	   
+		   		</div> 
+		   {% endif %}					       
+	
+
+	       {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""   %}	
+		   		   	   <div class="col-sm-12 block3b">	
+		   {% endif %}			   
+		   
+	       {% if course.UrlPed !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Plateforme pédagogique (url) : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	<a href="{{ course.UrlPed }}" target='cible'>{{ course.UrlPed }}</a>
+					</div> 	  	
+				</div> 			       	  	       
+	       {% endif %}	
+
+
+	       {% if course.UrlWeb !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Site web (hypotheses, etc) (url) : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	<a href="{{ course.UrlWeb }}" target='cible'>{{ course.UrlWeb }}</a>
+					</div> 	  	
+				</div> 		         	       
+	       {% endif %}	
+
+	       {% if course.UrlTwi !="" %}
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Twitter (url) : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	<a href="{{ course.UrlTwi }}" target='cible'>{{ course.UrlTwi }}</a>
+					</div> 	  	
+				</div> 		       	  	       
+	       {% endif %}	
+
+	       {% if course.UrlAut !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Autre (url) : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	<a href="{{ course.UrlAut }}" target='cible'>{{ course.UrlAut }}</a>
+					</div> 	  	
+				</div> 	  	       
+	       {% endif %}	
+	       
+	       {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""   %}		       
+		   </div>	
+	       {% endif %}	
+	       		  
+  		   <div class="col-sm-12 block3b">			       		   
+	       {% if course.created !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Dernière modification : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ course.created|date('d/m/Y  H:i:s') }}
+					</div> 	  	
+				</div> 		       	  	       
+	       {% endif %}	
+
+	       {% if course.publicationState !="" %}	
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Statut : 
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+		            	{% if course.publicationState==1 %}
+		                	<span class="glyphicon glyphicon-eye-open" style='color:green'> Publié
+		                {% else %}
+		                	<span class="glyphicon glyphicon-eye-close" style='color:red'> Brouillon
+		                {% endif %}  
+					</div> 	  	
+				</div> 			       
+ 	       
+	       {% endif %}	
+       	   </div>	    
+ 
+
+
+
+	</div>
+	        
+{% endblock %}

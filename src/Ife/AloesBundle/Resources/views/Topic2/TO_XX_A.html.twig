@@ -1,0 +1,66 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+ <div  id="TO_{{parent.id}}_A_title" class="col-sm-4"  > 
+ 
+ 	<span  id="TO_{{parent.id}}_A_bloc" class="button1"  > 	
+ 		{% if type is defined and type=="new"%}
+			<span id="REF{{parent.id}}" onclick="HideShow2('#TO_{{parent.id}}_B','#REF{{parent.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>
+		{% else %}
+			<span id="REF{{parent.id}}" onclick="HideShow2('#TO_{{parent.id}}_B','#REF{{parent.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>
+		{% endif %}			
+ 	</span> 
+	<span  id="TO_{{parent.id}}_A_title2"   >  
+				
+	
+		      	{% set deb = parent.startDate|date("d/m/Y")  %}
+		      	{% set fin = parent.endDate|date("d/m/Y")    %}
+	
+	
+	            {% if deb==fin %}
+	                    	{{ parent.startDate|date("d/m/Y") }}    
+	            {% else %}
+	                	{{ parent.startDate|date("d/m/Y") }} <span class="glyphicon glyphicon-arrow-right"></span> {{ parent.endDate|date("d/m/Y") }}  
+	            {% endif %}    	
+	                
+		        <br/><b>{{ parent.title }}</b>     
+	</span> 
+</div>	  
+
+
+<div  id="TO_{{parent.id}}_A_theme" class="col-sm-2" style="text-align:left"  >	
+	{% for theme in parent.typologies %}
+		{{ theme.title }}
+	{% endfor %}
+</div>
+
+<div  id="TO_{{parent.id}}_A_travaux" class="col-sm-1 text-warning" style="text-align:center"  >		
+		{% set nb_travaux = parent.assessments|length %}	
+		{{nb_travaux}}		
+</div>
+
+<div  id="TO_{{parent.id}}_A_events" class="col-sm-1 text-info" style="text-align:center"  >		
+		{% set nb_events = parent.events|length %}	
+ 
+		{{nb_events}}		
+</div>
+
+
+<div  id="TO_{{parent.id}}_A_weight" class="col-sm-2"  >{{macros.progress_bar(parent.weight,'success')}}</div>
+ 
+	        
+<div  id="TO_{{parent.id}}_A_button" class="col-sm-2"  style="text-align:right" >
+		
+		{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+		%}			          
+		           		  
+			<a  data-cache="false"  data-toggle="modal" class="btn1 btn-success" href="{{ path('topic_edit2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 						                    		          
+		           		    
+			<a  data-cache="false"  data-toggle="modal" class="btn1 btn-danger" href="{{ path('topic_del2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 						                    
+		          
+
+	    {% endif %}		
+		
+</div>	
+ 

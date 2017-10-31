@@ -1,0 +1,44 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+ 
+<div  id="CG_{{parent.id}}_A_title" class="col-sm-5"  > 	
+
+	<span  id="CG_{{parent.id}}_A_bloc" class="button1"   > 	  
+		{% if type is defined and type=="new"%}
+			<span id="COMP{{parent.id}}" onclick="HideShow2('#CG_{{parent.id}}_B','#COMP{{parent.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>    	
+		{% else %}
+			<span id="COMP{{parent.id}}" onclick="HideShow2('#CG_{{parent.id}}_B','#COMP{{parent.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>    			
+		{% endif %}			
+	</span>  
+	<span  id="CG_{{parent.id}}_A_title2"   > 
+		{{ parent.title }}  
+	</span> 
+</div> 
+
+<div class="col-sm-2"  id="CG_{{parent.id}}_A_categorie" style="text-align:center" >      		
+	 {% for cat in parent.categories  %}
+	 {{ cat.title}}
+	 {% endfor %}
+</div> 
+
+{% set nb_competences = parent.specificCompetences|length %}	 	 	 	              	              
+<div class="col-sm-1"  id="CG_{{parent.id}}_A_nb_specs" style="text-align:center" >      		
+	 {{nb_competences}}
+</div> 
+
+
+<div   id="CG_{{parent.id}}_A_weight" class="col-sm-2" > 
+	{{ macros.progress_bar(parent.weight,'success') }} 
+</div> 
+
+
+<div class="col-sm-2"   id="CG_{{parent.id}}_A_bupdate" style="text-align:right">  		         
+	{% if   (action=="update") and
+			((  is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or ( is_granted("ROLE_ADMIN"))) 		  
+	%}	 
+
+		<a  data-cache="false"  data-toggle="modal" class="btn1 btn-success" href="{{ path('program_competences_edit2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 						                    
+		        
+		<a  data-cache="false"  data-toggle="modal" class="btn1 btn-danger" href="{{ path('program_competences_del2', {id:parent.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 						                    
+		
+	{% endif %}
+</div>	 

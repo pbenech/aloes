@@ -1,0 +1,186 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block content -%}
+
+    <div class='row'>    	
+    	<div class='title-two col-md-9 col-sm-9'> 
+			Référentiel de compétences 
+		</div>
+    	<div class='col-md-3 col-sm-3' style='text-align:right'>
+    	</div> 		
+    </div>
+	   
+	<script type="text/javascript">   	
+		function HideShow(param,param2)
+			{
+		  	$(param).toggle();
+		  	str = $(param2).html();  
+		  	
+			if (str=='<span class="glyphicon glyphicon-resize-full"></span> Compétences spécifiques')
+		  		$(param2).html('<span class="glyphicon glyphicon-resize-small"></span> Compétences spécifiques');
+			else if (str=='<span class="glyphicon glyphicon-resize-small"></span> Compétences spécifiques')
+		  		$(param2).html('<span class="glyphicon glyphicon-resize-full"></span> Compétences spécifiques');		
+			}  
+	</script> 	
+
+
+    {{ block('course_selection') }}
+
+    {% embed 'IfeAloesBundle:Aloes:list.html.twig' with {'children':'specificCompetences'} %}
+
+        {% block parent_item %}
+            <div class="row">
+
+                <!-- Title -->
+	        <div class=" col-md-6 col-sm-6">
+                    {{ parent.title }}
+	        </div>
+                
+                <!-- Weight -->
+	        <div class="general-item-weight cold-md-2 col-sm-2">
+	            <span class="weight  text-muted"> {{ parent.weight|round(2) * 100 }} % </span>
+	        </div> 
+              
+			{% set nb_competences = parent.specificCompetences|length %}	              
+                              
+                
+                <!-- Link to edit -->
+	        <div class="text-info  col-md-4 col-sm-4">
+	         
+		      <span id="COMP{{parent.id}}" onclick="HideShow('#target{{parent.id}}','#COMP{{parent.id}}');"><span class="glyphicon glyphicon-resize-full"></span> Compétences spécifiques</span>    
+	          [{{nb_competences}}]
+	        
+			  {% if ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or
+			  		( is_granted("ROLE_ADMIN")) 			  
+			  %}		        
+                    <a href="{{path('generalcompetence_edit',{id:parent.id})}}" class="pull-right">
+	                <span class="glyphicon glyphicon-edit"></span> Modifier
+                    </a>
+			  {% endif %}
+	        </div>
+
+            </div>
+            
+
+	       {% if sequence is defined and sequence==parent.id %}
+		    	  <div id="target{{parent.id}}" class="col-md-12 col-sm-12 block" > 
+	       {% else %}
+		    	  <div id="target{{parent.id}}" class="col-md-12 col-sm-12 block" style="display: none;">             
+	       {% endif %}  
+                             
+            
+        {% endblock %}
+
+        {% block child_item %}
+            <tr>
+                <td> {{ child.title }} </td>
+                <td> {{ macros.progress_bar(child.weight) }} </td>
+                <td> 
+				  {% if ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+				  		( is_granted("ROLE_ADMIN"))
+				  %}		                
+                    <a href="{{ path('specificcompetence_delete', {id:child.id}) }}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                  {% endif %}  
+                </td>
+            </tr>
+        {% endblock %}
+
+
+        {% block children_header %}
+	    <thead class="list-header">
+	        <tr>
+		    <th class="col-md-8"> Compétences spécifiques </th>
+		    <th class="col-md-3"> Poids des évaluations </th>
+		    <th class="col-md-3"></th>
+	        </tr>
+	    </thead>
+        {% endblock %}
+
+        {% block new_parent %}
+		  {% if ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+		  		( is_granted("ROLE_ADMIN"))	
+		  %}	        
+            <div class="node-creator general-item-creatorX">
+                <form action="{{path('program_competences_create', {id:program.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_generalcompetence[title]" type="text" placeholder="Nouvelle compétence générale" required>
+                                                
+						<input type="hidden" name="aloes_generalcompetence[_token]" value="{{ csrf_token('aloes_generalcompetence') }}">                         
+                        
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div> 
+          {% endif %}  
+        {% endblock %}
+
+        {% block new_child %}
+		  {% if ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+		  		( is_granted("ROLE_ADMIN") )
+		  %}	
+            <div class="child-creator">
+                <form action="{{path('generalcompetence_specifics_create', {id:parent.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_specificcompetence[title]" type="text" placeholder="Nouvelle compétence spécifique" required>
+                        
+						<input type="hidden" name="aloes_specificcompetence[_token]" value="{{ csrf_token('aloes_specificcompetence') }}">                          
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button> 
+                </form>
+            </div>
+          {% endif %}       
+          
+          
+         </div>          
+                    
+                 
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+
+{% block course_selection %}
+    <div class="panel-group" id="course-selection" role="tablist">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="course-selection-heading">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#course-selection" href="#course-selection-form">
+                        Selectionner un parcours
+                    </a>
+                </h4>
+            </div>
+            <div id="course-selection-form" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                    <p class="alert alert-info"> 
+                        Selectionnez les cours à prendre en compte
+                        pour la pondération du référentiel de
+                        compétences 
+                    </p>
+                    {{ block('course_selection_form') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block course_selection_form %}  
+	    <form action="{{path('program_competences', {id:program.id})}}" method="POST">
+	        {% for course in courses %}
+	            <div class="checkbox">
+	                <label> 
+	                    <input type="checkbox" name="courses[{{ course.id }}]" 
+	                           {% if (selection|length == 0 and course.isOptional == false) or course.id in selection %}
+	                           checked
+	                           {% endif %}>  
+	                    {{ course.label }}
+	                </label>
+	            </div>
+	        {% endfor %}
+	        <button type="submit" class="btn btn-success"> Actualiser la sélection </button> 
+	    </form>
+{% endblock %}

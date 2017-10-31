@@ -1,0 +1,32 @@
+{% extends 'IfeAloesBundle:Course:link-layout.html.twig' %}
+{% import  'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block link_title %}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Objectifs liés à l'évaluation:  </div>  
+
+{% endblock %}
+
+{% block link_help_message %}
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign"> </span>
+        La place que prend chaque objectif dans l'évaluation, calculée
+        en fonction des pondérations, et telle que présentée aux
+        étudiants.
+    </div>
+{% endblock %}
+
+{% block link_content %}
+    {% if targets|length > 0 %}
+        {{ macros.link_weights(targets) }}
+    {% else %}
+        <p class="alert alert-warning"> 
+            Il n'y a pas encore d'objectifs liés à cette évaluation. Vous pouvez
+            en ajouter depuis l'onglet 'Selection'.
+        </p>
+    {% endif %}
+{% endblock %}
+
+
+
+

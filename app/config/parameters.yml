@@ -1,0 +1,16 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: aloes
+    database_user: root
+    database_password: 
+    mailer_transport: smtp
+    mailer_host: smtp.xxxx.fr 
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    secret: bc361b76ab7bd6fb0e55e63816c65240a01900d3
+    database_path: null
+    fr3d_ldap_host: ldap.XXX.fr
+    fr3d_ldap_dn: ou=people, dc=XXX, dc=fr

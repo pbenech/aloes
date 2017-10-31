@@ -1,0 +1,27 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+    {% embed 'IfeAloesBundle:Aloes:edit-general-item.html.twig' with {'children':edit_form.assessments} %}
+
+        {% block parent_title %}
+            <h1> Thématique - <small> Edition </small> </h1>
+        {% endblock %}
+
+        {% block children_title %}
+            <h2> Evaluations associées </h2>
+        {% endblock %}
+ 
+        {% block back_to_index %}
+            <a href="{{ path('course_topic', {id:course.id}) }}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Retour à la liste des thématiques
+            </a>
+        {% endblock %}
+
+        {% block child_form %}
+           {{ form(child) }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

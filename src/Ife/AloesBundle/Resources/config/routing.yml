@@ -1,0 +1,53 @@
+IfeAloesBundle_programs:
+  resource: "@IfeAloesBundle/Resources/config/routing/program.yml"
+  prefix:   /programs
+
+IfeAloesBundle_courses:
+  resource: "@IfeAloesBundle/Resources/config/routing/course.yml"
+  prefix:   /courses
+
+IfeAloesBundle_parcours:
+  resource: "@IfeAloesBundle/Resources/config/routing/parcours.yml"
+  prefix:   /parcours
+
+IfeAloesBundle_generalcompetence:
+  resource: "@IfeAloesBundle/Resources/config/routing/generalcompetence.yml"
+  prefix:   /generalcompetence
+
+IfeAloesBundle_specific-competence:
+  resource: "@IfeAloesBundle/Resources/config/routing/specificcompetence.yml"
+  prefix:   /specific-competence
+
+IfeAloesBundle_general_objective:
+  resource: "@IfeAloesBundle/Resources/config/routing/generalobjective.yml"
+  prefix:   /general_objective
+
+IfeAloesBundle_specific_objective:
+  resource: "@IfeAloesBundle/Resources/config/routing/specificobjective.yml"
+  prefix:   /specific_objective
+
+IfeAloesBundle_topic:
+  resource: "@IfeAloesBundle/Resources/config/routing/topic.yml"
+  prefix:   /topic
+
+IfeAloesBundle_assessment:
+  resource: "@IfeAloesBundle/Resources/config/routing/assessment.yml"
+  prefix:   /assessment
+
+IfeAloesBundle_event:
+  resource: "@IfeAloesBundle/Resources/config/routing/event.yml"
+  prefix:   /event
+  
+IfeAloesBundle_resp:
+  resource: "@IfeAloesBundle/Resources/config/routing/resp.yml"
+  prefix:   /resp
+
+IfeAloesBundle_typologies:
+  resource: "@IfeAloesBundle/Resources/config/routing/typologies.yml"
+  prefix:   /typologies
+  
+IfeAloesBundle_categories:
+  resource: "@IfeAloesBundle/Resources/config/routing/categories.yml"
+  prefix:   /categories
+
+

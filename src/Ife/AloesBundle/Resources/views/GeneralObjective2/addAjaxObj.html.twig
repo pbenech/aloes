@@ -1,0 +1,52 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+<div id="OG_{{parent.id}}" style="border-bottom:dotted 1px;">           
+	<div id="OG_{{parent.id}}_A" class="row">
+	      {% include 'IfeAloesBundle:GeneralObjective2:OG_XX_A.html.twig'  %}
+	</div>	
+	<div id="OG_{{parent.id}}_B" class="col-md-12 col-sm-12 blockc" >
+	
+			<div class="col-sm-12">
+	            <div class="col-sm-6 entete2" style="text-align:left"> Objectifs spécifiques</div> 
+	            <div class="col-md-2 entete2" style="text-align:center"> Compétences spécifiques</div>
+	            <div class="col-md-2 entete2" style="text-align:center"> % </div> 
+	            <div class="col-md-2 entete2" style="text-align:center"> </div> 	
+			</div>
+	
+			<div class="col-sm-12">
+				<ul id="sortable{{parent.id}}" class="connectedSortable  ui-sortable">		   		 
+				    <br class="ui-sortable-handle">   	    			
+				</ul> 
+			</div>
+
+    		<script>
+			    $( "#sortable{{parent.id}}").sortable({
+			      connectWith: ".connectedSortable",
+			      update: function (event, ui) { 
+			          var data = 	$(this).sortable('serialize', {attribute: "id"});    		          
+			          	               		              	           		   
+			          $.ajax({   
+			              data: "sortable="+this.getAttribute("id")+"&"+data,
+			              type: 'POST',
+			              url: '{{path('course_objective_order',{id:course.id})}}'
+			          });
+			        
+			      }      
+			    }).disableSelection();  
+			</script> 
+  
+			  <div id="button_gen" class="col-sm-12" style="text-align:right">  		  
+			  	<a data-toggle="modal" class="btn2 btn-warning" href="{{ path("general_objective_specific_objective_new_2", {id:parent.id}) }}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign"> Ajouter un objectif spécifique
+			  	</a> 
+			  	<br/>&nbsp; 				
+	          </div>    
+	 	
+	</div>
+
+</div>    
+
+
+		
+   
+		

@@ -1,0 +1,28 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%} 
+    <h2> {{ course.title }}</h2>
+
+
+	<fieldset>
+		<div  class="col-sm-9 col-xs-12">	
+			<form action="{{ path('course_url', { 'id' : course.id  }) }}" method="post">	
+				<div  class="col-sm-8  col-xs-8">	
+					{{ form_widget(form.url) }}
+				</div>				   			
+				{{ form_rest(form) }}	
+				<div  class="col-sm-4  col-xs-14">	
+					<button type="submit" class="btn  btn-button-cancel ">Enregistrer</button>
+				</div>
+			</form>
+		</div>							    
+	</fieldset>	
+	
+	
+	{% if param is defined and param!="" %} 
+	<fieldset>		
+		<a href="{{path('course_resum', {id:course.id,param:param}) }}" target='_blank'>http://ife.ens-lyon.fr/{{path('course_resum', {id:course.id,param:param}) }}</a>
+	</fieldset>
+	{% endif %}
+	        
+{% endblock %}

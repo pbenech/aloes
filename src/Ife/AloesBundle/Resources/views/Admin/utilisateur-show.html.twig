@@ -1,0 +1,94 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Gestion utilisateurs</a>
+    </div> 
+{% endblock %}
+  
+
+{% block content_10 -%}
+
+   	
+    <div class='title-two1a col-md-9 col-sm-9'> 
+			Consulter utilisateur
+	</div>
+    <div class='title-two1b col-md-3 col-sm-3' style='text-align:right'>
+			<a class="btn1 btn-color4" href="{{ path('admin_utilisateurs_updateuser', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+				<span class="glyphicon glyphicon-edit"></span> Modifier l'utilisateur
+			</a>    	      
+    </div> 		
+
+
+	<div class="col-sm-12 block3">
+			{{ entity.sn }}, {{ entity.givenname }}<br/><br/>
+			
+			 {% for role in entity.roles %}
+			 
+			 	{% if role=="ROLE_ADMIN" %}
+					<b>Administrateur</b><br/>
+			 	{% endif %}
+			 	
+			 	{% if role=="ROLE_RESPONSABLE" %}
+					 <b>Responsable de formation :</b><br/>
+					
+					 {% for program in entity.responsables %}
+					 	 - {{ program }}<br/>
+					 	
+						{% for course in entity.courses %}
+							{% if course.program.id==program.id %}
+							--- {{ course.title }} {{ course.program.id }} {{ course.program.title }}<br/>
+							{% endif %}
+						{% endfor %}						 	
+					 	
+					 {% endfor %}
+					 
+				 
+
+			 	{% endif %}	
+			 					
+			 	{% if role=="ROLE_ENSEIGNANT" %}
+					 <b>Enseignant(s) :</b><br/>
+					
+					 {% for program in entity.enseignants %}
+					 	- {{ program.title }}<br/>
+					 	
+						{% for course in entity.courses %}
+							{% if course.program.id==program.id %}
+							--- {{ course.title }} {{ course.program.id }} {{ course.program.title }}<br/>
+							{% endif %}
+						{% endfor %}						 	
+					 	
+					 {% endfor %}
+	
+			 	{% endif %}	
+			 					
+			 {% endfor %}
+
+
+		<div class='col-sm-12'>
+			<hr/>
+		</div>
+
+
+		<div class='col-sm-12'>
+				    <a href="{{ path('admin_utilisateurs') }}"><span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste des utilisateurs </a>
+		</div>
+
+		<div class='col-sm-12'>
+		</div>
+
+	</div>
+	          
+    
+
+
+			
+					          
+	          
+    
+{% endblock %} 
+
+
+    

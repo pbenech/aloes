@@ -1,0 +1,558 @@
+{% extends 'IfeAloesBundle:Course:public.html.twig' %}
+
+{% block content -%} 
+
+<h2> {{ course.title }}</h2>
+
+<div class='container-fluid'>	
+	
+{% if '0' in param	 	%}		
+	  	   <legend>PRESENTATION</legend>
+	  			
+	   	   <fieldset>	
+     
+	       {% if course.program !="" %}               
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Programme :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.program }}
+					</div> 	  	
+				</div>               
+	       {% endif %}	       
+
+
+
+	       {% if course.label !="" %}
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Sigle :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.label }}
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}
+	       
+	       
+	       {% if course.title !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Titre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.title }}
+					</div> 	  	
+				</div>  	        	       
+	       {% endif %}		       
+
+	       
+	       {% if course.semester !="" %}
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Semestre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.semester }}
+					</div> 	  	
+				</div>  		       	       
+	       {% endif %}	
+	       
+	       {% if course.year !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Année :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.year }}
+					</div> 	  	
+				</div>   	       
+	       {% endif %}		        
+
+	       {% if course.isOptional !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Optionnel :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.isOptional }}
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}	
+	       
+	       
+	       {% if course.language !="" %}
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Langue(s) du cours :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.language }}
+					</div> 	  	
+				</div> 	        	       
+	       {% endif %}		       
+
+	       {% if course.credits !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Nombre de crédits :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.credits }}
+					</div> 	  	
+				</div> 	 	  	       
+	       {% endif %}	
+
+	       
+	   	   </fieldset>
+
+	       {% if course.prerequisites|length >0 or course.concurrentCourses|length >0 %}		   
+			   <fieldset> 
+			       {% if course.prerequisites|length >0 %}	
+						<div class='row'>	
+							<div class='col-sm-2 '> 	  	  
+						    	Préalable(s) :
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+						    	{% for pre in course.prerequisites %}
+				                    {{ pre.label }}&nbsp
+				                    <br>
+				                  {% endfor %} 
+							</div> 	  	
+						</div> 	   	       
+			       {% endif %}	
+	
+			       {% if course.concurrentCourses|length >0  %}
+						<div class='row'>	
+							<div class='col-sm-2 '> 	  	  
+						    	Concomitant(s) : 
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+			 	              {% for conc in course.concurrentCourses %}
+			                    {{ conc.label }}
+			                    <br>
+			                  {% endfor %}
+							</div> 	  	
+						</div> 	        	       
+			       {% endif %}	
+			   </fieldset>
+		   {% endif %}	
+
+		   
+		   {% if course.isFaceToFace>0 or course.location!=null or course.timeSlot!=null or course.isRemote>0 or course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""  %} 	   
+		   		<fieldset>
+		   {% endif %}		
+		   		       		   
+				       {% if course.isFaceToFace>0 %} 
+							<div class='row'>	
+								<div class='col-sm-2 '> 	  	  
+							    	En présentiel :
+								</div> 	  		    	
+								<div class='col-sm-10'> 	  	  
+							    	{% if course.isFaceToFace==1 %}
+							    		Oui
+							    	{% else %}
+							    		Non
+							    	{% endif %}				    					    		
+								</div> 	  	
+							</div> 	 	       		  	       
+				       {% endif %}	
+			
+			
+				       {% if course.location !="" %}
+							<div class='row'>	
+								<div class='col-sm-2 '> 	  	  
+							    	Local :
+								</div> 	  		    	
+								<div class='col-sm-10'> 	  	  
+							    	{{ course.location }}
+								</div> 	  	
+							</div> 		       	  	       
+				       {% endif %}	
+			
+				       {% if course.timeSlot !="" %}	
+							<div class='row'>	
+								<div class='col-sm-2 '> 	  	  
+							    	Horaire :
+								</div> 	  		    	
+								<div class='col-sm-10'> 	  	  
+							    	{{ course.timeSlot }}
+								</div> 	  	
+							</div> 		       	       
+				       {% endif %}	
+			
+
+				       
+				       
+	
+
+	       {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""   %}	
+
+		   	
+				<div class='row'>	
+					<div class='col-sm-12 attribut'> 	  	  
+				    	Urls :
+					</div> 	  		    	  	
+				</div> 		   	
+		   	
+		   {% endif %}			   
+		   
+	       {% if course.UrlPed !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Plateforme pédagogique 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlPed }}" target='cible'>{{ course.UrlPed }}</a>
+					</div> 	  	
+				</div> 			       	  	       
+	       {% endif %}	
+
+
+	       {% if course.UrlWeb !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Site web (hypotheses, etc) 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlWeb }}" target='cible'>{{ course.UrlWeb }}</a>
+					</div> 	  	
+				</div> 		         	       
+	       {% endif %}	
+
+	       {% if course.UrlTwi !="" %}
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Twitter 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlTwi }}" target='cible'>{{ course.UrlTwi }}</a>
+					</div> 	  	
+				</div> 		       	  	       
+	       {% endif %}	
+
+	       {% if course.UrlAut !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 '> 	  	  
+				    	Autre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlAut }}" target='cible'>{{ course.UrlAut }}</a>
+					</div> 	  	
+				</div> 	  	       
+	       {% endif %}	
+	       
+	       {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !="" or course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""   %}		       
+		   </fieldset>	
+	       {% endif %}	
+
+<br/>	       
+{% endif %}	       
+	       
+{% if '1' in param	 	%}       	 
+  
+	    {% if course.publicationState !="" %}	       	     
+		  	<legend>DESCRIPTION</legend>
+		  	  
+
+	       {% if course.description !="" %}    
+				<div class='row'>	    	
+					<div class='col-sm-12' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">
+				    		{{ course.description|raw  }}
+				    	</div>
+					</div> 	  	
+				</div>  	                  
+	       {% endif %}	  
+ 	    {% endif %}	     
+<br/>		    
+{% endif	 	%}   	    
+ 
+ 
+ 		<div class='row col-md-12 '>	
+
+			{% if '2' in param	and  '3' in param	%}
+				<div class='col-sm-6 '>
+			{% endif %}
+			{% if '2' in param	 	%}
+					
+				<div class='col-sm-12 '>
+					<legend>OBJECTIFS D'APPRENTISSAGE</legend> 
+				</div>
+						
+		     	{% for oa in course.objectives %}
+		     	
+			     	{% if oa.weight>0 %}
+				     	<div class=' block col-sm-12'>
+				     		<div class='col-sm-10 '>
+				     			{{ oa.title }}
+				     		</div>
+				     		<div class='col-sm-2'>
+				     			{{ oa.weight * 100 }}%
+				     		</div>
+						</div>
+			     		
+			     		<div class='row '>
+			     				     	
+			     		{% for oas in oa.specificObjectives %}     	
+			     		
+			     			{% if oas.assessmentLinks.count >0 %}	
+			     				<div class='  col-sm-9 col-md-offset-1'>
+				     				- {{ oas.title}}  
+				     			</div>
+			     				<div class='  col-sm-2 '>
+			     					{{ oas.weight * 100}}%
+			     				</div>
+				     			<!--
+				     			Poids {{ oas.weight }} / {{ oas.position }} <br/>
+				     			Evaluations  {{ oas.competenceLinks.count }}  <br/>
+				     			Competences {{ oas.assessmentLinks.count }}  <br/>
+				     			-->
+				     			{% endif %}
+			     		{% endfor %}
+			     		
+			     		</div>
+			   
+			     	{% endif %}     		
+		     	{% endfor %}  		
+			{% endif 	%}		
+
+			{% if '2' in param	and  '3' in param	%}
+				</div>				
+				<div class='col-sm-6 '>	
+			{% endif %}		
+
+			
+					
+			{% if '3' in param	 	%}
+				<div class='col-sm-12 '>
+					<legend>REFERENTIEL DE COMPETENCES</legend> 
+				</div>
+				
+				{% for cp in comp%}   
+
+				     	<div class=' block col-sm-12'>
+				     		<div class='col-sm-10 '>
+				     			{{ cp.title }}
+				     		</div>
+				     		<div class='col-sm-2'>
+				     			 {{ cp.weight * 100 }}%
+				     		</div>
+						</div>
+
+	     		{% endfor %}	
+			{% endif	 	%}	   
+			{% if '2' in param	and  '3' in param	%}  			
+			</div>
+			{% endif %}			 
+		</div>
+		
+		<br/>
+     	
+{% if '4' in param	 	%}     	
+	    {% if course.Pedagogy !="" %}   
+	            	
+	  	<legend>METHODES PEDAGOGIQUES</legend>
+	  			 
+	   	<fieldset>	
+
+				<div class='row'>		    	
+					<div class='col-sm-12'> 	  	  
+				    	{{ course.Pedagogy|raw }}
+					</div> 	  	
+				</div>               
+	   	</fieldset>
+	    {% endif %}	 		        		       
+		<br/>
+{% endif 	%}  		
+
+{% if '5' in param	 	%}        	
+		<legend>CALENDRIER</legend> 	  
+		
+     	{% for se in topics %} 
+     	
+		{% if se.endDate != null 						  %}		
+		{%   set endSequence = se.endDate|date('d-m-Y')   %}
+		{% else 										  %}
+		{%   set endSequence = se.startDate|date('d-m-Y') %}					
+		{% endif 									      %}	  
+
+
+		{%   set cptAR = 0 %}			
+		     	
+     	<fieldset>
+				<div class='row block'>	
+					<div class='col-sm-3 '>
+						{{se.startDate|date('d-m-Y') }}  	
+						
+						<!--
+						{% if se.endDate != null %}
+						 au {{se.endDate|date('d-m-Y') }}  					
+						{% endif %} 
+						-->
+												
+					</div>     	
+					<div class='col-sm-7 '>
+						<h4>{{ se.title }}</h4> 	 
+					</div>     														
+  					<div class='col-sm-2 '>
+					<!--	{{ se.weight * 100 }}% -->
+					</div>   
+				</div>		
+				<div class='row '>	
+					<div class='col-sm-6 '>
+						{{se.description|raw}}	
+					</div>
+					
+					<div class='col-sm-6 '>				
+						
+	       				{% for sea in se.assessments %}   	       				
+	       					{% if ( sea.deadline|date('Ymd')   >=   se.startDate|date('Ymd')) and ( sea.deadline|date('Ymd')   <=   se.endDate|date('Ymd'))  %}
+															 
+							{%  else %}    			
+								{% if cptAR==0 %}		
+									<div class='col-sm-12 '>
+										<b><i>Travail à réaliser : </i></b>
+									</div>								
+								{% endif %}			
+								<div class='col-sm-10 '>
+									{{ sea.title }} 
+								</div>        				
+			   					<div class='col-sm-2 '> 
+							    </div> 
+							    
+							    {%   set cptAR = cptAR + 1 %}		  
+							{%  endif %}          								     		
+		 
+	       				{% endfor %}  
+						
+						{% set find=0 %}
+						
+	       				{% for ass in assessment %}  
+
+						  {% if (  ass.deadline !=null )  %}
+
+							{% if (  ass.deadline|date('Ymd')  >= se.startDate|date('Ymd')  ) and ( ass.deadline|date('Ymd') <=  se.endDate|date('Ymd') )  %}
+ 	
+ 								{% if find==0 %}
+			 						<div class='col-sm-12 '>
+										<br/><b><i>Travail à rendre : </i></b>
+									</div>
+ 								{% endif %} 
+ 
+								<div class='col-sm-10 '> 
+	
+									{% if ass.deadline !=null %}
+									 <i>{{ass.deadline|date('d-m-Y')}}</i> : 
+									{% endif %}
+									
+									{{ ass.title }}
+									
+	
+								</div>        				
+			   					<div class='col-sm-2 '>
+									{% if ass.weight!=0 %}
+										{{ ass.weight * 100}}%
+									{% endif %}
+								</div>         	 							     		
+	
+								{% set find=1 %}
+	
+							{% endif %}	
+						  {% endif %}		
+	       				{% endfor %}  						
+
+					</div>					
+
+ 
+ 
+					
+				</div>	   	
+
+
+       	</fieldset>	     		     	
+     	{% endfor%}		
+     	<br/>
+{% endif	 	%}  
+   	
+{% if '3' in param	 	%}        	
+
+	
+     	
+{% endif	 	%}     	
+   	
+{% if '6' in param	 	%}        	
+
+     	
+		<legend>EVALUATIONS</legend> 	 
+
+     	<fieldset>		
+     	  {% for se in topics %} 
+		    {% if se.weight!=0 %}
+							
+				<div class='row '>	
+	       				{% for sea in se.assessments %}   
+	       				
+							{% if sea.weight!=0 %}
+							<div class='col-sm-12'>							
+								<div class='col-sm-5'>
+									{{ sea.title }} 
+								</div>       				
+			   					<div class='col-sm-5'>
+			   						{% if sea.deadline is defined and sea.deadline !=null%}
+									Date de rendu : {{ sea.deadline|date('d/m/Y') }}
+									{% endif %}&nbsp;
+								</div>   
+			   					<div class='col-sm-2'>		   		
+									{{ sea.weight * 100}}% 		   					
+								</div>         								     		
+							</div> 
+					     	{% endif %} 
+	       				{% endfor %}  	 				
+				</div>	   	
+
+
+   		    {% endif %}   	
+     	  {% endfor%}		
+       	</fieldset>	  
+     	<br/>     	
+     	
+{% endif	 	%}  
+   	
+{% if '7' in param	 	%}    	
+	    {% if course.resources !="" %}   	            	
+		  	<legend>RESSOURCES</legend>  			
+		   	<fieldset>	
+	  
+	    			    
+	            
+					<div class='row'>		    	
+						<div class='col-sm-12'> 	  	  
+					    	{{ course.resources|raw }}
+						</div> 	  	
+					</div>  
+			</fieldset>		             
+	    {% endif %}	     	
+     	<br/>
+{% endif	 	%}       	
+
+{% if '8' in param	 	%}       	
+	    {% if course.rules !="" %}   
+	            	
+	  	<legend>REGLEMENTS</legend>
+	  			
+	   	<fieldset>	
+
+				<div class='row'>		    	
+					<div class='col-sm-12'> 	  	  
+				    	{{ course.rules|raw }}
+					</div> 	  	
+				</div>               
+	    {% endif %}	 		       		       
+{% endif	 	%}  
+	
+</div>
+        
+{% endblock %}
+

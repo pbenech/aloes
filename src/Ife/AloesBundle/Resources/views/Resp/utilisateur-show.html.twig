@@ -1,0 +1,86 @@
+{% extends 'IfeAloesBundle:Aloes:layout.html.twig' %}
+
+  
+
+{% block content -%}
+
+
+    <div class='title-one'> Profil utilisateur  </div>	   	 
+
+	<fieldset>
+
+	    <table class="table">
+	        <thead>
+	  
+	        </thead>
+	        <tbody> 
+	
+			{{ entity.sn }}, {{ entity.givenname }}<br/><br/>
+			
+			 {% for role in entity.roles %}
+			 
+			 	{% if role=="ROLE_ADMIN" %}
+					<b>Administrateur</b><br/>
+			 	{% endif %}
+			 	
+			 	{% if role=="ROLE_RESPONSABLE" %}
+					 <b>Responsable de formation :</b><br/>
+					
+					 {% for program in entity.responsables %}
+					 	 - {{ program }}<br/>
+					 	
+						{% for course in entity.courses %}
+							{% if course.program.id==program.id %}
+							--- {{ course.title }} {{ course.program.id }} {{ course.program.title }}<br/>
+							{% endif %}
+						{% endfor %}						 	
+					 	
+					 {% endfor %}
+					 
+				 
+
+			 	{% endif %}	
+			 					
+			 	{% if role=="ROLE_ENSEIGNANT" %}
+					 <b>Enseignant(s) :</b><br/>
+					
+					 {% for program in entity.enseignants %}
+					 	- {{ program.title }}<br/>
+					 	
+						{% for course in entity.courses %}
+							{% if course.program.id==program.id %}
+							--- {{ course.title }} {{ course.program.id }} {{ course.program.title }}<br/>
+							{% endif %}
+						{% endfor %}						 	
+					 	
+					 {% endfor %}
+	
+			 	{% endif %}	
+			 					
+			 {% endfor %}
+
+ 	    
+	        </tbody>
+	    </table>
+		
+	    
+	</fieldset>    
+	          
+    
+	<div class='row'>	
+			<div class='col-md-3'> 
+			    	<a href="{{ path('resp_utilisateurs_updateuser', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	Modifier
+			   		</a>    
+			</div>
+			<div class='col-md-3'>
+				    <a href="{{ path('resp_utilisateurs') }}"> Retour à la liste des utilisateurs </a>
+			</div>
+	</div>				
+					          
+	          
+    
+{% endblock %} 
+
+
+    

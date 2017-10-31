@@ -1,0 +1,15 @@
+IfeAloesBundle_admin:
+  resource: "@IfeAloesBundle/Resources/config/routing/admin.yml"
+  prefix:   /aloes_admin
+
+IfeAloesBundle_admin_level:
+  resource: "@IfeAloesBundle/Resources/config/routing/level.yml"
+  prefix:   /aloes_admin_level
+  
+IfeAloesBundle_admin_langue:
+  resource: "@IfeAloesBundle/Resources/config/routing/langue.yml"
+  prefix:   /aloes_admin_langue
+  
+IfeAloesBundle_admin_semestre:
+  resource: "@IfeAloesBundle/Resources/config/routing/semestre.yml"
+  prefix:   /aloes_admin_semestre

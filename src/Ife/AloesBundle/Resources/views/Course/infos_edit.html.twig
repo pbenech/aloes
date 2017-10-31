@@ -1,0 +1,96 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+
+{% block content -%}
+ 
+    	<div class='title-two1a col-md-12 col-sm-12'> 
+			Edition informations du cours
+		</div>
+
+	
+
+	{{ tinymce_init() }}
+	
+    {{ form_start(edit_form) }}	
+	
+	<div class='col-sm-12 container-fluid block3'>	
+	  	  
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.description) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.description) }}
+	 	   	 	{{ form_errors(edit_form.description) }}
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.pedagogy) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.pedagogy) }}
+	 	   	 	{{ form_errors(edit_form.pedagogy) }}
+			</div> 	  	
+		</div>  
+		
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.evaluation) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.evaluation) }}
+	 	   	 	{{ form_errors(edit_form.evaluation) }}
+			</div> 	  	
+		</div> 		
+
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.resources) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.resources) }}
+	 	   	 	{{ form_errors(edit_form.resources) }}
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.rules) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.rules) }}
+	 	   	 	{{ form_errors(edit_form.rules) }}
+			</div> 	  	
+		</div> 
+
+
+		<div class='row'>	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_label(edit_form.infos) }}
+			</div> 	  		    	
+			<div class='col-md-12'> 	  	  
+		    	{{ form_widget(edit_form.infos) }}
+	 	   	 	{{ form_errors(edit_form.infos) }}
+			</div> 	  	
+		</div> 
+
+
+
+		
+	{{ form_widget(edit_form._token) }}
+	  
+	<div class='row'>	
+			<div class='col-md-3'> 
+				{{ form_widget(edit_form.submit)}} 
+			</div>
+	    	<div class='col-md-6'>
+	    		<a href="{{path('course_infos_show', {id:course.id})}}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour informations</a> 
+	    	</div>
+	</div>	
+
+	
+	</div>	
+
+{% endblock %}

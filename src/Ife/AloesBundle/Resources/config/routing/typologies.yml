@@ -1,0 +1,3 @@
+typologies_ajax:
+    pattern:  /ajaxt/typologies.js
+    defaults: { _controller: IfeAloesBundle:Typologie:typologies }

@@ -1,0 +1,97 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block content -%}
+
+    <h1> Objectifs d'apprentissage </h1>      
+
+    {% embed 'IfeAloesBundle:Aloes:list.html.twig' with {'children': 'specificObjectives'} %}
+
+        {% block parent_item %}
+            <div class="row">
+
+                <!-- Title -->
+	        <div class="lead col-md-10 col-sm-10">
+                    {{ parent.title }}
+	        </div>
+                
+                <!-- Weight -->
+	        <div class="general-item-weight cold-md-1 col-sm-1">
+	            <span class="weight lead text-info"> {{ parent.weight * 100 }} % </span>
+	        </div> 
+                
+                <!-- Link to edit -->
+	        <div class="col-md-1 col-sm-1">
+                    <a href="{{path('general_objective_edit',{id:parent.id})}}" class="pull-right">
+	                <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+	        </div>
+
+            </div>
+        {% endblock %}
+
+        {% block child_item %}
+            <tr>
+                <td> {{ child.title }} </td>
+                <td> {{ macros.progress_bar(child.weight) }} </td>
+                <td>
+                    <span class="label label-{{(child.assessmentLinks.count == 0)?'warning':'default'}}"> 
+                            {{ child.assessmentLinks.count }}
+                    </span>
+                </td>
+                <td> 
+                    <a href="{{ path('objective_competence_selection', {id:child.id}) }}">
+                        <span class="label label-{{(child.competenceLinks.count == 0)?'warning':'default'}}"> 
+                            {{ child.competenceLinks.count }}
+                        </span>
+                    </a>
+                </td>
+                <td> 
+                    <a href="{{ path('specific_objective_delete', {id:child.id}) }}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endblock %}
+
+        {% block children_header %}
+            <thead class="list-header">
+	        <tr>
+	            <th class="col-md-5"> Objectifs spécifiques </th>
+	            <th class="col-md-3"> Poids </th>
+                    <th class="col-md-1"> s </th>
+                    <th class="col-md-1"> Compétences </th>
+	            <th class="col-md-1"> </th>
+	        </tr>
+            </thead>
+        {% endblock %}
+
+        {% block new_parent %}
+            <div class="node-creator general-item-creator">
+                <form action="{{path('course_objective_create', {id:course.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_general_objective[title]" type="text" placeholder="Nouvel objectif général" required>
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div>
+        {% endblock %}
+
+
+        {% block new_child %}
+            <div class="child-creator">
+                <form action="{{path('general_objective_specific_objective_create', {id:parent.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_specific_objective[title]" type="text" placeholder="Nouvel objectif spécifique" required>
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div>
+        {% endblock %}
+
+
+    {% endembed %}
+
+{% endblock %}
+
+

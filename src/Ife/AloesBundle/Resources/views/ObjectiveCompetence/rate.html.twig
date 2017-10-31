@@ -1,0 +1,31 @@
+{% extends 'IfeAloesBundle:Course:link-layout.html.twig' %}
+
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block link_content %}
+    {% if rating_form is not null %}
+        {{ macros.link_rating_form(rating_form, 'competenceLinks', 'competence') }}
+    {% else %}
+        <p class="alert alert-warning"> 
+            Il n'y a pas encore de compétences liées à cet objectif. Vous pouvez
+            en ajouter depuis l'onglet 'Selection'.
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block link_title %}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Pondération des compétences liées à l'objectif:</div>  
+
+    {% if msg is defined and msg==1 %}
+    	<br/><p><center><span  class="alert alert-success"> PONDERATION ENREGITREE AVEC SUCCES </span></center></p>
+    {% endif%}        
+    
+{% endblock %}
+
+{% block link_help_message %}
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-info-sign"> </span>
+        Indiquez sur une échelle de 1 à 3 le niveau de compétence atteint par cet objectif
+    </div>
+{% endblock %}

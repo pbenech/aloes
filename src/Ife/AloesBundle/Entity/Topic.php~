@@ -1,0 +1,274 @@
+<?php
+
+namespace Ife\AloesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Session
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Topic
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $endDate;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $title;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $description;
+
+    /* Related entities */
+    /* ================ */
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Course")
+     */
+    private $course;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="topic")
+     */
+    private $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Assessment", mappedBy="topic")
+     */
+    private $assessments;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->assessments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set startDate
+     *
+     * @param \DateTime $startDate
+     * @return Topic
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return Topic
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime 
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Topic
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set course
+     *
+     * @param \Ife\AloesBundle\Entity\Course $course
+     * @return Topic
+     */
+    public function setCourse(\Ife\AloesBundle\Entity\Course $course = null)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * Get course
+     *
+     * @return \Ife\AloesBundle\Entity\Course 
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Ife\AloesBundle\Entity\Event $events
+     * @return Topic
+     */
+    public function addEvent(\Ife\AloesBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Ife\AloesBundle\Entity\Event $events
+     */
+    public function removeEvent(\Ife\AloesBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Add assessments
+     *
+     * @param \Ife\AloesBundle\Entity\Assessment $assessments
+     * @return Topic
+     */
+    public function addAssessment(\Ife\AloesBundle\Entity\Assessment $assessments)
+    {
+        $this->assessments[] = $assessments;
+
+        return $this;
+    }
+
+    /**
+     * Remove assessments
+     *
+     * @param \Ife\AloesBundle\Entity\Assessment $assessments
+     */
+    public function removeAssessment(\Ife\AloesBundle\Entity\Assessment $assessments)
+    {
+        $this->assessments->removeElement($assessments);
+    }
+
+    /**
+     * Get assessments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssessments()
+    {
+        return $this->assessments;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Topic
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Computes the total weight of the topic.
+     * 
+     */
+    public function getWeight()
+    {
+        if (!$this->assessments->count()) return 0;
+
+        $sum = 0;
+        foreach ($this->assessments as $a)
+        {
+            $sum += $a->getWeight();
+        }
+        return $sum;
+    }        
+}

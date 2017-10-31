@@ -1,0 +1,57 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}
+    <title> @loes </title>
+{% endblock %}
+
+{% block header_nav %}
+<!--
+    <div class="btn-group btn-breadcrumb">
+        <a   class="btn btn-default" href="#"> Accueil</a>
+    </div>
+    <br/><br/>
+    -->
+{% endblock %} 
+
+{% block sidebar_nav %}
+ 
+	<nav class="navbar navbar-default"> 
+  		<div class="container-fluid">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+
+			        <li><a href="{{path('programs')}}"
+			        	{% if menu is defined and menu=="programs"%}
+			        		class="current"
+			        	{% endif%}          
+			        > Liste des programmes </a></li>
+			        
+			        <li><a href="{{path('tableaux_bord', {niv:1})}}"
+			        	{% if menu is defined and menu=="tableaux"%}
+			        		class="current"
+			        	{% endif%}> Tableaux de bord </a></li>			        
+			        
+
+			        {% if  ( is_granted("ROLE_ADMIN") )
+			        %}	
+				        <li><a href="{{path('admin_outil')}}"
+			          		{% if menu is defined and ( menu=="adm-out" or menu=="adm-util" or  menu=="adm-param" or  menu=="adm-level" or  menu=="adm-lang" or  menu=="adm-sem" )%}
+				        		class="current" 
+				        	{% endif%}> <span class="glyphicon glyphicon-cog"></span>  </a></li>
+
+			        {% endif %}				        
+
+				    <li><a href="{{ path('fos_user_security_logout') }}">
+				        	 Déconnexion </a></li>   
+
+
+		      </ul>
+		    </div><!-- /.navbar-collapse -->  
+  		</div><!-- /.container-fluid -->
+	</nav>
+	
+ 
+    
+{% endblock %}
+
+

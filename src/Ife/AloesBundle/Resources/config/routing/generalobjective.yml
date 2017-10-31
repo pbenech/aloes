@@ -1,0 +1,57 @@
+general_objective_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:GeneralObjective:create" }
+    requirements: { _method: post }
+
+
+
+general_objective_edit: 
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:GeneralObjective:edit" }
+
+general_objective_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:GeneralObjective:update" }
+    requirements: { _method: post|put }
+
+general_objective_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:GeneralObjective:delete" }
+    requirements: { _method: post|delete }
+
+# Specific objectives
+
+general_objective_specific_objective_create:
+  path: /{id}/specifics/create
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective:create" }
+  requirements: { _method: post }
+
+
+general_objective_specific_objective_new_2:
+  path: /{id}/specifics_2/new
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:new" }
+
+general_objective_specific_objective_create_2:
+  path: /{id}/specifics_2/create
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:create" }
+  requirements: { _method: post } 
+
+general_objective_specific_objective_edit_2:
+  path: /{id}/specifics_2/edit
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:edit" }
+
+
+general_objective_specific_objective_update_2:
+  path: /{id}/specifics_2/update
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:update" }
+  requirements: { _method: post }   
+
+general_objective_specific_objective_del_2:
+  path: /{id}/specifics_2/del
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:del" }  
+  
+general_objective_specific_objective_delete_2:
+  path: /{id}/specifics_2/delete
+  defaults: { _controller: "IfeAloesBundle:SpecificObjective2:delete" }
+  requirements: { _method: post }  
+            

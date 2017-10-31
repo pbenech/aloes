@@ -1,0 +1,56 @@
+test_admin:
+    path:     /test_admin
+    defaults: { _controller: "IfeAloesBundle:Admin:test" }
+
+admin_parameters:
+    path:     /admin_parameters
+    defaults: { _controller: "IfeAloesBundle:Admin:parameters" }
+
+admin_outil:
+    path:     /admin_outil
+    defaults: { _controller: "IfeAloesBundle:Admin:outil" }
+
+admin_parameters_edit:
+    path:     /admin_parameters_edit/{id}
+    defaults: { _controller: "IfeAloesBundle:Admin:parametersEdit" } 
+
+admin_parameters_update:
+    path:     /admin_parameters_update/{id}
+    defaults: { _controller: "IfeAloesBundle:Admin:parametersUpdate", id:1 } 
+
+admin_utilisateurs:
+    path:     /admin_utilisateurs/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:utilisateurs", page: 1, sort: sn, direction: asc }    
+
+admin_utilisateurs_add_ldap:    
+    path:     /admin_utilisateurs_add_ldap/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:addLdap", page: 1, sort: sn, direction: asc }
+
+admin_utilisateurs_add_user:    
+    path:     /admin_utilisateurs_add_user/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:addUser", page: 1, sort: sn, direction: asc }
+    
+admin_utilisateurs_create_ldap:    
+    path:     /admin_utilisateurs_create_ldap/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:createLdap", page: 1, sort: sn, direction: asc } 
+    
+admin_utilisateurs_create_user:    
+    path:     /admin_utilisateurs_create_user/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:createUser", page: 1, sort: sn, direction: asc }     
+        
+admin_utilisateurs_showuser:
+    path:     /admin_utilisateurs_show/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:showuser", page: 1, sort: sn, direction: asc }   
+    
+admin_utilisateurs_deleteuser:
+    path:     /admin_utilisateurs_deleteuser/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:deleteuser", page: 1, sort: sn, direction: asc }       
+
+admin_utilisateurs_updateuser:
+    path:     /admin_utilisateurs_updateuser/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:updateuser", page: 1, sort: sn, direction: asc }  
+   
+admin_utilisateurs_updateuser_valid:    
+    path:     /{id}/admin_utilisateurs_updateuser_valid/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Admin:validuser", page: 1, sort: sn, direction: asc }
+      

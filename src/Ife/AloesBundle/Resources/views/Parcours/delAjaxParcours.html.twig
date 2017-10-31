@@ -1,0 +1,29 @@
+<div class="modal-header color4"> 
+	<b>Suppression parcours </b><button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div> 
+ 
+<div id="modal-body" class="modal-body" >
+
+    Etes-vous sûr de vouloir supprimer définitivement le parcours suivant  ?
+     
+    <br/>{{ entity.title }}  
+
+	<br/>	
+	    
+    {{ form_start(delete_form) }}
+	<hr/>
+    {{ form_widget(delete_form.delete) }}
+      
+    {{ form_widget(delete_form.nodelete) }}
+      
+    {{ form_end(delete_form) }}
+    
+	<script type="text/javascript">	
+			 
+			$("#form_nodelete").click(function() {
+				$('#myModal').modal('hide');	         				 
+				return false;							
+			});		
+
+	</script>
+</div> 

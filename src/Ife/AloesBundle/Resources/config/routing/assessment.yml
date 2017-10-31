@@ -1,0 +1,54 @@
+assessment:
+  path:     /
+  defaults: { _controller: "IfeAloesBundle:Assessment:index" }
+
+assessment_show:
+  path:     /{id}/show
+  defaults: { _controller: "IfeAloesBundle:Assessment:show" }
+
+assessment_new:
+  path:     /new
+  defaults: { _controller: "IfeAloesBundle:Assessment:new" }
+
+assessment_create:
+  path:     /create
+  defaults: { _controller: "IfeAloesBundle:Assessment:create" }
+  requirements: { _method: post }
+
+assessment_edit:
+  path:     /{id}/edit
+  defaults: { _controller: "IfeAloesBundle:Assessment:edit" }
+
+assessment_update:
+  path:     /{id}/update
+  defaults: { _controller: "IfeAloesBundle:Assessment:update" }
+  requirements: { _method: post|put }
+
+assessment_delete:
+  path:     /{id}/delete
+  defaults: { _controller: "IfeAloesBundle:Assessment:delete" }
+
+
+# Linking to objectives
+
+assessment_objective_selection:
+  path: /{id}/objectives/selection/{menu}/{msg}
+  defaults: { _controller: "IfeAloesBundle:AssessmentObjective:select", msg:0 }
+  
+assessment_objective_selection_update:
+  path: /{id}/objectives/update-selection/{menu}
+  defaults: { _controller: "IfeAloesBundle:AssessmentObjective:updateSelection" }
+  requirements: { _method: post }
+
+assessment_objective_rating:
+  path: /{id}/objectives/rating/{menu}/{msg}
+  defaults: { _controller: "IfeAloesBundle:AssessmentObjective:rate", msg:0 }
+
+assessment_objective_rating_update:
+  path: /{id}/objectives/update-rating/{menu}
+  defaults: { _controller: "IfeAloesBundle:AssessmentObjective:updateRating" }
+  requirements: { _method: post }
+
+assessment_objective_weights:
+  path: /{id}/objectives/weights/{menu}
+  defaults: { _controller: "IfeAloesBundle:AssessmentObjective:show" }

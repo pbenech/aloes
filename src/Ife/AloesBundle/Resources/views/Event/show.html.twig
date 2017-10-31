@@ -1,0 +1,115 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content %}
+
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='row'>    	
+    	<div class='title-two col-md-9 col-sm-9'> 
+			Edition d'un évènement
+		</div>
+    	<div class='col-md-3 col-sm-3'>
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+			      ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+			      ( is_granted("ROLE_ADMIN") )
+			 %}
+		        <a href="{{ path('event_edit', { 'id': entity.id }) }}">
+		            <span class="glyphicon glyphicon-edit"></span> Modifier évènement
+		        </a>
+			{% endif %}    	
+    	</div> 		
+    </div>
+ 
+ 
+ 	<div class='container-fluid'>	
+
+		<fieldset>	
+
+	       {% if entity.title !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Titre
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ entity.title|raw }} 
+					</div> 	  	
+				</div>               
+	       {% endif %}	 
+        
+	       {% if entity.startDate !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Dates(s)
+					</div> 	  		    	
+					<div class='col-md-9'> 	  	  
+				    	{{ entity.startDate|date('Y-m-d H:i:s') }} 
+				    	{% if entity.endDate is defined and entity.endDate !=null %}
+				    	-> {{ entity.endDate|date('Y-m-d H:i:s') }}
+				    	{% endif %}
+					</div> 	  	
+				</div>               
+	       {% endif %}	 
+	       
+	       {% if entity.description !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Description
+					</div> 	  		    	
+					<div class='col-md-9' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">	  
+				    		{{ entity.description|raw }}
+				        </div>	
+					</div> 	  	
+				</div>               
+	       {% endif %}		
+
+	       {% if entity.instructions !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Instructions
+					</div> 	  		    	
+					<div class='col-md-9' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">	 	  
+				    	{{ entity.instructions|raw }}
+				        </div>	
+					</div> 	  	
+				</div>              
+	       {% endif %}	
+
+	       {% if entity.instructions !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Tutoring
+					</div> 	  		    	
+					<div class='col-md-9' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">  
+				    	{{ entity.tutoring|raw }}
+				        </div>	
+					</div> 	  	
+				</div>              
+	       {% endif %}	
+	       
+	       {% if entity.resources !="" %}               
+				<div class='row'>	
+					<div class='col-md-3 attribut'> 	  	  
+				    	Ressources
+					</div> 	  		    	
+					<div class='col-md-9' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">  	  
+				    	{{ entity.resources|raw }}
+				        </div>	
+					</div> 	  	
+				</div>             
+	       {% endif %}	
+	       
+		</fieldset>	
+		
+		<div class='row'>	
+			<div class='col-md-9'> 
+				<a href="{{path('course_event', {id:course.id})}}" ><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste des évènements</a>		
+			</div>
+		</div>	
+	</div>
+
+
+
+{% endblock %}

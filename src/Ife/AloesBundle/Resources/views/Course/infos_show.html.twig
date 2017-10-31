@@ -1,0 +1,111 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+   	
+   	
+    	<div class='title-two1a col-md-9 col-sm-9'> 
+			Informations du cours
+		</div>
+    	<div class='title-two1b col-md-3 col-sm-3' style="text-align:right">
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+			      ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+			      ( is_granted("ROLE_ADMIN") )
+			 %}
+			        <a class="btn1 btn-color4" href="{{ path('courses_infos_edit', { 'id': course.id }) }}">
+			            <span class="glyphicon glyphicon-edit"></span> Modifier informations
+			        </a>
+			{% endif %}	
+    	</div> 		
+
+
+	
+	
+	<div class='col-sm-12 container-fluid block3'>	
+			<br/>
+	       {% if course.description !="" %}    
+				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Description : 
+					</div> 	  		    	
+					<div class='col-md-10' > 	  	  
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">
+				    		{{ course.description|raw  }}
+				    	</div>
+					</div> 	  	
+				</div>  	                  
+	       {% endif %}	    
+	       
+
+	       {% if course.Pedagogy !="" %} 
+				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Méthodes Pédagogiques&nbsp;: 
+					</div> 	  		    	
+					<div class='col-md-10'> 	 
+					 	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">  
+				    		{{ course.Pedagogy|raw   }}
+				    	</div>
+					</div> 	  	
+				</div>  	              	       
+	       {% endif %}	    	       
+
+
+
+	       {% if course.evaluation !="" %}  
+ 				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Evaluation : 
+					</div> 	  		    	
+					<div class='col-md-10'> 	
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">	  
+				    		{{ course.evaluation|raw   }}
+				    	</div>
+					</div> 	  	
+				</div>    	             
+	       {% endif %}	
+
+	       {% if course.resources !="" %}  
+ 				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Ressources : 
+					</div> 	  		    	
+					<div class='col-md-10'> 	
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">					  	  
+				    		{{ course.resources|raw    }}
+				    	</div>	
+					</div> 	  	
+				</div>      	       
+	       {% endif %}	 	       
+
+	       {% if course.rules !="" %}        
+ 				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Règlements : 
+					</div> 	  		    	
+					<div class='col-md-10'> 	 
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">	  
+				    		{{ course.rules|raw    }}
+				    	</div>	
+					</div> 	  	
+				</div>    	       
+	       {% endif %}	
+ 
+	       {% if course.infos !="" %}  
+ 				<div class='row'>	
+					<div class='col-md-2 attribut'> 	  	  
+				    	Autres informations utiles : 
+					</div> 	  		    	
+					<div class='col-md-10'> 	
+				    	<div  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">	  
+				    		{{ course.infos|raw   }}
+				    	</div>
+					</div> 	  	
+				</div>    	             
+	       {% endif %}	
+
+
+	</div>
+
+	
+	
+{% endblock %}

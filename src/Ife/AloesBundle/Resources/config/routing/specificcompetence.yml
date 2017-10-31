@@ -1,0 +1,58 @@
+specific-competence:
+    path:     /
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:index" }
+
+specific-competence_show:
+    path:     /{id}/show
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:show" }
+
+specific-competence_new:
+    path:     /new
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:new" }
+
+specific-competence_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:create" }
+    requirements: { _method: post }
+
+specific-competence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:edit" }
+
+specific-competence_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:update" }
+    requirements: { _method: post|put }
+
+specificcompetence_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence:delete" }
+
+specificcompetence_new_2:
+  path: /{id}/new2
+  defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:new" }
+
+specificcompetence_create_2:
+    path:    /{id}/create2
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:create" }
+    requirements: { _method: post }
+    
+specificcompetence_edit_2:
+    path:     /{id}/edit2
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:edit" } 
+    
+specificcompetence_update2:
+    path:     /{id}/update2
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:update" }
+    requirements: { _method: post|put }
+
+specificcompetence_del_2:
+    path:     /{id}/del2
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:del" }     
+    
+specificcompetence_delete2:
+    path:     /{id}/delete2
+    defaults: { _controller: "IfeAloesBundle:SpecificCompetence2:delete" }
+    requirements: { _method: post|put }   
+      
+       

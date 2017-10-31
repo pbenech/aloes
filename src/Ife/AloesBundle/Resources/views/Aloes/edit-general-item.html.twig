@@ -1,0 +1,64 @@
+<div class="">
+
+
+    {{ block('parent_title') }}
+
+	<fieldset>
+
+    {# Edit #}
+    {% block parent_form %}
+        {{ form_start(edit_form) }}
+    	<fieldset> 
+        	{{ form_widget(edit_form.title) }}
+        	{{ form_errors(edit_form.title) }}
+        	
+			{{ form_widget(edit_form._token) }}        	
+     	</fieldset>      
+    {% endblock %}
+
+    {% if children|length > 0 %}
+
+    {{ block('children_title') }}
+    <fieldset>
+	     <div class="container-fluid">    
+	        <div class="row">
+	            {% for child in children %}
+	                <div class="col-md-12"> {% block child_form %} {{ form_widget(child.title) }}        	{{ form_errors(child.title) }}<br/> {% endblock %}</div> 
+	            {% endfor %}
+	        </div> 
+	    </div>    
+    </fieldset>    
+    {% endif %}
+    
+    <div class="row">
+    	<div class="col-md-3">    
+		    {{ 
+		        form_row(edit_form.submit, {
+		            'attr' : { 'class':'btn btn-success'},
+		            'label': 'Enregistrer'
+		        }) 
+		    }}
+		    {{ form_end(edit_form, {'render_rest': false}) }}
+		</div>
+		
+    {# Delete #}
+     	<div class="col-md-3">     	
+		    {{ form_start(delete_form) }}
+		
+		    {{ 
+		        form_row(delete_form.submit, {
+		            'attr' : { 'class':'btn btn-danger'},
+		            'label': 'Supprimer'
+		        }) 
+		    }}
+		
+		    {{ form_end(delete_form) }}
+    	</div>
+    	<div class="col-md-3">
+    		 {{ block('back_to_index') }}
+    	</div>    	
+    </div>
+
+	</fieldset>
+   
+</div>

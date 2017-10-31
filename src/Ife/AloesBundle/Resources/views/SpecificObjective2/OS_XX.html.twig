@@ -1,0 +1,86 @@
+ {% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+ 
+ {% if entete is defined and entete==true%}
+ 			<div id="OS_{{child.id}}" class="row block1 " >
+ {% endif %} 		
+	
+		 <table style="width:100%"> 
+		  	 
+		      <div id="OS_{{child.id}}_A" class="col-sm-12 ">  
+ 
+					<div  id="OS_{{child.id}}_A_title" class="col-sm-6"  > 					
+						<span  id="OS_{{child.id}}_A_bloc"  class="button2"  > 	  
+							{% if type is defined and type=="new"%} 
+								<span id="OBJS{{child.id}}" onclick="HideShow2('#OS_{{child.id}}_B','#OBJS{{child.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>
+							{% else %}
+								<span id="OBJS{{child.id}}" onclick="HideShow2('#OS_{{child.id}}_B','#OBJS{{child.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>
+							{% endif %}			
+						</span>     
+						<span  id="OS_{{parent.id}}_A_title2"   > 
+							{{ child.title }}  
+						</span> 
+					</div>  
+ 
+		            <div id="OS_{{child.id}}_cl" class="col-sm-2" style="text-align:center">
+					{% if objectifCompetences[child.id] is defined %}
+						{{ objectifCompetences[child.id]|length }} 						
+					{% endif %}
+		            </div>							         
+		      	             
+		            <div id="OS_{{child.id}}_weight" class="col-sm-2">
+		            	{{ macros.progress_bar(child.weight,'warning') }} 
+		            </div>	
+		            <!--
+		            <div id="OS_{{child.id}}_al" class="col-sm-1">
+		            	{{ child.assessmentLinks.count }}
+		            </div>	 
+		            -->         
+
+		            <div id="OS_{{child.id}}_update" class="col-sm-2"  style="text-align:right"> 
+					 	  {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+						       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+						       ( is_granted("ROLE_ADMIN") )
+						  %}	    
+			 		                    
+							<a data-toggle="modal" class="btn2 btn-warning" href="{{ path('general_objective_specific_objective_edit_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 				
+							
+				  			<a data-toggle="modal" class="btn2 btn-danger" href="{{ path('general_objective_specific_objective_del_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 				 				  	               
+
+		                  {% endif %}		            
+		            </div>
+
+		           </div>  
+		     
+
+		            <div id="OS_{{child.id}}_B"  style="display: none;background-color:white"  class="col-sm-12 block1">  		        
+		            {% if objectifCompetences[child.id] is defined and objectifCompetences[child.id]!= null   %}	 
+			            <div id="OS_{{child.id}}_B_titre" class="col-sm-3">
+			            	Compétences spécifiques :
+			            </div>			         
+			            <div id="OS_{{child.id}}_B_titre" class="col-sm-9">
+			            				{% for oc in objectifCompetences[child.id]  %} 
+					            				
+					            				<span class="glyphicon glyphicon-unchecked"></span>  
+					            				
+					            				{{ oc.title }} 
+					            				
+					            				
+					            				{% if oc.rating==1   			%}
+					            				 	<span title="{{ oc.weight*100}}%">[secondaire]</span>			 							            				
+					            				{% elseif oc.rating==2   	    %}
+					            					<span title="{{ oc.weight*100}}%">[principale]</span>			 								            				
+					            				{% endif				 		%}						            				
+					            				<br/>
+					            		{% endfor %}
+			            </div>			        
+		            {% endif %}  
+			        </div>    
+           
+		     </div> 
+		          
+
+		</table> 
+			 
+ {% if entete is defined and entete==true%}			
+		  	</div>	 						
+ {% endif %} 		  			 

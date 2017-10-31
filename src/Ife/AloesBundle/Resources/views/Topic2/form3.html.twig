@@ -1,0 +1,130 @@
+    <script src="{{asset('bundles/ifealoes/js/jquery.min.js')}}"></script>    
+    
+	<link rel="stylesheet" href="{{asset('bundles/ifealoes/bootstrap/css/bootstrap.min.css')}}" type="text/css">                                       
+    <script src="{{asset('bundles/ifealoes/bootstrap/js/bootstrap.min.js')}}"></script>
+
+        
+	 <script type='text/javascript'>
+	  $(document).ready(function() { 
+	    $('#previous').click(function() {
+ 		
+ 		
+	 		var data = $('#aloes_topic_form3').serialize() 		
+ 		
+		    $.ajax({
+		        url: '{{ path('course_topic22_create',{id:course.id}) }}',
+		        type: 'POST',
+		        //dataType   : 'json',	        
+		        data: data,
+		        cache: false,
+		        success: function (response) {
+		        	$("#formulaire").empty().append(response); 	
+		        } 
+	
+		    });
+		    
+			return false;
+	
+	    });
+	  });
+	 </script> 
+		
+		
+	<span class="label label-default">1. Général</span>
+	<span class="label label-default">2. Propositions dates</span>
+	<span class="label label-primary">3. Titres</span>
+<br/>
+
+
+	{{ tinymce_init() }} 
+
+
+	<form  id="aloes_topic_form3" class="form-inline" action="{{ path('course_topic24_create',{id:course.id}) }}"  method="post">
+	
+	 			 <div class="col-md-12 col-sm-12">
+		          	<hr/>
+      			 </div>		
+		
+        {% for topic in form.topics %}
+	 
+	 			 <div class="col-sm-12">
+	 			 	<div class="col-sm-3">
+	 			 	
+	 			 		<span class="glyphicon glyphicon-menu-right"></span>
+	 			 		 
+						{% set year1	 =  topic.startDate.vars.value.date.year %}
+						{% set month1 =  topic.startDate.vars.value.date.month %}
+						{% set day1 =  topic.startDate.vars.value.date.day %}
+						{% set day1 = day1~'/'~month1~'/'~year1 %}
+						{% set year2	 =  topic.endDate.vars.value.date.year %}
+						{% set month2 =  topic.endDate.vars.value.date.month %}
+						{% set day2 =  topic.endDate.vars.value.date.day %}
+						{% set day2 = day2~'/'~month2~'/'~year2 %}
+						
+						{% if day1==day2 %}
+							{{ day1 }}
+						{% else %}
+							{{ "Du "~day1~" au "~day2 }}
+						{% endif %}
+			
+			       		{{ form_widget(topic.startDate) }}
+			       		{{ form_widget(topic.endDate) }}
+					</div>
+					<div class="col-sm-1">
+		          		{{ form_label(topic.title) }}
+		          	</div>					
+					<div class="col-sm-8">
+		          		{{ form_widget(topic.title) }}
+		          		{{ form_errors(topic.title) }}
+		          	</div>	
+				  </div>	
+
+	 			 <div class="col-sm-12">
+	 			 	<div class="col-sm-6">
+ 					  <div class="col-sm-12">
+							<div class="col-sm-2">		
+					          		Horaire
+				          	</div> 
+							<div class="col-sm-4">		
+					          		{{ form_widget(topic.hdeb) }} 
+				          	</div> 
+							<div class="col-sm-2">		
+					          		à
+				          	</div>  
+							<div class="col-sm-4">		
+					          	{{ form_widget(topic.hfin) }}
+				          	</div>  
+				      </div>      	
+					</div> 
+					<div class="col-sm-3">
+		          		{{ form_widget(topic.place) }}
+		          		{{ form_errors(topic.place) }}
+		          		{{ form_row(topic.fc) }}
+		          	</div>					
+					<div class="col-sm-3">
+		          		{{ form_widget(topic.isFaceToFace) }}
+		          		{{ form_errors(topic.isFaceToFace) }}
+		          	</div>
+				</div>
+	
+
+	 			 <div class="col-md-12 col-sm-12">
+		          	<hr/>
+      			 </div>	
+    	
+        {% endfor %}	
+        
+        {{ form_widget(form._token) }}
+         
+	  	<div class='col-sm-12'> 
+
+			<a class="btn btn-success"  href="{{ path('course_topic22_create',{id:course.id}) }}" id="previous"> Précédent </a> 	
+
+    	    <button type="submit"  class="btn btn-success btn" >Enregistrer</button>          
+			<a class="btn btn-primary" type="button" href="{{path('course_assessment2', {id:course.id })}}">Annuler</a>	
+		</div>
+	</form> 
+
+
+
+ 

@@ -1,0 +1,54 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+
+{% block content -%}
+
+  <div class='title-two1a col-md-12 col-sm-12'>     	
+  		Nouveau parcours		
+  </div>
+
+  {{ form_start(form) }}
+
+  <div class='col-sm-12 container-fluid block3'>	 
+    <br/> 
+
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.title) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.title) }}
+	 	    {{ form_errors(form.title) }}	
+		</div> 	  	
+	</div>   
+	
+
+
+	<div class='row'>	
+		<div class='col-md-2'> 	  	  
+	    	{{ form_label(form.cours) }}
+		</div> 	  		    	
+		<div class='col-md-10'> 	  	  
+	    	{{ form_widget(form.cours) }}
+	 	    {{ form_errors(form.cours) }}	
+		</div> 	  	
+	</div>   
+	
+
+
+	{{ form_widget(form._token) }}
+        
+	<div class='row'>	
+			<div class='col-md-3'> 
+				{{ form_widget(form.submit)}} 
+			</div>
+	    	<div class='col-md-3'>
+	    		<a href="{{ path('parcours_list',{id:program.id}) }}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste des parcours</a>
+	    	</div>
+	</div>
+	
+  </div>         
+  
+   
+
+{% endblock %}

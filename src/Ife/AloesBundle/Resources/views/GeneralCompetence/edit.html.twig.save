@@ -1,0 +1,27 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+
+{% block content -%}
+
+    {% embed 'IfeAloesBundle:Aloes:edit-general-item.html.twig' with { 'children':edit_form.specificCompetences } %}
+
+        {% block parent_title %}
+
+   			<div class='title-one'> {{ program.title }} </div>
+    		<div class='title-two'> Compétence générale - <small> Edition </small> </div>    	
+        
+        {% endblock %}
+
+        {% block children_title %}
+            <h2> Compétences spécifiques associées </h2>
+        {% endblock %}
+
+        {% block back_to_index %}       
+            <a href="{{ path('program_competences', {id:program.id}) }}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Retour à la liste des compétences
+            </a>
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

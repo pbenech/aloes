@@ -1,0 +1,163 @@
+courses:
+    path:     /
+    defaults: { _controller: "IfeAloesBundle:Course:index" }
+
+course_show:
+    path:     /{id}/show
+    defaults: { _controller: "IfeAloesBundle:Course:show" }
+
+
+course_graph:
+    path:     /{id}/graph/
+    defaults: { _controller: "IfeAloesBundle:Course:graph" }
+
+
+course_resum:
+    path:     /{id}/resum
+    defaults: { _controller: "IfeAloesBundle:Course:resum" }
+
+course_statut:
+    path:     /{id}/statut
+    defaults: { _controller: "IfeAloesBundle:Course:statut" }
+
+course_infos_show:
+    path:     /{id}/infos_show
+    defaults: { _controller: "IfeAloesBundle:Course:infos_show" }
+
+courses_new:
+    path:     /new
+    defaults: { _controller: "IfeAloesBundle:Course:new" }
+
+courses_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:Course:create" }
+    requirements: { _method: post }
+
+courses_edit:
+    path:     /{id}/edit/{from}
+    defaults: { _controller: "IfeAloesBundle:Course:edit" }
+
+courses_infos_edit:
+    path:     /{id}/infos_edit
+    defaults: { _controller: "IfeAloesBundle:Course:infos_edit" }
+
+courses_update:
+    path:     /{id}/update/{from}
+    defaults: { _controller: "IfeAloesBundle:Course:update" }
+    requirements: { _method: post|put }
+
+courses_infos_update:
+    path:     /{id}/infos_update
+    defaults: { _controller: "IfeAloesBundle:Course:infos_update" }
+    requirements: { _method: post|put }
+
+courses_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:Course:delete" }
+
+courses_del2:
+    path:     /{id}/del
+    defaults: { _controller: "IfeAloesBundle:Course:del" }
+
+courses_delete2:
+    path:     /{id}/delete2
+    defaults: { _controller: "IfeAloesBundle:Course:delete" }
+
+
+# Objectives 
+course_objective:
+  path: /{id}/objectives/{sequence}
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective:index", sequence: 'ND' }
+
+course_objective_order:
+  path: /{id}/objectives_order
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:order" }
+
+course_objective_create:
+  path: /{id}/objective/create
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective:create" }
+  requirements: { _method: post }
+  
+   
+course_objective_create2:
+  path: /{id}/objective/create2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:create" }
+  requirements: { _method: post }
+  
+
+course_objective_new2:
+  path: /{id}/objective/new2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:new2" }
+
+course_objective_edit2:
+  path: /{id}/objective/edit2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:edit2" }
+
+
+course_objective_del2:
+  path: /{id}/objective/del2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:del2" }
+
+course_objective_delete2:
+  path: /{id}/objective/delete2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:delete2" }
+
+course_objective_update2:
+  path: /{id}/objective/update2
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:update2" }
+
+
+# Objectives2 
+course_objective2:
+  path: /{id}/objectives2/{sequence}
+  defaults: { _controller: "IfeAloesBundle:GeneralObjective2:index", sequence: 'ND' }
+ 
+
+# Topics
+course_assessment:
+  path: /{id}/topics/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic:index", sequence: 'ND' }
+
+course_assessment2: 
+  path: /{id}/topics2/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic2:index", sequence: 'ND' }
+ 
+course_topic_create:
+  path: /{id}/topic/create
+  defaults: { _controller: "IfeAloesBundle:Topic:create" }
+  requirements: {_method: post}
+
+course_topic21_create:
+  path: /{id}/topics21/{init}/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic2:create1", sequence: 'ND', init: false  }
+
+course_topic22_create:
+  path: /{id}/topics22/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic2:create2", sequence: 'ND' }
+
+course_topic23_create:
+  path: /{id}/topics23/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic2:create3", sequence: 'ND'  }
+
+course_topic24_create:
+  path: /{id}/topics24/{sequence}
+  defaults: { _controller: "IfeAloesBundle:Topic2:create4", sequence: 'ND'  }
+   
+# Competences
+course_competence:
+  path: /{id}/competence
+  defaults: { _controller: "IfeAloesBundle:GeneralCompetence:courseIndex" }
+
+
+# Events calendar:
+course_event:
+  path: /{id}/event/list/{page}/{sort}/{direction}
+  defaults: { _controller: "IfeAloesBundle:Event:index" , page: 1, sort: e.title, direction: asc  }
+  
+course_event_new:
+  path: /{id}/events/new
+  defaults: { _controller: "IfeAloesBundle:Event:new" }
+
+course_event_create:
+  path: /{id}/events/create
+  defaults: { _controller: "IfeAloesBundle:Event:create" }

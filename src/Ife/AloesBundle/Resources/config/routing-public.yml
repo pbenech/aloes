@@ -1,0 +1,11 @@
+IfeAloesBundle_courses:
+  resource: "@IfeAloesBundle/Resources/config/routing/course-public.yml"
+  prefix:   /courses-public
+
+IfeAloesBundle_aloes:
+  resource: "@IfeAloesBundle/Resources/config/routing/aloes-public.yml"
+  prefix:   /aloes
+
+IfeAloesBundle_tableaux:
+  resource: "@IfeAloesBundle/Resources/config/routing/tableauxbord.yml"
+  prefix:   /tableaux  

@@ -1,0 +1,77 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Paramètres</a>
+    </div> 
+{% endblock %}
+
+{% block content_10 -%}
+	
+    <div class='title-two1a col-md-12 col-sm-12'> 
+		Modifier paramètres
+	</div>
+
+	{{ tinymce_init() }}
+ 
+	{{ form_stylesheet(edit_form) }}
+    {{ form_javascript(edit_form) }}	
+
+    		
+	<form    class="form-horizontal" action="{{ path('admin_parameters_update' , { 'id': 1}) }}" method="post" {{ form_enctype(edit_form) }}>
+
+		<div class='col-sm-12 container-fluid block3'>
+
+			<div class='col-sm-12'>
+				<div class='col-sm-2'> 	  	  
+					    	{{ form_label(edit_form.about) }}
+				</div> 	  		    	
+				<div class='col-sm-10'> 	  	  
+					    	{{ form_widget(edit_form.about) }}
+					 	    {{ form_errors(edit_form.about) }}	
+				</div> 	  	
+ 			</div>
+		
+			<div class='col-sm-12'>
+				<div class='col-sm-2'> 	  	  
+					    	{{ form_label(edit_form.credits) }}
+				</div> 	  		    	
+				<div class='col-sm-10'> 	  	  
+					    	{{ form_widget(edit_form.credits) }}
+					 	    {{ form_errors(edit_form.credits) }}	
+				</div> 	  
+			</div>		
+
+			<div class='col-sm-12'> 
+				<hr/>
+			</div>     
+			
+
+			<div class='col-sm-12'> 
+				<div class='col-sm-3'> 
+							<button type="submit" value="Enregistrer" class="btn btn-success">
+								Enregistrer&nbsp;
+								<i class="icon-ok icon-white"></i>
+							</button>
+				</div>			
+				<div class='col-sm-9'>
+					<a href="{{path('admin_parameters')}}"><span class="glyphicon glyphicon-arrow-left"></span> Retour paramètres</a>		
+				</div> 
+			</div>
+		
+		    {{ form_rest(edit_form) }}			
+
+			<div class='col-sm-12'> 
+			</div>    
+		
+    	</div>	
+    </form>
+ 
+    
+{% endblock %} 
+
+
+    
+

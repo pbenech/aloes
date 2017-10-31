@@ -1,0 +1,98 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block content -%}
+ 
+   	<div class='title-one'>  {{ course.title }} </div>
+    <div class='title-two'> Compétences mobilisées dans ce cours</div>    	
+    <br/>   	
+
+    {% embed 'IfeAloesBundle:Aloes:list.html.twig' with {'children':'specificCompetences'} %}
+ 
+        {% block parent_item %}
+            <div class="row">
+
+                <!-- Title -->
+	        <div class="lead col-md-10 col-sm-10">
+                    {{ parent.title }}
+	        </div>
+                
+                <!-- Weight -->
+	        <div class="general-item-weight cold-md-1 col-sm-1">
+	            <span class="weight lead text-muted"> {{ parent.weight * 100 }} % </span>
+	        </div> 
+                
+                <!-- Link to edit -->
+	        <div class="col-md-1 col-sm-1">
+	        		{% if is_granted("ROLE_RESPONSABLE") %}
+	                    <a href="{{path('generalcompetence_edit',{id:parent.id})}}" class="pull-right">
+		                <span class="glyphicon glyphicon-edit"></span>
+	                    </a>
+	                {% endif %}
+	        </div>
+
+            </div>
+        {% endblock %}
+
+        {% block child_item %}
+            <tr>
+                <td> {{ child.title }} </td>
+                <td> {{ macros.progress_bar(child.weight) }} </td>
+                <td> 
+                	{% if is_granted("ROLE_RESPONSABLE") %}
+	                    <a href="{{ path('specificcompetence_delete', {id:child.id}) }}">
+	                        <span class="glyphicon glyphicon-remove"></span>
+	                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endblock %}
+
+
+        {% block children_header %}
+	    <thead class="list-header">
+	        <tr>
+		    <th class="col-md-8"> Compétences spécifiques </th>
+		    <th class="col-md-3"> Poids </th>
+		    <th class="col-md-3"></th>
+	        </tr>
+	    </thead>
+        {% endblock %}
+
+        {% block new_parent %}
+  
+		  {% if is_granted("ROLE_RESPONSABLE") %}	                   
+	            <div class="node-creator general-item-creator">
+	                <form action="{{path('program_competences_create', {id:program.id})}}" method="POST">
+	                    <div class="form-group">
+	                        <input name="aloes_generalcompetence[title]" type="text" placeholder="Nouvelle compétence générale" required>
+	                    </div>
+	                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+	                </form>
+	            </div>
+          {% endif %}
+
+        {% endblock %}
+
+        {% block new_child %}
+
+		  {% if is_granted("ROLE_RESPONSABLE") %}	   
+            <div class="child-creator">
+                <form action="{{path('generalcompetence_specifics_create', {id:parent.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_specificcompetence[title]" type="text" placeholder="Nouvelle compétence spécifique" required>
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div>
+    	  {% endif %} 
+ 
+    	             
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+
+
+

@@ -1,0 +1,64 @@
+{% set pourcentage = 0 %}
+
+<div id="OGS" >        
+
+    <div class="col-sm-12 blockheader"  >       
+    	<div class="col-sm-6 entete0" style="text-align:left"   >
+  			Objectif général
+        </div>		
+    	<div class="col-sm-2 entete0" style="text-align:center"   >
+  			Objectifs spécifiques
+        </div>	
+    	<div class="col-sm-2 entete0" style="text-align:center"   >
+  			%
+        </div>	        
+    	<div class="col-sm-2 entete0"  style="text-align:center"  >
+  			
+        </div>	  
+                
+    </div>
+       
+
+
+  {% for parent in entities %} 	                    
+	{% set pourcentage = (parent.weight * 100) + pourcentage %}	 
+  
+    <div id="OG_{{parent.id}}" style="border-bottom:dotted 1px;"> 
+
+        {{ block('parent_item') }}
+
+	     <div id="OG_{{parent.id}}_B" class="col-md-12 col-sm-12 blockc" style="display: none;"> 	    
+	       	    
+		  	  	{{ block('children_header') }}
+  
+    	    	{{ block('new_child') }} 
+
+          </div>	
+ 
+    </div> 
+  {% endfor %}
+</div>  
+  
+   
+<div class="row">
+
+	{% if pourcentage>100 				%}
+	{% set color="progress-bar-danger"  %}	
+	{% else 							%}
+	{% set color="progress-bar-striped" %}
+	{% endif 							%}
+
+	<div id='' class="col-md-8 col-sm-8">	
+	</div>  
+	<div id='general-item-weight' class="general-item-weight cold-md-2 col-sm-2">	
+		<div class="progress">	
+			<div class="progress-bar {{color}} active" style="width:{{ pourcentage }}%;" role="progressbar" progress-bar-info=""> 
+				<span class="text-muted">{{ pourcentage }}%</span>  
+			</div>		
+		</div>	
+	</div> 
+</div>	 
+
+
+
+{{ block('new_parent') }}

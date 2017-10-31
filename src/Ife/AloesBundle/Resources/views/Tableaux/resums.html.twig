@@ -1,0 +1,45 @@
+
+<div class='col-sm-12'>
+
+	<ul class="nav nav-tabs">
+
+	  {% set cpt=0 %}	
+	  {% for value in liste_cours 															%}
+	  	 {% if cpt==0 %}
+	  		<li class="active"><a data-toggle="tab" href="#menu{{value.cours.id}}">{{value.cours.label}}</a></li>
+	  		{% set cpt = 1 %}	  	 
+	  	 {% else     %}
+		 	<li><a data-toggle="tab" href="#menu{{value.cours.id}}">{{value.cours.label}}</a></li>	  	 
+	  	 {% endif    %}
+	  	 
+	  {% endfor 																				%}
+
+	</ul>
+ 
+
+	<div class="tab-content" style="border-left:1px solid #ddd ;border-right:1px solid #ddd ;border-bottom:1px solid #ddd ;padding:15px;">
+
+	  {% set cpt=0 %}		
+	  {% for value in liste_cours 															%}
+	  	 {% if cpt==0 %}
+		 <div id="menu{{value.cours.id}}" class="tab-pane fade in active">
+	  		{% set cpt = 1 %}	  	 
+	  	 {% else     %}
+		 <div id="menu{{value.cours.id}}" class="tab-pane fade">  	 
+	  	 {% endif    %}
+			
+			{% include "IfeAloesBundle:Tableaux:resum.html.twig" with {"course": value.cours,"comp": value.comp,"topics": value.topics,"assessments": value.assessments,"champs": value.champs,"colors": value.colors} %}
+				  
+	  	 </div>	   
+	  		
+	  {% endfor 																			%}		  		
+	
+	</div>
+
+
+</div>
+
+
+
+
+</div> 

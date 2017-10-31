@@ -1,0 +1,27 @@
+tableaux_bord:
+    pattern:  /niveau/{niv}/{program}/{course}
+    defaults: { _controller: IfeAloesBundle:Tableaux:index, niv:0, program:0, course:0}
+    
+tableaux_calendar:
+    path:     /{id}/calendar
+    defaults: { _controller: "IfeAloesBundle:Tableaux:calendar" }
+
+tableaux_bord_programs:
+    pattern:  /programs/{niv}
+    defaults: { _controller: IfeAloesBundle:Tableaux:programs }
+    requirements: { _method: post }
+
+tableaux_bord_filtre:
+    pattern:  /filtre
+    defaults: { _controller: IfeAloesBundle:Tableaux:filtre }
+    requirements: { _method: post }   
+
+tableaux_bord_rapport:
+    pattern:  /rapport
+    defaults: { _controller: IfeAloesBundle:Tableaux:rapport }
+    requirements: { _method: post }        
+    
+tableaux_bord_resum:
+    path:     /{id}/resum/{param}
+    defaults: { _controller: "IfeAloesBundle:Tableaux:resum" }    
+      

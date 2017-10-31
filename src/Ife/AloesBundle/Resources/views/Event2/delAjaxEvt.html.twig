@@ -1,0 +1,73 @@
+<div class="modal-header color3"> 
+	<b>Suppression évènement </b>
+	<button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div id="modal-body" class="modal-body" >
+
+
+    Etes-vous sûr de vouloir supprimer définitivement cet évènement  ?
+  
+    <br/>    
+    <br/>{{ entity.title }}
+
+	<br/>	
+	    
+    {{ form_start(delete_form) }}
+    
+	<hr/>     
+
+    {{ form_widget(delete_form.delete) }}
+      
+    {{ form_widget(delete_form.nodelete) }}
+      
+    {{ form_end(delete_form) }}
+    
+	<script type="text/javascript">
+
+			$("#form_delete").click(function() {
+			
+					data = $(this).serialize();		
+		
+					$.ajax({ 
+							type: "POST",						
+							url: "{{ path("topic_events_delete_2", {id:entity.id}) }}",					
+							data: data, 
+							dataType : 'json',				 								
+							cache: false, 
+							success: function(data) 
+								{ 
+								if (data.result==false)					  
+									$("#modal-content").empty().append(data.content);  
+								else
+									{   												 
+									$( "#AS2_{{entity.id}}" ).remove();	 
+									$("#TO_{{parent.id}}_A_events").empty().append(data.nb_spec); 
+															
+									var x = data.assessments;
+											
+									$.each( x, function( key, value ) {
+												key 	= value['key'];
+												event 	= value['event'];
+	
+									  $("#AS_"+key+"_evt").empty().append(event);
+																	
+									});					 												
+																							
+									$('#myModal').modal('hide');							
+									}   
+								}   	
+					});	      
+
+         				 
+					return false;		
+			});
+			
+			 
+			$("#form_nodelete").click(function() {
+				$('#myModal').modal('hide');	         				 
+				return false;							
+			});		
+
+	</script>
+</div> 

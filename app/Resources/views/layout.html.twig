@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+
+        {% block scripts %}
+            <script src="{{asset('bundles/ifealoes/js/jquery.min.js')}}"></script> 
+            
+            <!--           
+			<script src="{{asset('bundles/ifealoes/js/moment.js')}}"></script>  
+			--> 
+            <script src="{{asset('bundles/ifealoes/bootstrap/js/bootstrap.min.js')}}"></script>
+
+            <script src="{{asset('bundles/scdatetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
+
+            <script src="{{asset('bundles/ifealoes/js/vis.min.js')}}"></script>  
+
+            <script src="{{asset('bundles/ifealoes/js/jquery-ui.min.js')}}"></script>   
+                         
+            <script src="{{asset('bundles/ifealoes/js/aloes.js')}}"></script>     
+            
+            <script src="{{asset('bundles/ifealoes/js/bootstrap3-typeahead.min.js')}}"></script>                
+            
+        {% endblock %}
+        
+         {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/bootstrap/css/bootstrap.min.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/dashboard-layout.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/layout.css')}}" type="text/css">
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/sessions.css')}}" type="text/css">
+
+  
+            <link rel="stylesheet" href="{{asset('bundles/scdatetimepicker/css/datetimepicker.css')}}" type="text/css"> 
+
+     		
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/vis.css')}}" type="text/css"> 
+            
+            <link rel="stylesheet" href="{{asset('bundles/ifealoes/css/bootstrap-datetimepicker.min.css')}}" type="text/css">  
+                    
+            
+        {% endblock %}
+        
+    </head>
+
+    <body> 
+
+        <!-- Header -->
+        <div class="container-fluid" id="header">
+            <div class="row  top-bar "> 
+                <div class="col-md-offset-2 col-sm-offset-3">
+		    		BackOffice Aloes 
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-12 " id="menu">
+                	{% block sidebar_nav %}
+                    {% endblock %}
+                    
+	                {% block header_nav %}
+    	            {% endblock %}	                    
+                </div>
+
+  
+
+                <div class="col-sm-12">
+                    {% block content %}		                                      
+                    {% endblock %}
+                </div>
+
+                <div class="col-sm-12">
+	                <div class="col-sm-2">                    
+    	                {% block content_2 %}		                                      
+        	            {% endblock %}
+        	        </div>    
+	                <div class="col-sm-10">                       
+	                    {% block content_10 %}
+    	                {% endblock %}
+    	            </div>    
+                </div>
+
+            </div>
+
+        </div>
+        
+
+
+    </body>
+
+</html>
+
+
+

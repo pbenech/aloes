@@ -1,0 +1,72 @@
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/jquery.tinymce.min.js')}}"></script> 
+<script src="{{asset('bundles/stfalcontinymce/vendor/tinymce/tinymce.min.js')}}"></script>
+
+
+<div class="modal-header color4"> 
+
+		<b>Description compétences</b>
+
+		
+	<button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div id="modal-body" class="modal-body" > 
+<form id="description_generale" action="program_update_competences" method="post" name="description_generale"  {{ form_enctype(form) }}>
+
+	{{ form_errors( form ) }}
+
+	{{ form_row(form.competences) }}	
+
+	{{ form_rest(form) }}
+
+	<hr/>    
+    
+	<button class="btn btn-color4" type="submit"><i class="icon icon-check icon-lg"></i>Enregistrer</button>
+    <button class="btn btn-inverse" type="button" data-dismiss="modal"><i class="icon icon-times icon-lg"></i> Fermer</button>	    
+     
+</form>
+
+<script type="text/javascript">
+    
+		$('input:text:visible:first').focus();   
+		
+		tinymce.init({
+					 selector: "textarea",	
+  					 cache_suffix: '?v=4.1.6',					 		 
+			 	   	 menubar: false,		
+			 	   	 "toolbar1":"code preview |bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink  ",
+//			 	   	 "plugins":"link image "						
+			 	   	 "plugins":"code preview link fullscreen "		
+					 });				
+		 
+    
+		$("#description_generale").submit(function() {
+			            
+		data = $(this).serialize();		         
+
+		$.ajax({ 
+				type: "POST",
+				
+				url: "{{ path("program_update_competences", {id:program.id }) }}",
+				data: data, 
+				dataType : 'json',				 								
+				cache: false, 
+				success: function(data) 
+					{
+						if (data.result==false)					  
+							$("#modal-content").empty().append(data.content);  
+						else
+							{	
+							$("#CSSDESCR").empty().append(data.content);  				
+						
+							$('#myModal').modal('hide');							
+							}   					 
+					}    	
+		});	             			             
+
+		return false;		           				 
+			           				 
+	});
+
+</script>
+</div>

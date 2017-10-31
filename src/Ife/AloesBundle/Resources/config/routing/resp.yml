@@ -1,0 +1,35 @@
+resp_utilisateurs:
+    path:     /resp_utilisateurs/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:utilisateurs", page: 1, sort: sn, direction: asc }    
+
+resp_utilisateurs_showuser:
+    path:     /resp_utilisateurs_show/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:showuser", page: 1, sort: sn, direction: asc }  
+      
+resp_utilisateurs_updateuser:
+    path:     /resp_utilisateurs_updateuser/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:updateuser", page: 1, sort: sn, direction: asc }  
+    
+resp_utilisateurs_updateuser_valid:    
+    path:     /{id}/resp_utilisateurs_updateuser_valid/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:validuser", page: 1, sort: sn, direction: asc } 
+    
+resp_utilisateurs_deleteuser:
+    path:     /resp_utilisateurs_deleteuser/{id}/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:deleteuser", page: 1, sort: sn, direction: asc }   
+    
+resp_utilisateurs_add_ldap:    
+    path:     /resp_utilisateurs_add_ldap/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:addLdap", page: 1, sort: sn, direction: asc }    
+
+resp_utilisateurs_create_ldap:    
+    path:     /resp_utilisateurs_create_ldap/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:createLdap", page: 1, sort: sn, direction: asc } 
+    
+resp_utilisateurs_add_user:    
+    path:     /resp_utilisateurs_add_user/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Resp:addUser", page: 1, sort: sn, direction: asc }
+    
+resp_utilisateurs_create_user:    
+    path:     /resp_utilisateurs_create_user/{page}/{sort}/{direction} 
+    defaults: { _controller: "IfeAloesBundle:Resp:createUser", page: 1, sort: sn, direction: asc }   

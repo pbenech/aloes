@@ -1,0 +1,130 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+{% import "::macro.html.twig" as macro %} 
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Gestion utilisateurs</a>
+    </div>       
+{% endblock %}
+
+{% block content_10 -%}
+
+	
+	<div class='title-two1a col-md-12 col-sm-12'> 
+				Liste des utilisateurs 
+	</div>
+
+	   	 
+	<div class="col-sm-12 block3">
+	
+		<div  class="col-sm-6">	
+			<form class="form-inline" action="{{ path('admin_utilisateurs', { 'page' : page, 'sort' : sort, 'direction' : direction  }) }}" method="post">	
+				<div  class="col-sm-4  col-xs-12">	
+					{{ form_widget(form.search) }}
+				</div>				   			
+				{{ form_rest(form) }}	
+				<div  class="col-sm-8  col-xs-12">	
+					<button type="submit" class="btn  btn-button-cancel ">Ok</button>
+				</div>
+			</form>
+		</div>			
+
+		<div  class="col-sm-3" style="valign:middle">	
+		      <a class="btn1 btn-color4" href="{{ path('admin_utilisateurs_add_ldap', { 'page' : page, 'sort' : sort, 'direction' : direction  } ) }}">
+		      	<span class="glyphicon glyphicon-pencil"></span> Ajouter un utilisateur LDAP
+		      </a><br/><br/>
+
+		</div>			
+					
+		<div  class="col-sm-3">	
+		      <a  class="btn1 btn-color4" href="{{ path('admin_utilisateurs_add_user', { 'page' : page, 'sort' : sort, 'direction' : direction  } ) }}">
+		      	<span class="glyphicon glyphicon-pencil"></span> Ajouter un utilisateur 
+		      </a>
+		</div>					    
+	</div>						
+
+
+	<div class="col-sm-12 block3">
+      <table class="table   table-striped  table-hover col-sm-12">
+        <thead>
+            <th >{{ knp_pagination_sortable(pagination, 'Nom', 'sn') }}
+            	{{ macro.tri('sn',sort,direction) }} 
+            </th>
+            <th>{{ knp_pagination_sortable(pagination, 'Prénom', 'givenname') }}
+            	{{ macro.tri('givenname',sort,direction) }} 
+            </th>
+            <th>{{ knp_pagination_sortable(pagination, 'Courriel', 'email') }}
+            	{{ macro.tri('email',sort,direction) }} 
+            </th>        
+            <th  style="text-align:center"> Administrateur </th> 
+            <th  style="text-align:center"> Responsable de formation </th>  
+            <th  style="text-align:center"> Enseignant </th>  
+  
+            <th  style="text-align:center"> </th>
+            <th  style="text-align:center"> </th> 
+            <th  style="text-align:center"> </th>            
+   
+        </thead> 
+        <tbody>
+        
+		{% for entity in pagination %}
+            <tr>
+                <td> 
+	            	{{ entity.sn}} 
+                </td>
+                <td> 
+                	{{ entity.givenname }}                  
+                </td>
+                <td> 
+                	{{ entity.email }}          
+                </td>         
+                <td style="text-align:center"> 
+                	{{ entity.ROLE_ADMIN}}                	 	                  
+                </td>    
+                <td style="text-align:center"> 
+                <!--		{{ entity.ROLE_RESPONSABLE}}  --> 
+                	{{ entity.programs|raw }}                      	 	                  
+                </td>  
+                <td style="text-align:center"> 
+                <!--	{{ entity.ROLE_ENSEIGNANT}} -->
+                	{{ entity.courses|raw }}       	 	                  
+                </td>  
+                <td style="text-align:center">  
+			    	<a href="{{ path('admin_utilisateurs_showuser', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	<span class="glyphicon glyphicon-eye-open"></span>
+			   		</a>     	 	                  
+                </td>                  
+
+                <td style="text-align:center">  
+			    	<a href="{{ path('admin_utilisateurs_updateuser', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	<span class="glyphicon glyphicon-edit"></span>
+			   		</a>     	 	                  
+                </td>  
+
+                <td style="text-align:center">  
+			    	<a href="{{ path('admin_utilisateurs_deleteuser', { 'id': entity.id, 'page' : page, 'sort' : sort, 'direction' : direction  }) }}">
+			        	<span class="glyphicon glyphicon-remove"></span> 
+			   		</a>     	 	                  
+                </td>                  
+   
+
+            </tr>		
+		{% endfor %}
+		
+        </tbody>
+      </table>
+	  
+	</div>
+
+	<center>
+	{{ knp_pagination_render(pagination) }}
+	</center>
+	          
+    
+{% endblock %} 
+
+
+    
+

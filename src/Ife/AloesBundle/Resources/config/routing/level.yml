@@ -1,0 +1,33 @@
+levels:
+  path:     /list/{page}/{sort}/{direction}
+  defaults: { _controller: "IfeAloesBundle:Level:index", page: 1, sort: l.title, direction: asc  }
+
+levels_show:
+    path:     /{id}/show/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:show", page: 1, sort: l.title, direction: asc }
+
+levels_new:
+    path:     /new/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:new", page: 1, sort: l.title, direction: asc }
+
+levels_create:
+    path:     /create/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:create", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post }
+
+levels_edit:
+    path:     /{id}/edit/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:edit", page: 1, sort: l.title, direction: asc}
+
+levels_update:
+    path:     /{id}/update/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:update", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post|put }
+
+levels_delete:
+    path:     /{id}/delete/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Level:delete", page: 1, sort: l.title, direction: asc}
+
+  
+  
+               

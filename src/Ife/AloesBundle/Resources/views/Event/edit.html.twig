@@ -1,0 +1,156 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Edition d'un évènement   </div> 
+
+	{{ tinymce_init() }}
+ 
+ 
+ 	{{ form_stylesheet(edit_form) }}
+    {{ form_javascript(edit_form) }}
+    
+
+    {{ form_start(edit_form) }}    
+ 
+	<fieldset>
+	<div class='container-fluid'>	
+	
+    
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.title) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(edit_form.title) }}
+	    		{{ form_errors(edit_form.title) }}	  
+			</div> 	  	
+		</div>     
+   
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.startDate) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(edit_form.startDate) }}
+	    		{{ form_errors(edit_form.startDate) }}	  
+			</div> 	  	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.endDate) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(edit_form.endDate) }}
+	    		{{ form_errors(edit_form.endDate) }}	
+			</div> 	  	
+		</div> 
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.description) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(edit_form.description) }}
+	    		{{ form_errors(edit_form.description) }}			    	
+			</div> 	  	
+		</div>     
+		
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.instructions) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(edit_form.instructions) }}
+	    		{{ form_errors(edit_form.instructions) }}	
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.tutoring) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(edit_form.tutoring) }}
+	    		{{ form_errors(edit_form.tutoring) }}	
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(edit_form.resources) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(edit_form.resources) }}
+	    		{{ form_errors(edit_form.resources) }}	
+			</div> 	  	
+		</div> 	
+	
+		<div class='row'>		  		    	
+			<div class='col-md-12'>
+				<br/>
+				<b>Sélectionner travaux</b> 	  
+			</div>
+			<div class='col-md-5'> 	  	  
+		    	{{ form_widget(edit_form.assessments) }}
+	    		{{ form_errors(edit_form.assessments) }}	
+			</div> 	  	
+			<div class='col-md-2'> 	  	  
+
+				<input id="button1" type="button" value=">" /></input>
+				
+				<br/><br/>
+
+				<input id="button2" type="button" value="<" />
+				
+			</div> 	  
+			<div class='col-md-5'> 	  	  
+		    	{{ form_widget(edit_form.assessments_selected) }}
+	    		{{ form_errors(edit_form.assessments_selected) }}	
+			    
+			</div> 			
+			
+			<script>
+			$(function(){
+			    $("#button1").click(function(){
+			        $("#aloes_event_assessments > option:selected").each(function(){
+			            $(this).remove().appendTo("#aloes_event_assessments_selected");
+			        });
+			    });
+			    
+			    $("#button2").click(function(){			    		    	
+			        $("#aloes_event_assessments_selected > option:selected").each(function(){
+			            $(this).remove().appendTo("#aloes_event_assessments");
+			        });
+			    });
+			});
+			</script>	
+		</div> 		
+	
+
+ 
+	
+		<div class='row'>	
+				<div class='col-md-3'> 
+					{{ form_widget(edit_form.submit)}} 
+					{{ form_end(edit_form) }}  
+				</div>
+				<div class='col-md-3'> 
+					{{ form(delete_form) }}
+				</div>
+		    	<div class='col-md-6'>
+		    		<a href="{{ path('course_event', {id:course.id}) }}"><span class="glyphicon glyphicon-arrow-left"></span>Retour à la liste des évènements</a>
+		    	</div>
+		</div>    
+   </div>
+   </fieldset>
+
+<script>
+	$( "#aloes_event_submit" ).click(function() {
+		$('#aloes_event_assessments_selected option').each(function () {				
+				$(this).prop("selected",true);
+		});							 
+	 	$( "#aloes_event_submit" ).submit();
+	});
+</script>
+      
+    
+{% endblock %}

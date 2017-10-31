@@ -1,0 +1,243 @@
+<?php
+
+namespace Ife\AloesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Ife\AloesBundle\Entity\GeneralItem;
+
+/** 
+ * @ORM\Entity() 
+ * @ORM\Table()
+ */
+
+class GeneralCompetence extends GeneralItem
+{
+    /** 
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    private $id;    
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $title;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Program") 
+     */
+    private $program;
+
+    /**
+     * Related specific competences.
+     * 
+     * @ORM\OneToMany(targetEntity="SpecificCompetence", mappedBy="generalCompetence", cascade={"remove"}) 
+     */
+    private $specificCompetences;
+
+    /* Aggregate weight of the competence in the program*/
+    public $weight;
+
+    /* Edition metadata */
+    /* ================ */
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $lastModified;  
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->specificCompetences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set id
+     *
+     * @param string $id
+     * @return GeneralCompetence
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return GeneralCompetence
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return GeneralCompetence
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return GeneralCompetence
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set lastModified
+     *
+     * @param \DateTime $lastModified
+     * @return GeneralCompetence
+     */
+    public function setLastModified($lastModified)
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
+    }
+
+    /**
+     * Get lastModified
+     *
+     * @return \DateTime 
+     */
+    public function getLastModified()
+    {
+        return $this->lastModified;
+    }
+
+    /**
+     * Set program
+     *
+     * @param \Ife\AloesBundle\Entity\Program $program
+     * @return GeneralCompetence
+     */
+    public function setProgram(\Ife\AloesBundle\Entity\Program $program = null)
+    {
+        $this->program = $program;
+
+        return $this;
+    }
+
+    /**
+     * Get program
+     *
+     * @return \Ife\AloesBundle\Entity\Program 
+     */
+    public function getProgram()
+    {
+        return $this->program;
+    }
+
+    /**
+     * Add specificCompetences
+     *
+     * @param \Ife\AloesBundle\Entity\SpecificCompetence $specificCompetences
+     * @return GeneralCompetence
+     */
+    public function addSpecificCompetence(\Ife\AloesBundle\Entity\SpecificCompetence $specificCompetences)
+    {
+        $this->specificCompetences[] = $specificCompetences;
+
+        return $this;
+    }
+
+    /**
+     * Remove specificCompetences
+     *
+     * @param \Ife\AloesBundle\Entity\SpecificCompetence $specificCompetences
+     */
+    public function removeSpecificCompetence(\Ife\AloesBundle\Entity\SpecificCompetence $specificCompetences)
+    {
+        $this->specificCompetences->removeElement($specificCompetences);
+    }
+
+    /**
+     * Get specificCompetences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSpecificCompetences()
+    {
+        return $this->specificCompetences;
+    }
+
+    public function getChildren()
+    {
+        return $this->specificCompetences;
+    }
+}

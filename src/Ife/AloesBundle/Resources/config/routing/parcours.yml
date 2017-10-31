@@ -1,0 +1,30 @@
+parcours_list:
+    path:     /{id}
+    defaults: { _controller: "IfeAloesBundle:Parcours:index" }
+    
+parcours_new:
+    path:     /{id}/new
+    defaults: { _controller: "IfeAloesBundle:Parcours:new" }    
+
+parcours_create:
+    path:     /{id}/create
+    defaults: { _controller: "IfeAloesBundle:Parcours:create" }
+    requirements: { _method: post }
+    
+parcours_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:Parcours:edit" }
+    
+
+parcours_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:Parcours:update" }
+    
+
+parcours_del:
+    path:     /{id}/del
+    defaults: { _controller: "IfeAloesBundle:Parcours:del" }
+
+parcours_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:Parcours:delete" }

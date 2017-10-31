@@ -1,0 +1,52 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content %}
+    
+    
+    <div class="aloes-panel2">
+    {% block link_title %} <h1>Liens</h1>  {% endblock %}  
+    
+        <p class="lead"> {{ source.title }} </p> 
+        
+        {% if routes is not null %}
+            {% set current = app.request.attributes.get('_route') %}
+            <ul class="nav nav-pills">
+                <li class="{{('selection' in current)?'active':''}}">
+                    <a href="{{path(routes.selection, {id:source.id,menu:menu})}}"> Selection </a>
+                </li>
+
+                <li class="{{('rating' in current)?'active':''}}">
+                    <a href="{{path(routes.rating, {id:source.id,menu:menu})}}"> Pondération </a>
+                </li>
+
+                <li class="{{('weights' in current)?'active':''}}">
+                    <a href="{{path(routes.weights, {id:source.id,menu:menu})}}"> Vue étudiant </a>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="aloes-panel">
+        {% block link_help_message %} {% endblock %}
+        {% block link_content %} {% endblock %}           
+    </div>
+
+    <div class="aloes-panel">
+    
+      {% if source.generalObjective.id is defined 	%}
+        <a href="{{path(routes.index, {id: course.id, sequence: source.generalObjective.id})}}"> 
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Retour à la liste  
+        </a>
+     {% endif %}     
+    
+    {% if source.topic.id is defined 	%}
+        <a href="{{path(routes.index, {id: course.id, sequence: source.topic.id})}}"> 
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Retour à la liste  
+        </a>
+     {% endif %}   
+        
+    </div>
+{% endblock %}
+

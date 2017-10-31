@@ -1,0 +1,235 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import  'IfeAloesBundle:Course:linking.html.twig' as macros%}
+{% block content -%}
+
+   	<div class='title-one'>  {{ course.title }} </div>
+    <div class='title-two'> Séquences et Evaluations</div>    	
+    <br/>
+	<script type="text/javascript">
+	
+	function HideShow(param,param2)
+		{
+	  	$(param).toggle();
+	  	str = $(param2).html();  
+	  	
+		if (str=='<span class="glyphicon glyphicon-resize-full"></span> Travaux associés')
+	  		$(param2).html('<span class="glyphicon glyphicon-resize-small"></span> Travaux associés');
+		else if (str=='<span class="glyphicon glyphicon-resize-small"></span> Travaux associés')
+	  		$(param2).html('<span class="glyphicon glyphicon-resize-full"></span> Travaux associés');		
+		}  
+	</script>     
+
+    {% embed 'IfeAloesBundle:Aloes:list.html.twig' with {'children': 'assessments'} %}
+
+
+
+        {% block parent_item %}
+			
+
+            <div class="row">
+	
+	                <!-- Title -->
+		        <div class=" col-md-6 col-sm-6">
+	                {% if parent.startDate is defined and parent.startDate is not null %}
+	                    	{{ parent.startDate|date("d/m/Y") }}    
+	                {% endif %}		        	 	                 
+	                {% if parent.endDate is defined and parent.endDate is not null %}
+	                    	<span class="glyphicon glyphicon-arrow-right"></span> {{ parent.endDate|date("d/m/Y") }}    
+	                {% endif %}	
+	                
+		            <b>{{ parent.title }}</b>    
+	                
+		        </div>  
+	                
+				 {% set nb_travaux = parent.assessments|length %}	
+
+				 {% if (
+				 		  (
+				 			(( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       		( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       		( is_granted("ROLE_ADMIN") )
+				       	  ) 
+				       	  	and
+				       		( nb_travaux > 0)
+				       	  ) 
+				       ) 
+				  %}			          
+			        <div class="text-info general-item-weight col-md-2 col-sm-2 " style="text-align:right">		           		        
+	                    <a  href="{{path('topic_edit',{id:parent.id})}}">
+		                	<span class="glyphicon glyphicon-edit"></span><span class="text-info weight  text-muted"> {{ parent.weight * 100}} %  </span>	  
+	                    </a> 
+	                </div>
+	              {% else %}  
+			        <div class="general-item-weight col-md-2 col-sm-2 "  style="text-align:right">	                  
+      					<span class="weight  text-muted"> {{ parent.weight * 100}} %  </span>	                    
+					</div>
+	              {% endif %}		        
+	
+	                
+	                <!-- Link to edit -->
+		        <div class="text-info  col-md-4 col-sm-4">
+		          
+		        	<span id="REF{{parent.id}}" onclick="HideShow('#target{{parent.id}}','#REF{{parent.id}}');"><span class="glyphicon glyphicon-resize-full"></span> Travaux associés</span>    
+		         	[{{nb_travaux}}]
+		         
+				 {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+				  %}			          
+		           		        
+	                    <a  href="{{path('topic_edit',{id:parent.id})}}" class="pull-right">
+		                	<span class="glyphicon glyphicon-edit"></span> Modifier 
+	                    </a> 
+	              {% endif %}
+		        </div>
+	        </div>
+		
+            {% if sequence is defined and sequence==parent.id %}
+	    	  <div id="target{{parent.id}}" class="col-md-12 col-sm-12 block" > 
+            {% else %}
+	    	  <div id="target{{parent.id}}" class="col-md-12 col-sm-12 block" style="display: none;">             
+            {% endif %}            	    
+	        	            
+            <div class="col-md-12 col-sm-12">
+
+	
+		        <div class="text-info col-md-12 col-sm-12 attribut3">
+	                    {% if parent.startDate is defined and parent.startDate is not null %}
+	                    	Date d&eacute;but : {{ parent.startDate|date("d/m/Y") }} &nbsp;  
+	                    {% endif %}
+	                    {% if parent.endDate is defined and parent.endDate is not null%}                   
+	                    	Date fin : {{ parent.endDate|date("d/m/Y") }}
+	                    {% endif %}                    	
+		        </div>
+	         
+	                <!-- Title -->
+		        <div class=" col-md-12 col-sm-12 attribut3"  style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA" >
+	                    {{ parent.description|raw }}
+		        </div>	        
+
+
+
+            </div>
+        {% endblock %}
+
+        {% block child_item %}
+            <tr>
+                <td> {{ child.title }} </td>
+                <td> 
+                    {% if child.deadline is not null %}
+                        {{ child.deadline|date('d/m/Y') }}
+                    {% else %}
+                        <span class="text-muted small"> Non spécifiée </span>
+                    {% endif %}
+                </td>
+                <td> {{ macros.progress_bar(child.weight|default('0'))}} </td>
+                <td> 
+				 {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+				  %}	                 
+                
+                    <a href="{{ path('assessment_objective_selection', {id:child.id,menu:'course_assessment'})}}">
+                        <span class="label label-{{(child.objectiveCount == 0)?'warning':'default'}}"> 
+                            {{ child.objectiveCount }} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-edit"></span> 
+                        </span> 
+                    </a> 
+                {% else %}
+                    	{{ child.objectiveCount }} 
+                {% endif %}                    
+                </td>
+                <td> 
+		         
+				 {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+				  %}	          
+                    <a href="{{ path('assessment_delete', {id:child.id}) }}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                  {% endif %}
+                </td>
+            </tr>
+            
+            
+            {% if assessmentObjectives[child.id] is defined and assessmentObjectives[child.id]!= null   %}
+	             <tr>
+	            	<td colspan='5' style="background-color:white">
+	            		<div class="col-md-2">
+	            			Vue étudiant :
+	            		</div>
+	            		<div class="col-md-10">            		
+		            		{% for ao in assessmentObjectives[child.id]  %}
+		            				<li>   {{ ao.weight*100}}% {{ ao.title }}
+		            		{% endfor %}
+		            	</div>
+	            	</td>
+	            </tr>         
+            {% endif %}              
+            
+            
+        {% endblock %}
+
+        {% block children_header %} 
+            <thead class="list-header">
+	        <tr>
+	            <th class="col-md-7"> Travail à réaliser</th>
+	            <th class="col-md-2"> Date de rendu </th>
+	            <th class="col-md-1"> Coefficient </th>
+                <th class="col-md-1"> Objectifs </th>
+	            <th class="col-md-1"> Supprimer</th>
+	        </tr>
+            </thead>
+        {% endblock %} 
+
+        {% block new_parent %}
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				  ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				  ( is_granted("ROLE_ADMIN") )
+			%}		       
+            <div class="node-creator general-item-creatorX">
+                <form action="{{path('course_topic_create', {id:course.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_topic_create[title]" type="text" placeholder="Nouvelle séquence" required>
+                        
+						<input type="hidden" name="aloes_topic_create[_token]" value="{{ csrf_token('aloes_topic_create') }}">                          
+                    </div>
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div>
+
+          {% endif %}
+        {% endblock %}
+
+
+        {% block new_child %}
+        
+ 
+			{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+				       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+				       ( is_granted("ROLE_ADMIN") )
+			%}			
+            <div class="child-creator">
+                <form action="{{path('topic_assessment_create', {id:parent.id})}}" method="POST">
+                    <div class="form-group">
+                        <input name="aloes_assessment[title]" type="text" placeholder="Nouveau travail à réaliser" required>
+                        
+						<input type="hidden" name="aloes_assessment[_token]" value="{{ csrf_token('aloes_assessment') }}">                            
+ 
+                    </div> 
+                    <button class="btn btn-xs btn-success" type="submit"> Ajouter </button>
+                </form>
+            </div>
+            
+          {% endif %}
+          
+         </div>
+          
+        {% endblock %}
+
+
+    {% endembed %}
+
+{% endblock %}
+
+

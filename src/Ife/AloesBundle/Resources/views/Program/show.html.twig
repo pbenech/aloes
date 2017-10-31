@@ -1,0 +1,108 @@
+{% extends 'IfeAloesBundle:Program:layout.html.twig' %}
+
+{% block content -%}
+
+
+  
+  	
+    <div class='title-two1a col-md-9 col-sm-9'> 
+			Présentation 	
+	</div>
+    <div class='title-two1b col-md-3 col-sm-3' style='text-align:right'>
+		  {% if  ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+		                	   ( is_granted("ROLE_ADMIN") )
+		  %}
+			    	<a class="btn1 btn-color4" href="{{ path('programs_edit', {id:program.id,from:'entity'}) }}"><span class="glyphicon glyphicon-edit"></span> Modifier le programme </a>
+		  {% endif %} 	
+    </div> 		
+
+
+	
+	<div class='col-sm-12 container-fluid block3'>	
+
+		<div class='row'>	
+			<div class='col-md-2 attribut'> 	  	  
+		    	Titre : 
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ program.title }}
+			</div> 	  	
+		</div>   	
+	
+		  	  
+		<div class='row'>	
+			<div class='col-md-2 attribut'> 	  	  
+		    	Sigle : 
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ program.label }}
+			</div> 	  	
+		</div>   	
+		
+		
+		{% if program.level!="" %}			
+			<div class='row'>	
+				<div class='col-md-2 attribut'> 	  	  
+			    	Niveau : 
+				</div> 	  		    
+		
+							
+				<div class='col-md-10'>
+					 	  	  
+			    	<div >
+			    		{{ program.level|raw }}
+			    	</div>
+				</div> 	  	
+			</div> 
+		{% endif %}			
+		
+		{% if program.resps|length >0 %}
+				<div class='row'>	
+					<div class='col-md-2 attribut'> 	
+						{% if program.resps|length > 1 %}  	  
+					    	Responsables <br/>de la formation : 
+						{% else %}
+					    	Responsable <br/>de la formation	: 					
+						{% endif %}						  
+					</div> 	  		    	
+					<div class='col-md-10'> 
+						{% for user in program.resps %}  	  
+				    		{{ user.sn}}, {{ user.givenname}}<br/>	
+						{% endfor %}
+					</div> 	  	
+				</div> 	 			
+		{% endif %}
+		
+		{% if program.description!="" %}			
+			<div class='row'>	
+				<div class='col-md-2 attribut'> 	  	  
+			    	Description : 
+				</div> 	  		    
+		
+							
+				<div class='col-md-10'>
+					 	  	  
+			    	<div   style="overflow:auto; height: 200px; width: 100%; padding: 15px; border: 1px solid #AAAAAA" >
+			    		{{ program.description|raw }}
+			    	</div>
+				</div> 	  	
+			</div> 
+		{% endif %}	
+
+		{% if program.url!="" %}		
+			<div class='row'>	
+				<div class='col-md-2 attribut'> 	  	  
+			    	Url : 
+				</div> 	  		    	
+				<div class='col-md-10'> 	  	  
+			    	<a href="{{ program.url }}" target='cible'>{{ program.url }}</a>
+				</div> 	  	
+			</div> 
+		{% endif %}	
+		
+	</div>
+
+
+
+
+{% endblock %}

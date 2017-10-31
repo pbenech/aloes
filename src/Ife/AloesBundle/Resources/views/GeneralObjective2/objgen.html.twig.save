@@ -1,0 +1,48 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+<div id="OG_{{child.id}}" >           
+	<div id="OG_{{child.id}}_A" class="row">
+		<div class="col-sm-6">
+			<span id="OBJG{{child.id}}" onclick="HideShow2('#OG_{{child.id}}_B','#OBJG{{child.id}}');"><span class="glyphicon glyphicon-triangle-right"></span></span>
+
+		 	{{ child.title }} 
+		</div>
+		<div class="col-sm-1">
+			<span class="weight text-muted"> 0% </span>
+		</div>
+		<div class="col-sm-5">
+			[0]
+			<a class="pull-right" title="Modifier Objectifs" href="{{path('general_objective_edit',{id:child.id})}}">
+				<span class="glyphicon glyphicon-edit"></span>
+ 				Modifier
+			</a>
+		</div>
+	</div>	
+	<div id="OG_{{child.id}}_B" class="col-md-12 col-sm-12 block" >
+			<ul id="sortable{{child.id}}" class="connectedSortable  ui-sortable">		   		 
+				    <br class="ui-sortable-handle">   	    			
+			</ul> 
+
+    		<script>
+			    $( "#sortable{{child.id}}").sortable({
+			      connectWith: ".connectedSortable",
+			      update: function (event, ui) { 
+			          var data = 	$(this).sortable('serialize', {attribute: "id"});    		          
+			          	               		              	           		   
+			          $.ajax({   
+			              data: "sortable="+this.getAttribute("id")+"&"+data,
+			              type: 'POST',
+			              url: '{{path('course_objective_order',{id:course.id})}}'
+			          });
+			        
+			      }      
+			    }).disableSelection();  
+			</script> 
+  
+			<a data-toggle="modal" class="btn btn-info" href="{{ path("general_objective_specific_objective_new_2", {id:child.id}) }}" data-target="#myModal">Ajouter objectif spécifique</a> 				    
+	</div>
+
+</div>    
+
+
+		

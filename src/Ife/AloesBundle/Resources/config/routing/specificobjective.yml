@@ -1,0 +1,65 @@
+specific_objective:
+    path:     /
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:index" }
+
+
+specific_objective_show:
+    path:     /{id}/show
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:show" }
+
+specific_objective_new:
+    path:     /new
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:new" }
+
+specific_objective_create:
+    path:     /create
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:create" }
+    requirements: { _method: post }
+
+specific_objective_create_2:
+    path:     /create2
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective2:create" }
+    requirements: { _method: post }
+
+specific_objective_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:edit" }
+
+specific_objective_update:
+    path:     /{id}/update
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:update" }
+    requirements: { _method: post|put }
+
+specific_objective_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective:delete" }
+
+specific_objective_delete_2:
+    path:     /{id}/delete_2
+    defaults: { _controller: "IfeAloesBundle:SpecificObjective2:delete" }
+
+# Linking to competences
+
+objective_competence_selection:
+  path: /{id}/competences/selection/{menu}/{msg}
+  defaults: {_controller: "IfeAloesBundle:ObjectiveCompetence:select", msg:0}
+
+objective_competence_selection_update:
+  path: /{id}/competences/update-selection/{menu}
+  defaults: {_controller: "IfeAloesBundle:ObjectiveCompetence:updateSelection"}
+  requirements: { _method: post }
+
+objective_competence_rating:
+  path: /{id}/competences/rating/{menu}/{msg}
+  defaults: {_controller: "IfeAloesBundle:ObjectiveCompetence:rate", msg:0}
+  
+objective_competence_rating_update:
+  path: /{id}/competences/update-rating/{menu}
+  defaults: {_controller: "IfeAloesBundle:ObjectiveCompetence:updateRating"}
+  requirements: { _method: post }
+
+objective_competence_weights:
+  path: /{id}/competences/weights/{menu}
+  defaults: {_controller: "IfeAloesBundle:ObjectiveCompetence:show"}
+
+

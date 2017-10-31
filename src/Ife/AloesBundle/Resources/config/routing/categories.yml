@@ -1,0 +1,3 @@
+categories_ajax:
+    pattern:  /ajaxc/categories.js
+    defaults: { _controller: IfeAloesBundle:Categorie:categories }

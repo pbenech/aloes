@@ -1,0 +1,756 @@
+<br/>	   
+
+<div class="col-sm-12 block3">	            
+				<div class='row'>		    	
+					<div class='col-sm-12'> 	 
+							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									 <a href="{{path('tableaux_bord_resum', {id:course.id,param: champs|join('') }) }}" target='_blank'>Présentation cours (url)</a>
+									<br/>
+							{% endif %}
+									<a href="{{path('tableaux_calendar', {id:course.id }) }}" target='_blank'> Calendrier Ical</a>
+
+					</div> 	  	
+				</div>  
+</div>
+<br/>
+<br/>	
+	  	   <legend>PRESENTATION</legend>
+	  			
+	   	   <div class="col-sm-12 block3">	
+     
+	       {% if course.program !="" %}               
+				<div class='row'>	
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Programme :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.program }}
+					</div> 	  	
+				</div>               
+	       {% endif %}	       
+
+
+
+	       {% if course.label !="" %}
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Sigle :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.label }}
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}
+	       
+	       
+	       {% if course.title !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Titre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.title }}
+					</div> 	  	
+				</div>  	        	       
+	       {% endif %}		       
+
+	       
+	       {% if course.semester !="" %}
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Semestre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.semester }}
+					</div> 	  	
+				</div>  		       	       
+	       {% endif %}	
+	       
+	       {% if course.year !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Année :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.year }}
+					</div> 	  	
+				</div>   	       
+	       {% endif %}		        
+
+	       {% if course.isOptional !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Optionnel :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.isOptional }}
+					</div> 	  	
+				</div>  	         	       
+	       {% endif %}	
+	       
+	       
+	       {% if course.language !="" %}
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Langue(s) du cours :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.language }}
+					</div> 	  	
+				</div> 	        	       
+	       {% endif %}		       
+
+	       {% if course.credits !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2  attribut'> 	  	  
+				    	Nombre de crédits :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	{{ course.credits }}
+					</div> 	  	
+				</div> 	 	  	       
+	       {% endif %}	
+	        
+	       
+	   	   		<div class="row">		   	   
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Enseignant(s) associé(s) :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+					 	{% for user in course.redacteurs %}
+				    		{{user.sn }}, {{ user.givenname }}</br>
+				    	{% endfor %}
+					</div> 	  	
+				</div> 	 	   	   
+       
+
+	       
+	   	   </div>
+
+	       {% if course.prerequisites|length >0 or course.concurrentCourses|length >0 %}		   
+			   <div class="col-sm-12 block3"> 
+			       {% if course.prerequisites|length >0 %}	
+						<div class='row'>	
+							<div class='col-sm-2  attribut'> 	  	  
+						    	Préalable(s) :
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+						    	{% for pre in course.prerequisites %}
+				                    {{ pre.label }}&nbsp
+				                    <br>
+				                  {% endfor %} 
+							</div> 	  	
+						</div> 	   	       
+			       {% endif %}	
+	
+			       {% if course.concurrentCourses|length >0  %}
+						<div class='row'>	
+							<div class='col-sm-2  attribut'> 	  	  
+						    	Concomitant(s) : 
+							</div> 	  		    	
+							<div class='col-sm-10'> 	  	  
+			 	              {% for conc in course.concurrentCourses %}
+			                    {{ conc.label }}
+			                    <br>
+			                  {% endfor %}
+							</div> 	  	
+						</div> 	        	       
+			       {% endif %}	
+			   </div>
+		   {% endif %}	
+	
+		   
+		   {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""  %} 	   
+		   		<div class="col-sm-12 block3">
+		   {% endif %}		
+		   		       		   
+	       {% if course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""   %}	
+
+		   	
+				<div class='row'>	
+					<div class='col-sm-12 '> 	  	  
+				    	<span class="attribut">Urls :</span>
+					</div> 	  		    	  	
+				</div> 		   	
+		   	
+		   {% endif %}			   
+		   
+	       {% if course.UrlPed !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Plateforme pédagogique 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlPed }}" target='cible'>{{ course.UrlPed }}</a>
+					</div> 	  	
+				</div> 			       	  	       
+	       {% endif %}	
+
+	       {% if course.UrlWeb !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Site web (hypotheses, etc) 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlWeb }}" target='cible'>{{ course.UrlWeb }}</a>
+					</div> 	  	
+				</div> 		         	       
+	       {% endif %}	
+
+	       {% if course.UrlTwi !="" %}
+				<div class='row'>	
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Twitter 
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlTwi }}" target='cible'>{{ course.UrlTwi }}</a>
+					</div> 	  	
+				</div> 		       	  	       
+	       {% endif %}	
+
+	       {% if course.UrlAut !="" %}	
+				<div class='row'>	
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Autre :
+					</div> 	  		    	
+					<div class='col-sm-10'> 	  	  
+				    	<a href="{{ course.UrlAut }}" target='cible'>{{ course.UrlAut }}</a>
+					</div> 	  	
+				</div> 	  	       
+	       {% endif %}	
+	       
+	       {% if  course.UrlPed !="" or course.UrlWeb !="" or course.UrlTwi !="" or course.UrlAut !=""  %}		       
+		   </div>	
+	       {% endif %}	
+
+ 
+ <!--    DESCRIPTION : 1			-->				
+{% if 'A' in champs	 					%}    	 
+<br/>	       
+     
+ 	  	   <legend>DESCRIPTION</legend>    
+		   <div class="col-sm-12 block3">	
+	       {% if course.description !="" %}    
+				<div class='row'>	    	
+					<div class='col-sm-12' > 	  	  
+				    		{{ course.description|raw  }}
+					</div> 	  	
+				</div>  	                  
+	       {% endif %}	
+	       </div>	  
+{% endif	 							%}   
+
+
+ <!--    REFERENTIEL DE COMPETENCES : 9			-->				
+{% if 'I' in champs	 					%}  
+<br/>    
+	
+				<legend>COMPETENCES VISEES</legend> 
+				<div class="col-sm-12 block3">	
+				<div class='row'>
+				{% for cp in comp%}   
+
+							
+				     		<div class='col-sm-10 attribut2'>
+				     			<br/><span class="glyphicon glyphicon-triangle-bottom"></span>
+				     			{% for categorie in  cp.categories %}
+				     				{{ categorie.title}} : 
+				     			{% endfor %}
+				     			
+				     			{{ cp.title }}
+				     		</div>
+				     		<div class='col-sm-2'>
+				     				   {% set taux1 = cp.weight * 100 %}
+				     				   {% set color1 = "progress-bar-success" %}
+										<div class="progress">	
+											<div class="progress-bar {{color1}} " style="width:{{ taux1 }}%;" role="progressbar" > 
+												<span class="text-muted">{{ taux1 }}%</span>
+											</div>					     				
+				     					</div>				     		
+
+				     		</div>
+		
+
+
+						 <!--    REFERENTIEL DE COMPETENCES SPECIFIQUES : 10			-->				
+						{% if 'J' in champs	 					%} 						
+			     				     	
+				     		{% for cps in cp.specificCompetences %}     	
+				     		
+				     			{% if cps.weight!=0 %}
+				     				<div class='col-sm-10 col-sm-offset-1'>
+					     				<span class="glyphicon glyphicon-triangle-right" style="color:#888"></span> {{ cps.title}}  
+					     			</div>
+				     				<div class='  col-sm-1 '>
+				     				   {% set taux2 = cps.weight * 100 %}
+				     				   {% set color2 = "progress-bar-warning" %}
+										<div class="progress">	
+											<div class="progress-bar {{color2}} " style="width:{{ taux2 }}%;" role="progressbar" > 
+												<span class="text-muted">{{ taux2 }}%</span>
+											</div>					     				
+				     					</div>
+				     				
+				     				</div>
+				     				{% if cps.description!="" %}
+					     				<div class='  col-sm-10 col-sm-offset-2'>
+						     				{{ cps.description|raw}}  
+						     			</div>
+					     			{% endif %}				     				
+								{% endif %}
+				     		{% endfor %}		     		
+					
+						{% endif %}
+
+	     		{% endfor %}
+	     		</div>
+				</div>	     			
+{%   endif %}	    
+
+
+ <!--    OBJECTIFS D'APPRENTISSAGE : 7			-->				
+{% if 'G' in champs	 					%}     		            
+<br/>    
+
+
+				<legend>OBJECTIFS D'APPRENTISSAGE</legend> 
+				<div class="col-sm-12 block3">	
+				<div class='row'>						
+		     	{% for oa in course.objectives %}
+		     	
+			     	{% if oa.weight>0 %}
+		
+				     		<div class='col-sm-10 attribut2'>
+				     			<span class="glyphicon glyphicon-triangle-bottom"></span> {{ oa.title }}
+				     		</div>
+				     		<div class='col-sm-2'>
+
+				     			
+				     			{% set taux1 = oa.weight * 100 %}
+				     			{% set color1 = "progress-bar-success" %}
+								<div class="progress">	
+									<div class="progress-bar {{color1}} " style="width:{{ taux1 }}%;" role="progressbar" > 
+										<span class="text-muted">{{ taux1 }}%</span>
+									</div>					     				
+				     			</div>	
+				     		</div>
+	
+			     		
+			     		
+			     		
+						<!--    OBJECTIFS SPECIFIQUES : 8			-->				
+						{% if 'H' in champs	 					%}    
+
+				     				     	
+				     		{% for oas in oa.specificObjectives %}     	
+				     		
+				     			{% if oas.assessmentLinks.count >0 %}	
+				     				<div class='  col-sm-10 col-md-offset-1'>
+					     				<span class="glyphicon glyphicon-triangle-right" style="color:#888"></span> {{ oas.title}}  
+					     			</div>
+				     				<div class='  col-sm-1 '>
+		
+			     				   	   {% set taux2 = oas.weight * 100 %}
+				     				   {% set color2 = "progress-bar-warning" %}
+										<div class="progress">	
+											<div class="progress-bar {{color2}} " style="width:{{ taux2 }}%;" role="progressbar" > 
+												<span class="text-muted">{{ taux2 }}%</span>
+											</div>					     				
+				     					</div>				     					
+				     					
+				     				</div>
+					     			<!--
+					     			Poids {{ oas.weight }} / {{ oas.position }} <br/>
+					     			Evaluations  {{ oas.competenceLinks.count }}  <br/>
+					     			Competences {{ oas.assessmentLinks.count }}  <br/>
+					     			-->
+					     			{% endif %}
+				     		{% endfor %}
+				     		
+
+				     	{% endif %}	
+			   
+			     	{% endif %}     		
+		     	{% endfor %} 
+		     	</div> 	
+		     	</div>		
+{%   endif  %}
+
+
+ 		
+   
+ <!--    METHODES PEDAGOGIQUES : 2			-->				
+{% if 'B' in champs	 					%}    	   
+<br/>	        
+ 
+	       {% if course.pedagogy !="" %}       
+ 	  	   	 <legend>METHODES PEDAGOGIQUES</legend>    
+		   	 <div class="col-sm-12 block3">	
+  
+				<div class='row'>	    	
+					<div class='col-sm-12' > 	  	  
+				    		{{ course.pedagogy|raw  }}
+					</div> 	  	
+				</div>  	                  
+	       	 </div>	  
+	       {% endif %}		       
+{%  endif %}	       
+	       
+
+ <!--    METHODES SEQUENCES : 11			-->				
+{% if 'K' in champs	 					%}  	            
+<br/>
+
+		<legend>CALENDRIER</legend> 	  
+		
+     	{% for se in topics %} 
+
+	
+		{% if se.endDate != null 						  %}		
+		{%   set endSequence = se.endDate|date('d-m-Y')   %}
+		{% else 										  %}
+		{%   set endSequence = se.startDate|date('d-m-Y') %}					
+		{% endif 									      %}	  
+
+
+
+
+		{%   set cptAR = 0 %}			 
+		     	
+     	<div class="col-sm-12 block3">
+				<div class='row block col-sm-12'>	
+				
+					{% set backgroundcolor= "#D3D3D3" %}
+					{% set typo = "" %}
+					
+					{% for typologie in se.typologies %}
+							{% set backgroundcolor= colors[typologie.title] %}
+							{% set typo = typologie.title %}
+				    {% endfor %}
+
+
+					<div class='col-sm-2 ' style="background-color:{{backgroundcolor}};color:white;padding:5px;">
+						{% set deb = se.startDate|date("d/m/Y")  %}
+						{% set fin = se.endDate|date("d/m/Y")    %}
+				
+						{% if deb!=fin    %}		      				        
+								  	du {{se.startDate|date("d/m/Y")}} <i>à  {{se.startDate|date("G")}}H{{se.startDate|date("i")}}</i> 
+								  	au {{se.endDate|date("d/m/Y")}}   <i>à  {{se.endDate|date("G")}}H{{se.endDate|date("i")}}</i>
+						{% else %}
+								  	{{se.startDate|date("d/m/Y")}}  <br/><i>de {{se.startDate|date("G")}}H{{se.startDate|date("i")}} à {{se.endDate|date("G")}}H{{se.endDate|date("i")}}</i>
+						{% endif %}					
+										
+					
+					    {% if se.place!=""%}
+						<br/><br/> 	
+						{{ se.place }}
+						{% endif %}
+						
+						 <br/><br/>
+						 <span class="col-sm-12" style="text-align:center">
+						{% if se.isFaceToFace == 1%}
+							En présentiel
+						{% else	%}
+							A distance
+						{% endif %}
+						</span>
+						<br/> 
+						<hr/>
+						<span class="glyphicon glyphicon-tag" style="color:white;font-weight:bold;padding: 0 5px 0 0"> {{ se.title }}</span>
+						<br/>
+						<hr/>
+						<span class="col-sm-12" style="color:white;text-align:center">{{ typo|upper }}</span>
+						<br/><br/>				 		 
+					</div>   
+					<div class='col-sm-7 ' style="border-right: 1px solid #AAAAAA;min-height:250px;">					   															
+	 
+						<div class='col-sm-6 '>											
+								{{se.description|raw}}	
+						</div> 
+						
+						<div class='col-sm-6 '>				
+							
+		       				{% for sea in se.assessments %}   
+		       				
+
+		       					       				
+		       					{% if ( sea.deadline|date('Y-m-d G:i:s')   >=   se.startDate|date('Y-m-d G:i:s')) and ( sea.deadline|date('Y-m-d G:i:s')   <=   se.endDate|date('Y-m-d G:i:s'))  %}
+															 	 
+
+								{%  else %}    			
+									{% if cptAR==0 %}		
+										<div class='col-sm-12 '>
+											<span class="attribut2">Travail à réaliser : </span><br/>
+										</div>								
+									{% endif %}			
+									<div class='col-sm-12 '>
+										<span class="glyphicon glyphicon-triangle-right" style="color:#888"></span> {{ sea.title }} 
+									</div>        				
+				   		
+								    
+								    {%   set cptAR = cptAR + 1 %}		  
+								{%  endif %}          								     		
+			 
+		       				{% endfor %}  
+						</div>	
+
+					</div>			
+					<div class='col-sm-3 ' style="">	
+
+					
+						{% set find=0 %}
+						
+	       				{% for ass in assessments %}  
+
+						  {% if (  ass.deadline !=null )  %}
+
+							{% if (  date(ass.deadline)  >= date(se.startDate)  ) and ( date(ass.deadline) <=  date(se.endDate) )  %}
+ 	
+ 								{% if find==0 %}
+			 						<div class='col-sm-12 '>
+										<span class="attribut2"><span class="glyphicon glyphicon-pushpin" style="color:#888"></span> Travail à rendre : </span><br/>
+									</div>
+ 								{% endif %} 
+ 
+								<div class='col-sm-12 '> 
+	
+									{% if ass.deadline !=null %} 
+									<span class="attribut2">{{ass.deadline|date('d-m-Y')}}</span> :<br/> 
+									{% endif %}
+									{% for typologie in ass.typologies %}
+										<span class="attribut2">{{ typologie.title }} : </span>
+									{% endfor %}
+									
+									<span class="glyphicon glyphicon-triangle-right" style="color:#888"></span> {{ ass.title }}
+									<br/>
+									{% if ass.isIndividual==1 %}
+										Individuel
+									{% else %}
+										Groupe
+									{% endif%}
+									{% if ass.weight!=0 %}
+										[{{ ass.weight * 100}}%]
+									{% endif %}
+									<br/>									
+								</div>        				    	 							     		
+
+									
+								{% set find=1 %}
+	
+							{% endif %}	
+						  {% endif %}		
+	       				{% endfor %} 					
+					
+					
+					</div>	
+		
+
+				</div>	   	
+
+       	</div>	     		     	
+     	{% endfor%}		
+
+
+{% endif %}
+
+<br/>
+{% if 'C' in champs or 	 'L' in champs						%}   
+ 	  	   <legend>EVALUATION</legend>   
+ 
+		   <div class="col-sm-12 block3">	
+{% endif					%} 
+ <!--    EVALUATION : 3			-->				
+{% if 'C' in champs	 					%}    	   
+<br/>	       
+	       {% if course.evaluation !="" %}    
+				<div class='row'>	    	
+					<div class='col-sm-12' > 	  	  
+				    		{{ course.evaluation |raw  }}
+					</div> 	  	
+				</div>  	                  
+	       {% endif %}	
+ 
+{%  endif %}	 
+
+
+ <!--    EVALUATIONS : 12			-->				
+{% if 'L' in champs	 					%}    
+<br/>	           
+
+		{% set pourcentage1=0 %}  
+		{% set pourcentage2=0 %}  
+		{% set pourcentage3=0 %} 		
+
+ 
+		  <div class='row '>	
+
+							<div class='col-sm-12' style='border-bottom: 1px solid grey;'>	
+								<div class='col-sm-2 attribut'>							
+									<span class="attribut">Typologie</span>
+								</div>								
+								<div class='col-sm-4 attribut'>							
+									<span class="attribut">Titre</span>
+								</div>							
+								<div class='col-sm-3 attribut'>							
+									<span class="attribut">Date de rendu</span>
+								</div>
+								<div class='col-sm-2 attribut'>							
+									<span class="attribut">%</span>
+								</div>								
+								<div class='col-sm-1 attribut'>							
+									<span class="attribut">Type</span>
+								</div>	
+							</div>
+					
+     	  {% for se in topics %} 
+		    {% if se.weight!=0 %}
+	       				{% for sea in se.assessments %}   
+	       				
+							{% if sea.weight!=0 %}
+							<div class='col-sm-12'>		
+
+								{% set backgroundcolor2= "white" %}
+								{% set typo2 = "" %}								
+																	
+								{% for typologie in sea.typologies %}
+									{% set backgroundcolor2= colors[typologie.title] %}
+									{% set typo2 = typologie.title %}
+								{% endfor %}
+
+								<div class='col-sm-2' style="background-color:{{backgroundcolor2}};color:white;">	 	
+									{{ typo2 }}
+								</div>												
+								<div class='col-sm-4'>
+									{{ sea.title }} 
+								</div>       				
+			   					<div class='col-sm-3'>
+			   						{% if sea.deadline is defined and sea.deadline !=null%}
+										 {{ sea.deadline|date('d/m/Y') }}  
+									
+									 à  {{sea.deadline|date("G") }}H{{sea.deadline|date("i") }}
+									
+									{% endif %}&nbsp;
+								</div>   
+			   					<div class='col-sm-2'>		   		
+									{{ sea.weight * 100}}% 		   					
+								</div>     
+			   					
+									{% if sea.isIndividual==1 %}
+										<div class='col-sm-1 progress-bar-success center'> 
+											Individuel
+											{% set pourcentage1=pourcentage1 + sea.weight * 100 %}  
+										</div>
+									{% elseif sea.isIndividual==2 %}
+										<div class='col-sm-1 progress-bar-warning center'> 									
+											Groupe
+											{% set pourcentage2=pourcentage2 + sea.weight * 100 %}  
+										</div>	
+									{% else %}
+										<div class='col-sm-1 progress-bar-danger'> 									
+											&nbsp;
+											{% set pourcentage3=pourcentage3 + sea.weight * 100 %} 
+										</div>	
+									{% endif %}
+			 				
+								    								     		
+							</div> 
+					     	{% endif %} 
+	       				{% endfor %}  	 				
+				   	
+
+
+   		    {% endif %}   	
+     	  {% endfor%}	
+     	  	
+		  </div>	
+		  
+
+		{% set color1="progress-bar-success" %}  
+		{% set color2="progress-bar-warning" %}  
+		{% set color3="progress-bar-danger" %} 
+								   
+		<div class="progress">	
+			<div class="progress-bar {{color1}} " style="width:{{ pourcentage1 }}%;" role="progressbar" > 
+				{{ pourcentage1 }}%
+			</div>		
+			<div class="progress-bar {{color2}} " style="width:{{ pourcentage2 }}%;" role="progressbar" > 
+				{{ pourcentage2 }}%
+			</div>		
+			<div class="progress-bar {{color3}} " style="width:{{ pourcentage3 }}%;" role="progressbar" > 
+				{{ pourcentage3 }}%
+			</div>							
+		</div>	
+		  
+		  
+{%   endif %}       	
+       	
+
+{% if 'C' in champs or 	 'L' in champs						%}   
+		   </div>	
+{% endif					%} 
+
+
+ <!--    RESSOURCES : 4			-->				
+{% if 'D' in champs	 					%}    
+<br/>             
+	    {% if course.resources !="" %}   	            	
+		  	<legend>RESSOURCES</legend>  			
+		   	<div class="col-sm-12 block3">	
+	  
+	    			    
+	            
+					<div class='row'>		    	
+						<div class='col-sm-12'> 	  	  
+					    	{{ course.resources|raw }}
+						</div> 	  	
+					</div>  
+			</div>		             
+	    {% endif %}	     
+	    
+{%   endif %}	    
+	    	
+
+
+ <!--    REGLEMENTS : 5			-->				
+{% if 'E' in champs	 					%}    
+<br/>	            
+	            
+	    {% if course.rules !="" %}   
+	            	
+	  	<legend>REGLEMENTS</legend>
+	  			
+	   	<div class="col-sm-12 block3">	
+
+				<div class='row'>		    	
+					<div class='col-sm-12'> 	  	  
+				    	{{ course.rules|raw }}
+					</div> 	  	
+				</div>               
+	   	</div>	
+	    {% endif %}	 	
+	    
+{%   endif %}	 
+
+
+ <!--    REGLEMENTS : 5			-->				
+{% if 'F' in champs	 					%}    
+<br/>	            
+	            
+	    {% if course.infos !="" %}   
+	            	
+	  	<legend>AUTRES INFORMATIONS UTILES</legend>
+	  			
+	   	<div class="col-sm-12 block3">	
+
+				<div class='row'>		    	
+					<div class='col-sm-12'> 	  	  
+				    	{{ course.infos|raw }}
+					</div> 	  	
+				</div>               
+
+	   	</div>	
+	    {% endif %}	 	
+	    
+{%   endif %}	 
+
+&nbsp;
+<br/><br/>

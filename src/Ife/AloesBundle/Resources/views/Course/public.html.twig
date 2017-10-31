@@ -1,0 +1,64 @@
+{% extends '::public.html.twig' %}
+
+
+{% set program = course.program %}
+
+{% block title %}
+    <title> {{ course.label }} </title>
+{% endblock %}
+
+
+{% block sidebar_nav %}
+<!-- 
+	<h3>{{course.label}} </h3> 	
+	
+    <ul class="nav nav-sidebar">
+        <li><a href="{{path('course_show', {id:course.id})}}"
+            {% if menu is defined and menu=="programs_courses"%}
+        		class="current"
+        	{% endif%}  
+        > Présentation </a></li>
+        
+        <li><a href="{{path('course_infos_show', {id:course.id})}}"
+            {% if menu is defined and menu=="infos_courses"%}
+        		class="current"
+        	{% endif%}  
+        > Informations du cours</a></li>        
+        
+        <li><a href="{{path('course_objective', {id:course.id})}}"
+            {% if menu is defined and menu=="course_objective"%}
+        		class="current"
+        	{% endif%}          
+        > Objectifs </a></li>
+        <li><a href="{{path('course_assessment', {id:course.id })}}"
+            {% if menu is defined and menu=="course_assessment"%}
+        		class="current"
+        	{% endif%}             
+         
+        > Séquences & Evaluations </a></li>
+  
+        <li><a href="{{path('course_event', {id:course.id})}}"   
+            {% if menu is defined and menu=="course_event"%}
+        		class="current"
+        	{% endif%}         
+        > Ev&egrave;nements </a></li>
+        
+        <li><a href="{{path('program_competences_cours', {id:program.id,selection:course.id}) }}"
+            {% if menu is defined and menu=="competence_assessment"%}
+        		class="current"
+        	{% endif%}             
+                
+        
+        > Compétences </a></li>
+
+
+        <li><a href="{{path('course_resum', {id:course.id}) }}"
+            {% if menu is defined and menu=="course_resum"%}
+        		class="current"
+        	{% endif%}                   
+        target='student'> Synthèse </a></li> 
+
+    </ul>
+
+-->    
+{% endblock %}

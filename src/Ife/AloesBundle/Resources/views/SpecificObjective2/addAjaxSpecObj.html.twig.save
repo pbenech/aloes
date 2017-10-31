@@ -1,0 +1,88 @@
+		<div id="x_{{child.id}}">  
+ 		
+		        <table style="width:100%"> 
+		            <tr> 
+		                <td style="width:60%"> <span id="OBJS{{child.id}}" onclick="HideShow3('#target2{{child.id}}','#OBJS{{child.id}}');"><span class="glyphicon glyphicon-triangle-right"></span></span>{{ child.title }} </td>
+
+		                <td  style="text-align:center">
+		                       {{ child.assessmentLinks.count }}
+		                </td>
+		                <td  style="text-align:center;width:10%"> 
+ 
+		                </td>
+		                <td style="text-align:center;width:10%"> 
+		                
+					 	  	  {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+							       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+							       ( is_granted("ROLE_ADMIN") )
+							  %}	    
+				 		         
+								<!--          
+			                    <a id="update_{{child.id}}" href="{{ path('general_objective_specific_objective_edit_2', {id:child.id}) }}"  title="Modifier l'objectif sp�cifique">
+			                        <span class="glyphicon glyphicon-edit"></span> 
+			                    </a>
+			                    -->
+			                    
+
+								<a data-toggle="modal" class="btn btn-info" href="{{ path('general_objective_specific_objective_edit_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 				
+
+
+								<script type="text/javascript">
+											$("#update_{{child.id}}").click(function() {
+								           
+													var DATA = "id=" + {{parent.id}};			           
+								           
+													$.ajax({
+														type: "POST",
+														url: "{{ path("general_objective_specific_objective_edit_2", {id:child.id}) }}",
+														data: DATA,
+					 									dataType : 'html',									 
+														cache: false,
+														success: function(data) {
+															var content = $(data);
+															//alert(JSON.stringify(data));
+															$("#OS_{{child.id}}").empty().append(data); 
+														}  
+													});	             
+								            
+							           				return false;
+											});
+							 	</script>		                    
+			                    
+			                    
+			                  {% endif %}		                
+		                
+	 						 {% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+							       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+							       ( is_granted("ROLE_ADMIN") )
+							  %}	    
+				 		                   
+			                    <a href="{{ path('specific_objective_delete_2', {id:child.id}) }}"  title="Supprimer l'objectif sp�cifique">
+			                        <span class="glyphicon glyphicon-remove"></span>
+			                    </a>
+			                  {% endif %} 
+			                    
+		                </td>    
+		            </tr>
+		                       
+	
+		            {% if objectifCompetences[child.id] is defined and objectifCompetences[child.id]!= null   %}	 
+			             <tr id="target2{{child.id}}"  style="display: none;">  
+			            	<td colspan='5' style="background-color:white">
+			            		<div class="col-md-2">
+			            			Vue �tudiant :
+			            		</div>
+			            		<div class="col-md-10">            		
+				            		{% for oc in objectifCompetences[child.id]  %}
+				            				<li>   {{ oc.weight*100}}% {{ oc.title }}
+				            		{% endfor %}
+				            	</div>
+			            	</td>
+			            </tr> 
+		    
+		            {% endif %}  	
+		
+				</table>   
+			
+		</div>
+		

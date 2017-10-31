@@ -1,0 +1,69 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+ 
+ 
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default"href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Niveaux</a>
+    </div>  
+{% endblock %}
+
+{% block content_10 -%}
+
+   	
+    	<div class='title-two1a col-md-12 col-sm-12'> 
+			Modifier niveau
+		</div>
+
+   	
+ 		<div class='col-sm-12 block3'>
+ 	
+			<form class="form-inline" id="roles" action="{{ path('levels_update', { 'id' : entity.id ,'page' : page, 'sort' : sort, 'direction' : direction  }) }}" method="post">	
+
+
+	
+				<div class='col-md-2'> 	  	  
+			    	{{ form_label(edit_form.sigle) }}
+				</div> 	  		    	
+				<div class='col-md-10'> 	  	  
+			    	{{ form_widget(edit_form.sigle) }}
+			 	    {{ form_errors(edit_form.sigle) }}	
+				</div> 	
+
+
+				<div class='col-md-2'> 	  	  
+			    	{{ form_label(edit_form.title) }}
+				</div> 	  		    	
+				<div class='col-md-10'> 	  	  
+			    	{{ form_widget(edit_form.title) }}
+			 	    {{ form_errors(edit_form.title) }}	
+				</div> 	
+
+				{{ form_rest(edit_form) }}	
+
+				<div class='col-sm-12'>
+					<hr/>	
+				</div>  
+ 		  			
+				<div class='row'>	
+						<div class='col-md-3'> 
+						    <button type="submit"  class="btn btn-success btn" >Enregistrer</button>  
+						</div>
+						<div class='col-md-3'>
+							    <a href="{{ path('levels') }}"><span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste des niveaux </a>
+						</div>
+				</div>		
+							
+				
+				
+			</form>		
+
+ 		</div>  
+	          
+    
+{% endblock %} 
+
+
+    
+

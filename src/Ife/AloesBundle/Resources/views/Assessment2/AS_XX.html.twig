@@ -1,0 +1,123 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %} 
+ 
+ {% if entete is defined and entete==true%}
+ 			<div id="AS_{{child.id}}" class="row block1">
+ {% endif %} 
+
+		<div id="AS_{{child.id}}_A" class="col-sm-12">  
+ 
+ 			<div id="AS_{{child.id}}_list" class="col-sm-3">
+ 							
+				<span  id="OS_{{child.id}}_A_bloc"  class="button2"  > 	  
+							{% if type is defined and type=="new"%} 
+								<span id="ASS{{child.id}}" onclick="HideShow2('#AS_{{child.id}}_B','#ASS{{child.id}}');"><span class="glyphicon glyphicon-collapse-up"></span></span>
+							{% else %}
+								<span id="ASS{{child.id}}" onclick="HideShow2('#AS_{{child.id}}_B','#ASS{{child.id}}');"><span class="glyphicon glyphicon-collapse-down"></span></span>
+							{% endif %}			
+				</span>  
+
+ 				<span id="AS_{{child.id}}_title" >	
+ 					{{ child.title }} 	    
+ 		    	</span>    
+
+ 		    </div>       
+
+			<div id="AS_{{child.id}}_evt" class="col-sm-3">
+					 {% if child.event is not null %}
+							{{ child.event.title }} 
+					 {% else %}
+						  <span class="text-muted small"> Non spécifié </span>
+					 {% endif %}	
+			</div>
+ 
+ 			<div id="AS_{{child.id}}_deadline" class="col-sm-2">	
+                    {% if child.deadline is not null %}
+                        {{ child.deadline|date('d/m/Y') }}
+                    {% else %}
+                        <span class="text-muted small"> Non spécifiée </span>
+                    {% endif %} 			
+ 			</div>
+ 			
+ 			<div id="AS_{{child.id}}_update" class="col-sm-1"  style="text-align:center" >
+					{% if assessmentObjectives[child.id] is defined %}
+						{{ assessmentObjectives[child.id]|length }} 
+					{% endif %}
+ 			</div>
+ 			
+ 			<div id="AS_{{child.id}}_weight" class="col-sm-1">{{macros.progress_bar(child.weight,'warning')}}</div>  			 			
+			
+ 			<div id="AS_{{child.id}}_update" class="col-sm-2"  style="text-align:right" >	
+				{% if ( is_granted("ROLE_ENSEIGNANT")  and course.isRedacteur(app.user.id) ) or 
+						       ( is_granted("ROLE_RESPONSABLE") and course.isRedacteur(app.user.id) ) or  
+						       ( is_granted("ROLE_ADMIN") )
+				%}	     			 		                    
+					<a data-toggle="modal" class="btn2 btn-warning" href="{{ path('topic_assessment_edit_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> </a> 				        
+
+				  	<a data-toggle="modal" class="btn2 btn-danger" href="{{ path('topic_assessment_del_2', {id:child.id}) }}" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> </a> 				 				  	               
+
+                  {% endif 
+                 %} 	
+             		 
+ 			</div>
+          
+        </div> 
+
+            
+
+		   <div id="AS_{{child.id}}_B"  style="display: none;background-color:white"  class="col-sm-12 block1">  
+		            
+	       {% if assessmentObjectives[child.id] is defined and assessmentObjectives[child.id]!= null   %} 
+
+	        	<div class="col-sm-2 col-sm-offset-1 label2">
+	        		Objectifs
+	        	</div>
+	        	<div class="col-sm-9 label2">
+	        		Compétences
+	        	</div>	        	
+
+			            
+		            		{% for ao in assessmentObjectives[child.id]  %}
+		            			<div id="AS_{{child.id}}_B_titre" class="col-sm-11 col-sm-offset-1">
+		            				<span class="glyphicon glyphicon-unchecked"></span>   
+		            				
+		            				{{ ao.title }}
+		            				
+		            				
+					            	{% if ao.rating==1   			%}
+					            				 	<span title="{{ ao.weight*100}}%">[secondaire]</span>			 							            				
+					            	{% elseif ao.rating==2   	    %}
+					            					<span title="{{ ao.weight*100}}%">[principale]</span>			 								            				
+					            	{% endif				 		%}			            				
+		            				
+		            				<br/>
+		            			</div>			
+		            				{% for cs  in ao.competences  %}
+		            					<div id="AS_{{child.id}}_B_titre" class="col-sm-9 col-sm-offset-3">	  
+		            						*  {{ cs.title }}	 
+		            						
+					            				{% if cs.rating==1   			%}
+					            				 	<span title="{{ cs.weight*100}}%">[secondaire]</span>			 							            				
+					            				{% elseif cs.rating==2   	    %}
+					            					<span title="{{ cs.weight*100}}%">[principale]</span>			 								            				
+					            				{% endif				 		%}		
+					            				
+					            				           						
+		            						
+		            						<br/>
+		            					</div>	
+		            				{% endfor%}
+		            		{% endfor %}
+			          
+           {% else %}
+           	Aucun objectif associé actuellement 
+           {% endif %}  
+                
+           </div>	       
+           
+ 
+
+ 
+  {% if entete is defined and entete==true%}			
+		  	</div>	 						
+ {% endif %} 
+            

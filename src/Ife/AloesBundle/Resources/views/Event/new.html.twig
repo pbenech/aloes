@@ -1,0 +1,142 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+
+{% block content -%}
+   	<div class='title-one'> {{ course.title }} </div>
+    <div class='title-two'> Nouvel évènement   </div> 
+       
+	{{ tinymce_init() }}
+ 
+ 	{{ form_stylesheet(form) }}
+    {{ form_javascript(form) }}
+
+    {{ form_start(form) }}    
+ 
+	<fieldset>
+	<div class='container-fluid'>	 
+    
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.title) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.title) }}
+	    		{{ form_errors(form.title) }}	
+			</div> 	  	
+		</div>     
+   
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.startDate) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(form.startDate) }}
+	    		{{ form_errors(form.startDate) }}	
+			</div> 	  	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.endDate) }}
+			</div> 	  		    	
+			<div class='col-md-4'> 	  	  
+		    	{{ form_widget(form.endDate) }}
+	    		{{ form_errors(form.endDate) }}	
+			</div> 	  	
+		</div> 
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.description) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.description) }}
+	    		{{ form_errors(form.description) }}	
+			</div> 	  	
+		</div>     
+		
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.instructions) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.instructions) }}
+	    		{{ form_errors(form.instructions) }}	
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.tutoring) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.tutoring) }}
+	    		{{ form_errors(form.tutoring) }}	
+			</div> 	  	
+		</div>  
+
+		<div class='row'>	
+			<div class='col-md-2'> 	  	  
+		    	{{ form_label(form.resources) }}
+			</div> 	  		    	
+			<div class='col-md-10'> 	  	  
+		    	{{ form_widget(form.resources) }}
+	    		{{ form_errors(form.resources) }}	
+			</div> 	  	
+		</div> 
+		
+		<div class='row'>		  		    	
+			<div class='col-md-12'>
+				<br/>
+				<b>Sélectionner travaux</b> 	  
+			</div>
+			<div class='col-md-5'> 	  	  
+		    	{{ form_widget(form.assessments) }}
+	    		{{ form_errors(form.assessments) }}	
+			</div> 	  	
+			<div class='col-md-2'> 	  	  
+
+				<input id="button1" type="button" value=">" /></input>
+				
+				<br/><br/>
+
+				<input id="button2" type="button" value="<" />
+				
+			</div> 	  
+			<div class='col-md-5'> 	  	  
+		    	{{ form_widget(form.assessments_selected) }}
+	    		{{ form_errors(form.assessments_selected) }}	
+			    
+			</div> 			
+			 
+			<script>
+			$(function(){
+			    $("#button1").click(function(){
+			        $("#aloes_event_assessments > option:selected").each(function(){
+			            $(this).remove().appendTo("#aloes_event_assessments_selected");
+			        });
+			    });
+			    
+			    $("#button2").click(function(){			    		    	
+			        $("#aloes_event_assessments_selected > option:selected").each(function(){
+			            $(this).remove().appendTo("#aloes_event_assessments");
+			        });
+			    });
+			});
+			</script>	
+		</div> 				
+		
+		
+	 
+	 	{{ form_widget(form._token) }}
+	 	
+		<div class='row'>	
+				<div class='col-md-3'> 
+					{{ form_widget(form.submit)}} 
+				</div>
+		    	<div class='col-md-6'>
+		    		<a href="{{ path('course_event', {id:course.id}) }}"><span class="glyphicon glyphicon-arrow-left"></span>  Retour à la liste des évènements</a>
+		    	</div>
+		</div>   
+   </div>
+   </fieldset>
+
+
+
+{% endblock %}

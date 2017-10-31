@@ -1,0 +1,56 @@
+{% extends 'IfeAloesBundle:Aloes:layout-outils.html.twig' %}
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">   
+        <a  class="btn btn-default" href="{{path('admin_outil')}}"> Réglages</a></li>
+        <a  class="btn btn-default" href="">Paramètres</a>
+    </div>     
+{% endblock %} 
+
+{% block content_10 -%}
+   	
+    	<div class='title-two1a col-md-9 col-sm-9'> 
+			Consulter paramètres
+		</div>
+    	<div class='title-two1b  col-md-3 col-sm-3' style='text-align:right'>
+			{% if (  is_granted("ROLE_ADMIN") ) %}
+			        <a class="btn1 btn-color4" href="{{ path('admin_parameters_edit', { 'id': entity.id}) }}">
+			            <span class="glyphicon glyphicon-edit"></span> Modifier les paramètres
+			        </a>
+			{% endif %}	
+    	</div> 		
+
+
+
+    	<div class='col-sm-12 block3'>         
+
+					<div class='col-sm-2 attribut'> 	  	  
+				    	About
+					</div> 	  		    	
+					<div class='col-sm-10' > 	  	  
+				    	<div  style="overflow:auto; height: 400px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">
+				    		{{ entity.about|raw  }}				    						    		
+				    	</div>
+					</div> 	  	
+	
+
+
+					<div class='col-sm-2 attribut'> 	  	  
+				    	Credits
+					</div> 	  		    	
+					<div class='col-sm-10' > 	  	  
+				    	<div  style="overflow:auto; height: 400px; width: 100%; padding: 15px; border: 1px solid #AAAAAA">
+				    		{{ entity.credits|raw  }}
+				    	</div>
+					</div> 	  	
+ 
+ 		</div> 
+	
+
+
+
+{% endblock %} 
+
+
+    
+

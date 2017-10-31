@@ -1,0 +1,194 @@
+
+
+{% extends '::layout.html.twig' %}
+
+
+{% set program = course.program %}
+
+{% block title %}
+    <title> {{ course.label }} </title>
+{% endblock %}
+
+{% block header_nav %}
+    <div class="btn-group btn-breadcrumb">
+        <a  class="btn btn-default" href="{{path('programs')}}"> Liste des programmes </a>
+        <a  class="btn btn-default" href="{{path('programs_courses', {id:program.id})}}"> 
+	   		{% if program.level is defined and program.level !=null %}
+				{{ program.level }} - 
+			{% endif %}
+			{{ program.title }}           
+        
+        </a>
+         <a  class="btn btn-default active" href="#">{{course.label}} - {{course.title}} </a>
+    </div>
+    <br/><br/>
+{% endblock %}
+
+{% block sidebar_nav %}
+
+	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+					      
+			        <li><a href="{{path('course_show', {id:course.id})}}"
+			            {% if menu is defined and menu=="programs_courses"%}
+			        		class="current"
+			        	{% endif%}   
+			        > Présentation </a></li>
+			         
+			        <li><a href="{{path('course_infos_show', {id:course.id})}}"
+			            {% if menu is defined and menu=="infos_courses"%}
+			        		class="current"
+			        	{% endif%}  
+			        > Informations</a></li>        
+			        
+			        <li><a href="{{path('course_objective2', {id:course.id})}}"
+			            {% if menu is defined and menu=="course_objective2"%}
+			        		class="current"
+			        	{% endif%}          
+			        > Objectifs </a></li> 
+			        
+			        <li><a href="{{path('course_assessment2', {id:course.id })}}"
+			            {% if menu is defined and menu=="course_assessment2"%}
+			        		class="current"
+			        	{% endif%}              
+			          
+			        > Séquences & Evaluations </a></li> 
+
+
+			    	<li><a href="{{path('tableaux_bord', {niv:3, course:course.id })}}"
+			        	{% if menu is defined and menu=="tableaux"%}
+			        		class="current"
+			        	{% endif%}> Tableaux de bord </a></li>		
+			     		
+			     	<!--	   
+			        <li><a href="{{path('program_competences_cours', {id:program.id,selection:course.id}) }}"
+			            {% if menu is defined and menu=="competence_assessment"%}
+			        		class="current"
+			        	{% endif%}             
+			                
+			        
+			        > Compétences </a></li>
+					-->
+					
+					<!--		
+			        <li><a href="{{path('course_graph', {id:course.id}) }}"
+			            {% if menu is defined and menu=="course_graph"%}
+			        		class="current"
+			        	{% endif%}             			        
+			        > Graphe </a></li>
+			        -->
+
+					<!--
+			        <li><a href="{{path('course_resum', {id:course.id}) }}"
+			            {% if menu is defined and menu=="course_resum"%}
+			        		class="current"
+			        	{% endif%}                   
+			         target="_blank"> Plan du cours  </a></li> 
+			        -->
+			          
+			        <!-- 
+			        <li><a href="{{path('course_url', {id:course.id}) }}"
+			            {% if menu is defined and menu=="course_url"%}
+			        		class="current"
+			        	{% endif%}                   
+						> Url plan du cours  </a></li> 
+					-->
+					
+			        
+				        <li><a href="{{ path('fos_user_security_logout') }}">
+				        	 Déconnexion </a></li>  
+		      </ul>
+		    </div><!-- /.navbar-collapse -->  
+  		</div><!-- /.container-fluid -->
+	</nav>
+
+	<!--
+ 	<u>
+	<fieldset>
+		{% if program.level is defined %}
+		{{ program.level }}
+	{% endif %}
+	{{course.program.label}}</u><br/>Cours (UE) <br/><b> <span class="glyphicon glyphicon-pushpin"></span> {{course.label}}</b> </fieldset> 	
+	<br/>
+	-->
+	  
+	 
+	 <!--
+	 
+    <ul class="nav nav-sidebar">
+        <li><a href="{{path('course_show', {id:course.id})}}"
+            {% if menu is defined and menu=="programs_courses"%}
+        		class="current"
+        	{% endif%}  
+        > Présentation </a></li>
+        
+        <li><a href="{{path('course_infos_show', {id:course.id})}}"
+            {% if menu is defined and menu=="infos_courses"%}
+        		class="current"
+        	{% endif%}  
+        > Informations</a></li>        
+        
+        <li><a href="{{path('course_objective', {id:course.id})}}"
+            {% if menu is defined and menu=="course_objective"%}
+        		class="current"
+        	{% endif%}          
+        > Objectifs </a></li>
+        <li><a href="{{path('course_assessment', {id:course.id })}}"
+            {% if menu is defined and menu=="course_assessment"%}
+        		class="current"
+        	{% endif%}             
+         
+        > Séquences & Evaluations </a></li> 
+  
+     	<hr>	
+     		   
+        <li><a href="{{path('program_competences_cours', {id:program.id,selection:course.id}) }}"
+            {% if menu is defined and menu=="competence_assessment"%}
+        		class="current"
+        	{% endif%}             
+                
+        
+        > Compétences </a></li>
+
+
+        <li><a href="{{path('course_graph', {id:course.id}) }}"
+            {% if menu is defined and menu=="course_graph"%}
+        		class="current"
+        	{% endif%}             
+                
+        
+        > Graphe </a></li>
+	
+
+        <li><a href="{{path('course_event', {id:course.id})}}"   
+            {% if menu is defined and menu=="course_event"%}
+        		class="current"
+        	{% endif%}         
+        > Ev&egrave;nements </a></li>
+ 
+		<hr/>
+        <li><a href="{{path('course_resum', {id:course.id}) }}"
+            {% if menu is defined and menu=="course_resum"%}
+        		class="current"
+        	{% endif%}                   
+         target="_blank"> Plan du cours  </a></li> 
+        <li><a href="{{path('course_url', {id:course.id}) }}"
+            {% if menu is defined and menu=="course_url"%}
+        		class="current"
+        	{% endif%}                   
+			> Url plan du cours  </a></li> 
+
+
+        <hr>
+        <li><a href="http://ecoweb.ens-lyon.fr/cahier-cours/private/ad9abb56303dfffa1ffc7c54fb2dfe5fd9767c1c/feedback-loes-v2" target='pad'>Pad</a></li>       
+		<hr> 
+        
+	        <li><a href="{{ path('fos_user_security_logout') }}">
+	        	 Déconnexion </a></li>        
+        
+ 
+    </ul>
+    --> 
+{% endblock %}

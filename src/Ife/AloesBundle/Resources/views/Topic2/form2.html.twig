@@ -1,0 +1,113 @@
+<script src="{{asset('bundles/ifealoes/fullcalendar/js/moment.min.js')}}"></script>
+<script src="{{asset('bundles/ifealoes/fullcalendar/js/fullcalendar.min.js')}}"></script>	 
+
+       
+<script type='text/javascript'>
+		$(document).ready(function() {
+			
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev',
+					center: 'title',
+			//		right: 'month,agendaWeek,agendaDay'
+					right: 'next'
+				},
+			//	defaultDate: '2016-01-12',
+				selectable: true,
+				selectHelper: true,
+				height: "auto",
+				
+				
+				eventClick: function(calEvent, jsEvent, view) {
+				    $('#calendar').fullCalendar('removeEvents', function (event) {
+				        return event == calEvent;
+				    });
+				},		
+				select: function(start, end) {
+					//var title = prompt('Event Title:');
+					var eventData;
+					//if (title) {
+						eventData = {
+							title: "", 
+							start: start,
+							end: end,
+							fc : Math.random()
+						}; 
+						$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+					//}
+					$('#calendar').fullCalendar('unselect');
+				},
+				editable: true,
+				eventLimit: true, // allow "more" link when too many events
+				events: [
+				
+				{% for entity in array_dates %}   
+					{				        
+    					title:  '',
+    					start:  '{{ entity.start|date("Y-m-d") }}',
+    					end:  	'{{ entity.end|date("Y-m-d") }}',
+    					fc: 	'{{ entity.fc }}'
+					},    					        
+				{% endfor %}
+				 			
+				]
+			});
+			
+		});	
+	</script>	
+	
+	<script type='text/javascript'>
+	  $(document).ready(function() { 
+	    $('#next').click(function() {
+				
+			var clientevents = $('#calendar').fullCalendar('clientEvents');
+	
+			var clientdata ="";
+			$cpt =0;
+			for (var prop in clientevents) {
+				  console.log("obj." + prop + " = " + clientevents[prop]);
+				  
+					for (var prop2 in clientevents[prop]) {
+						  console.log($cpt +"--"+ prop2 + " = " + clientevents[prop][prop2]);
+						  if (prop2!="source")
+						  clientdata = clientdata + $cpt +"__"+ prop2 + "=" + encodeURIComponent(clientevents[prop][prop2])+"&";
+						}	
+					$cpt++;   
+			 
+			}	
+ 		
+		    $.ajax({
+		        url: '{{ path('course_topic23_create',{id:course.id}) }}',
+		        type: 'POST',
+		        //dataType   : 'json',	        
+		        data: clientdata,
+		        cache: false,
+		        success: function (response) {
+		        	$("#formulaire").empty().append(response); 	
+		        } 
+	
+		    });
+		    
+			return false;
+	
+	    });
+	  });
+	 </script> 
+ 
+		
+	<span class="label label-default">1. Général</span>
+	<span class="label label-primary">2. Propositions dates</span>
+	<span class="label label-default">3. Titres</span>
+	<br/>
+	
+  	<div id='calendar'></div> 
+  	 
+  	<div class='col-sm-12'> 	
+	  	<hr/>
+	  		  	  	
+		<a class="btn btn-success" href="{{ path('course_topic21_create',{id:course.id}) }}" id="previous"> Précedent </a>    	  	
+		<a class="btn btn-success" href="{{ path('course_topic23_create',{id:course.id}) }}" id="next"> Suivant </a>  	
+		<a class="btn btn-primary" type="button" href="{{path('course_assessment2', {id:course.id })}}">Annuler</a>
+	</div> 
+
+

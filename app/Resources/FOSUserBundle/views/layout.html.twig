@@ -1,0 +1,129 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}
+	Accueil - {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+<fieldset>
+	    <table class="table">
+	        <thead>
+
+	        </thead>
+	        <tbody>
+
+				<form  class="form-horizontal"  action="{{ path("fos_user_security_check") }}" method="post">
+
+				    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+					<div class='container-fluid'>	 				
+						<div class='row'>	
+						  <div class='col-md-2'>
+					    	<label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+					      </div>
+						  <div class='col-md-10'>				      	
+					    	<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+					 	  </div>
+                        </div>
+                          
+						<div class='row'>	
+						  <div class='col-md-2'>
+					    	<label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+					      </div>
+						  <div class='col-md-10'>				      	
+					    	 <input type="password" id="password" name="_password" required="required" />
+					 	  </div>
+					 	</div> 
+
+						<div class='row'>	
+						  <div class='col-md-12'>
+						    <label for="remember_me">
+						    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+						    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+						    </label>
+					 	  </div>
+					 	</div> 
+					 	
+						<div class='row'>	
+						  <div class='col-md-12'>
+						    <input type="submit" id="_submit" class="btn btn-primary" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />			 	
+					 	  </div>
+					 	</div> 
+					 						 	
+					</div> 	
+
+				</form>
+
+
+
+			</tbody>
+		</table>	
+		
+		<div class='row'>	
+			<div class='col-sm-12'>	
+			 
+				<a href="{{ path('password_reset') }}" >
+					<i>
+					Mot de passe oublié ?
+					</i>
+				</a>				
+			</div>
+		</div>		
+		
+</fieldset>
+
+
+{% endblock %}
+
+{% block header_nav %}
+
+{% endblock %}		
+
+{% block sidebar_nav %}
+
+	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+
+		        <li><a href="{{path('aloes_about')}}"
+		        	{% if menu is defined and menu=="about"%}
+		        		class="current"
+		        	{% endif%}> A propos</a></li>
+		        <li><a href="{{path('aloes_credits')}}"
+		        	{% if menu is defined and menu=="credits"%}
+		        		class="current"
+		        	{% endif%}> Credits </a></li>
+		        <li><a href="{{path('tableaux_bord')}}"
+		        	{% if menu is defined and menu=="tableaux"%}
+		        		class="current"
+		        	{% endif%}> Tableaux de bord </a></li>		        	
+		        	
+		        	
+		        <li><a href="{{ path('fos_user_security_login') }}">
+		        	 Connexion </a></li>     
+		      
+		      </ul>
+		    </div><!-- /.navbar-collapse -->  
+  		</div><!-- /.container-fluid -->
+	</nav>
+
+	<!--
+    <ul class="nav nav-sidebar">
+
+        <li><a href="{{path('aloes_about')}}"
+        	{% if menu is defined and menu=="about"%}
+        		class="current"
+        	{% endif%}> A propos</a></li>
+        <li><a href="{{path('aloes_credits')}}"
+        	{% if menu is defined and menu=="credits"%}
+        		class="current"
+        	{% endif%}> Credits </a></li>
+        <hr>
+        <li><a href="{{ path('fos_user_security_login') }}">
+        	 Connexion </a></li>             	
+    </ul>
+    --> 
+    
+{% endblock %}

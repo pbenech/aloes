@@ -1,0 +1,318 @@
+/*
+ * General CSS 
+ */
+
+/* Inputs */
+
+.ui-sortable-handle{
+		   border-bottom: 1px solid LightGray ;
+}
+
+ .entete {
+    font-size: 90%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+ 
+ 
+.progress {
+    position: relative;
+}
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black;
+ }
+
+.col-sm-12 {
+    padding-top: 5px;
+
+}
+
+.modal-header {
+   background:#337ab7 ;
+   color:white ; 
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}  
+ 
+.glyphicon-collapse-down{
+	font-size:22px;
+	color:green;
+}
+ 
+.glyphicon-collapse-up{
+	font-size:22px;	
+	color:green; 
+}  
+
+
+.button1  .glyphicon-collapse-down {
+	font-size:22px;
+	color:green; 
+}
+
+
+
+
+.button1  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:green; 
+}  
+
+
+.button2  .glyphicon-collapse-down {
+	font-size:22px;
+	color:orange; 
+}
+
+.button2  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:orange; 
+}  
+
+
+
+.button3  .glyphicon-collapse-down {
+	font-size:22px;
+	color:#46b8da; 
+}
+
+.button3  .glyphicon-collapse-up {
+	font-size:22px;	
+	color:#46b8da; 
+}   
+
+.btn1 {
+    -moz-user-select: none;
+    background-image: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 4px 9px; 
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn2 {
+    -moz-user-select: none;
+    background-image: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 3px 7px; 
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}  
+body {
+    padding-top: 0px !important;
+} 
+
+fieldset
+{
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);	
+
+}
+
+
+.item-nodeX {
+	padding: 0px;
+    border-top: 1px dotted #ddd; 	
+}
+
+.block
+{
+    margin: 10px;
+	background-color:#E6E6E6;	
+}
+
+.title-one {
+	background-color: #ececec; 
+    font-weight : bold; 
+  	font-size: 25px;  
+  	padding: 5px;  	
+}
+
+.title-two { 
+    font-weight : bold; 
+  	font-size: 18px;
+  	padding: 5px;    	    	
+}
+
+.row {
+
+    padding: 5px;
+}
+ 
+.attribut { 
+    font-weight : bold; 
+}
+
+.attribut2 {
+	
+}
+
+input:not([class="form-control"])[type="text"]
+{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 0 none;
+    height: 40px;
+    width: 100%; 
+}
+
+ 
+input:not([class="form-control"])[type="password"]
+{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 0 none;
+    height: 40px;
+    width: 100%; 
+}
+
+
+
+/* Progress bars */
+
+.progress-bar-info {
+    background-color: #23527c;
+}
+
+/* Edition hints and controls */
+
+.remove  {
+    cursor:pointer
+}
+
+[class*=item] .remove, .aloes-session .remove {
+    visibility:hidden;
+    border:0;
+}
+
+.specific-item:hover .remove, 
+.parent-container:hover > div > .remove,
+.aloes-session:hover .remove {
+    visibility:visible;
+}
+
+
+.editable .editable-attribute{
+    border-bottom: 3px solid #fff;
+}
+
+.editable:hover .editable-attribute{
+    border-bottom: 3px dotted #ddd; 
+}
+
+.aloes-create-session, .aloes-description-save {
+    color: #fff;
+    background-color: #23527c;
+    border-color: #23527c;
+}
+
+
+.aloes-rich-editable {
+    border-left: 3px solid #fff;
+    padding-left: 10px;
+}
+
+.aloes-rich-editable:hover {
+    border-left: 3px dotted #ddd;
+    padding-left: 10px;
+}
+
+
+/* Editing state */
+
+.editable:hover .editable-attribute{
+    border-bottom: 3px dotted #ddd; 
+}
+
+.editable input {
+    display: none;
+}
+
+.editable.editing input {
+    display: inline;
+}
+
+.editable.editing .view {
+    display: none;
+}
+
+.rich-text-controls{
+    margin-top:20px;
+}
+
+
+/* List layout and styling */
+
+.aloes-panel {
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+
+.item-node , .aloes-session , .general-item-node {
+    margin-top: 20px;
+    padding: 10px;
+    padding-top:20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+.general-item-creator {
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
+/* Table styling */
+
+td.linked, 
+td.deadline,
+td.weight, {
+    text-align:center
+}
+
+
+/* Navigation pills */
+
+.nav-pills > li.active > a {
+    color: #fff;
+    background-color: #23527c ;
+}
+
+.current {
+	color: white!important;
+    background-color: #23527c ; 	
+}
+
+.nav > li > .current:hover { 
+    color: white;
+    background-color: #23527c ; 
+}
+
+.nav > li > a:hover { 
+    color: white;
+    background-color: #ACBECD ; 
+}
+
+
+
+

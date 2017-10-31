@@ -1,0 +1,74 @@
+<div class="modal-header color1"> 
+	<b>Suppression séquence </b><button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div> 
+
+<div id="modal-body" class="modal-body" >
+
+    Etes-vous sûr de vouloir supprimer définitivement le(s) enregistrement(s) suivant  ?
+    <br/> 
+    <br/>Séquence : 
+    <br/>- {{ entity.title }}  
+
+	<br/>	
+	<br/>
+
+
+	{% if entity.assessments|length > 0 %}
+			Travaux : <br/>
+			{% for wk in entity.assessments %}
+			    - {{ wk.title }}<br/>
+			{% endfor %}    		
+	{% endif %}    
+	
+	<br/>	
+	<br/>
+
+
+	{% if entity.events|length > 0 %}
+			Evènements : <br/>
+			{% for ev in entity.events %}
+			    - {{ ev.title }}<br/>
+			{% endfor %}    		
+	{% endif %}   		
+	    
+    {{ form_start(delete_form) }}
+	<hr/>
+    {{ form_widget(delete_form.delete) }}
+      
+    {{ form_widget(delete_form.nodelete) }}
+      
+    {{ form_end(delete_form) }}
+    
+	<script type="text/javascript">
+
+			$("#form_delete").click(function() {
+
+					$.ajax({ 
+							type: "POST",						
+							url: "{{ path("topic_delete2", {id:entity.id}) }}",					 
+							dataType : 'json',				 								
+							cache: false, 
+							success: function(data) 
+								{ 
+								if (data.result==false)					  
+									$("#modal-content").empty().append(data.content);  
+								else
+									{			
+									$( "#TO_{{entity.id}}" ).remove();									
+										
+									$("#general-item-weight").empty().append(progress_bar(data.sum,'info'));
+										
+									$('#myModal').modal('hide');							
+									}   
+								}    		
+					});	               				 
+					return false;		
+			});			
+			 
+			$("#form_nodelete").click(function() {
+				$('#myModal').modal('hide');	         				 
+				return false;							
+			});		
+
+	</script>
+</div> 

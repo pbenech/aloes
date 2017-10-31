@@ -1,0 +1,74 @@
+<div class="modal-header color1"> 
+	{% if type is defined and type=="new" %}
+		<b>Créer un objectif général</b>
+	{% else %}
+		<b>Modifier un objectif général</b>	
+	{% endif%}			 
+	
+	<button type="button" id="close"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+ 
+ 
+<div id="modal-body" class="modal-body" >
+
+
+<form id="aloes_general_objective" action="" method="post" name="aloes_general_objective"  {{ form_enctype(form) }}>
+
+	{{ form_errors( form ) }}
+
+	{{ form_row(form.title) }}	
+
+	{{ form_rest(form) }}
+
+	<hr/>   
+    
+	<button class="btn btn-color1" type="submit"><i class="icon icon-check icon-lg"></i>Enregistrer</button>
+    <button class="btn btn-inverse" type="button" data-dismiss="modal"><i class="icon icon-times icon-lg"></i> Fermer</button>	    
+     
+</form>
+
+<script type="text/javascript">
+    
+		$('input:text:visible:first').focus();    
+    
+		$("#aloes_general_objective").submit(function() {
+			            
+		data = $(this).serialize();		         
+
+		$.ajax({ 
+				type: "POST",
+				 
+				{% if 		type is defined and type=="new" 														%}					
+					url: "{{ path("course_objective_create2", {id:entity.course.id }) }}",
+				{% elseif type is defined and type=="update" 														%}						
+					url: "{{ path("course_objective_update2", {id:entity.id}) }}",					
+				{% endif 																							%}	
+				data: data, 
+				dataType : 'json',				 								
+				cache: false, 
+				success: function(data) 
+					{ 
+					if (data.result==false)					  
+						$("#modal-content").empty().append(data.content);  
+					else
+						{					
+						{% if 		type is defined and type=="new" 														%}							
+							$("#OGS").append(data.content);  	
+						{% elseif type is defined and type=="update" 														%}																		 
+							$("#OG_{{entity.id}}_A_title2").empty().append(data.content);  
+						{% endif 																							%}
+						
+						$('#myModal').modal('hide');							
+						}   
+					}   
+					
+					
+					
+		});	             			             
+
+		return false;		           				 
+			           				 
+	});
+
+</script>
+</div>

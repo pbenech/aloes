@@ -1,0 +1,33 @@
+langues:
+  path:     /list/{page}/{sort}/{direction}
+  defaults: { _controller: "IfeAloesBundle:Langue:index", page: 1, sort: l.title, direction: asc  }
+
+langues_show:
+    path:     /{id}/show/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:show", page: 1, sort: l.title, direction: asc }
+
+langues_new:
+    path:     /new/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:new", page: 1, sort: l.title, direction: asc }
+
+langues_create:
+    path:     /create/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:create", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post }
+
+langues_edit:
+    path:     /{id}/edit/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:edit", page: 1, sort: l.title, direction: asc}
+
+langues_update:
+    path:     /{id}/update/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:update", page: 1, sort: l.title, direction: asc }
+    requirements: { _method: post|put }
+
+langues_delete:
+    path:     /{id}/delete/{page}/{sort}/{direction}
+    defaults: { _controller: "IfeAloesBundle:Langue:delete", page: 1, sort: l.title, direction: asc}
+
+  
+  
+               

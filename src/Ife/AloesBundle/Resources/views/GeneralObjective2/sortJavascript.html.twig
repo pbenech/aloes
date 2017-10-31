@@ -1,0 +1,52 @@
+	<script>		
+	    $("#sortable{{parent.id}}").sortable({
+	      connectWith: ".connectedSortable",
+	      update: function (event, ui) { 
+	          var data = 	$(this).sortable('serialize', {attribute: "id"});    		          
+	          	               		              	           		   
+	          $.ajax({   
+	              data: "sortable="+this.getAttribute("id")+"&"+data,
+	              type: 'POST', 
+	              url: '{{path('course_objective_order',{id:parent.course.id})}}',
+				  dataType : 'json',	 												
+				  cache: false,
+					success: function(data) 
+						{
+						if (data.result==true)			              
+	        				{	        				
+	        				$("#OG_"+data.content.key+"_A_nb_specs").empty().append(data.content.size);   
+
+							var x = data.content.order;
+						
+							var cpt=0;
+									
+							$.each( x, function( key, value ) {
+										key 	= value['key'];
+										weight 	= value['weight'];
+										type 	= value['type'];
+										
+										if (type=="GEN")
+											{
+											if (weight==null)
+												weight=0;
+											$("#OG_"+key+"_A_weight").empty().append(progress_bar(weight,'success'));
+											cpt = cpt +	weight;	 													
+											}
+										if (type=="SPE")
+											{
+											if (weight==null)
+												weight=0;
+											$("#OS_"+key+"_weight").empty().append(progress_bar(weight,'warning')); 																					
+											}																	
+							}); 
+   												 	        				
+	        				$("#general-item-weight").empty().append(progress_bar(cpt,'info')); 
+	        				
+	        				}
+	              		} 
+	          }); 
+	        
+	      }      
+	    }).disableSelection();  
+		
+	</script>

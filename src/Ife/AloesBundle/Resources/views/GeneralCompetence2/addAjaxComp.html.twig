@@ -1,0 +1,40 @@
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+<div id="CG_{{parent.id}}" style="border-bottom:dotted 1px;">           
+	<div id="CG_{{parent.id}}_A" class="row">
+	      {% include 'IfeAloesBundle:GeneralCompetence2:CG_XX_A.html.twig'   with {'action':'update'}  %}
+	</div>	 
+	<div id="CG_{{parent.id}}_B" class="col-md-12 col-sm-12 blockc" >
+			<div class="col-sm-12">  	
+				<div class="col-sm-8 entete2" style="text-align:left"> Compétences spécifiques</div>
+				<div class="col-sm-2 entete2" style="text-align:center"> % </div>
+				<div class="col-sm-2 entete2" style="text-align:center"> </div>	
+			</div>
+
+			<div class="col-sm-12"> 
+				<ul id="sortable{{parent.id}}" class="connectedSortable  ui-sortable">		   		 
+				    <br class="ui-sortable-handle">   	    			
+				</ul> 
+	 		</div>
+ 
+			{% include 'IfeAloesBundle:GeneralCompetence2:sortJavascript.html.twig' %}					
+			
+  
+		  	{% if ( is_granted("ROLE_RESPONSABLE") and program.isResp(app.user.id)) or 
+		  		( is_granted("ROLE_ADMIN") )
+		  	%}	
+			  <div id="button_gen" class="col-sm-12" style="text-align:right">  		  
+			  	<a data-toggle="modal" class="btn2 btn-warning" href="{{ path("specificcompetence_new_2", {id:parent.id}) }}" data-target="#myModal">
+			  		<span class="glyphicon glyphicon-plus-sign"> Ajouter une compétence spécifique
+			  	</a> 
+			  	<br/>&nbsp; 				
+	          </div>  
+          	{% endif %}    	
+	</div> 
+
+</div>    
+
+
+		
+   
+		

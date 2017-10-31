@@ -1,0 +1,88 @@
+{% extends 'IfeAloesBundle:Course:layout.html.twig' %}
+{% import 'IfeAloesBundle:Course:linking.html.twig' as macros %}
+
+{% block scripts %}
+  {{ parent() }} 
+{% endblock %} 
+
+{% block content -%}
+
+  	
+    	<div class='title-two1a col-md-12 col-sm-12'> 
+			Référentiel de compétences 
+		</div>
+
+    {{ block('course_selection') }}
+
+    {% embed 'IfeAloesBundle:Aloes:list4.html.twig' with {'children':'specificCompetences'} %}
+
+
+        {% block parent_item %}
+  			<div id="CG_{{parent.id}}_A" class="row" >      
+        		{% include 'IfeAloesBundle:GeneralCompetence2:CG_XX_A.html.twig'  with {'action': 'consult'} %}
+			</div>   			
+			           
+        {% endblock %}
+
+        {% block child_item %}
+			<div id="CS_{{child.id}}" class="row block1">                 
+		  		{% include 'IfeAloesBundle:SpecificCompetence2:CS_XX.html.twig'  with {'action':  'consult'} %}				
+		  	</div>	         
+        {% endblock %}
+
+        {% block children_header %}
+        
+	            <div class="col-sm-8 entete2" style="text-align:center"> Compétences spécifiques</div> 
+	            <div class="col-sm-2 entete2" style="text-align:center"> % </div>
+	            <div class="col-sm-2 entete2" style="text-align:center"> </div>        
+        
+        		<!--
+				<ul id="sortable{{parent.id}}" class="connectedSortable">		   		 
+				    <br/>      
+				-->    
+			    	{% for child in attribute(parent,children) %}
+				    	{{ block('child_item') }}                                 
+					{% endfor %}		    			
+			    <!--
+			    </ul>
+			    -->  
+			 	
+			   {% include 'IfeAloesBundle:GeneralCompetence2:sortJavascript.html.twig' %}				   
+			    
+        {% endblock %}
+
+        {% block new_parent %}
+   
+        {% endblock %}  
+
+        {% block new_child %}
+                     
+        {% endblock %}
+
+    {% endembed %} 
+
+
+  	<script>            
+		$(document.body).on('hidden.bs.modal', function () {
+				$('#myModal').removeData('bs.modal');	    	
+				$("#modal-content").html('');								
+					
+		});								 		                     
+	</script>
+	  
+		<div class="modal fade in " data-backdrop="static" id="myModal" tabindex="-1" role="dialog"  data-target=".bs-example-modal-lg" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">  
+				<div id="modal-content" class="modal-content"> 					  	
+			    </div>
+			</div>   
+		</div>    
+    
+
+{% endblock %}
+
+{% block course_selection %}  
+{% endblock %}
+
+
+{% block course_selection_form %}  
+{% endblock %}
