@@ -1,3 +1,5 @@
+Testé avec version PHP 5.5/5.6
+
 1 - Installer la base de donnée :
 =================================
 
